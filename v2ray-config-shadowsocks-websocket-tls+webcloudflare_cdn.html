@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="567899.xyz">
+<meta name="twitter:description" content="这家伙很懒,什么也没有留下.">
+<meta name="twitter:image:src" content="https://567899.xyz/images/avatar.png">
+
+<meta property="og:url" content="https://567899.xyz">
+<meta property="og:title" content="567899.xyz">
+<meta property="og:description" content="这家伙很懒,什么也没有留下.">
+<meta property="og:site_name" content="567899.xyz">
+<meta property="og:image" content="https://567899.xyz/images/avatar.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="567899.xyz">
+<meta itemprop="description" content="这家伙很懒,什么也没有留下.">
+<meta itemprop="image" content="https://567899.xyz/images/avatar.png">
+
+<link rel="canonical" href="https://567899.xyz">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="V2ray,shadowsocks,WebSocket,Cloudflare,Caddy,">
+        <meta name="description" content="V2ray官方安装配置shadowsocks&#43;WebSocket&#43;TLS&#43;Web&#43;Cloudflare_CDN">
+        <meta name="author" content="567899.xyz">
+        <title>V2ray官方安装配置shadowsocks&#43;WebSocket&#43;TLS&#43;Web&#43;Cloudflare_CDN</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar.png" />
+    567899.xyz
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">V2ray官方安装配置shadowsocks&#43;WebSocket&#43;TLS&#43;Web&#43;Cloudflare_CDN</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    
+                    <span class="date" data-time="1547542800"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/V2ray/index.html">V2ray</a><a class="tag" href="/tag/shadowsocks/index.html">shadowsocks</a><a class="tag" href="/tag/WebSocket/index.html">WebSocket</a><a class="tag" href="/tag/Cloudflare/index.html">Cloudflare</a><a class="tag" href="/tag/Caddy/index.html">Caddy</a></span>
+                </section>
+                <article class="content"><ol>
+<li><a href="https://v2ray.com/">https://v2ray.com/</a></li>
+<li><a href="https://github.com/v2ray/v2ray-core">https://github.com/v2ray/v2ray-core</a></li>
+<li><a href="https://toutyrater.github.io/">https://toutyrater.github.io/</a></li>
+<li><a href="https://guide.v2fly.org/">https://guide.v2fly.org/</a></li>
+<li><a href="https://github.com/veekxt/v2ray-template">https://github.com/veekxt/v2ray-template</a></li>
+</ol>
+
+<p>本篇主要针对websocket+tls+web三件套的使用方法</p>
+
+<h2>准备工作</h2>
+
+<ol>
+<li>拥有公网IP且80 443端口可用的墙外VPS，NAT鸡一般不会给这2个端口使用权。</li>
+<li>注册并拥有域名</li>
+<li>域名绑定使用<a href="https://www.cloudflare.com/zh-cn/">Cloudflare </a>家的NS解析服务。</li>
+</ol>
+
+<p>Cloudflare Nameservers分配给我的2个免费NS服务器。</p>
+
+<pre><code class="language-bash">lynn.ns.cloudflare.com
+tara.ns.cloudflare.com
+</code></pre>
+
+<p>把域名原有的NS删除并填上Cloudflare Nameservers分配给我的2个免费NS服务器。</p>
+
+<p>假设我想</p>
+
+<ul>
+<li>a.yourdomain.com 用作直连</li>
+<li>b.yourdomain.com 套Cloudflare_CDN</li>
+</ul>
+
+<p>在Cloudflare里添加A记录值Name分别为a和b到VPS的公网IP的2条解析，确保解析生效后才能使用。</p>
+
+<h2>V2Ray安装</h2>
+
+<p>日常更新及安装curl</p>
+
+<p>Debian &amp; Ubuntu</p>
+
+<pre><code class="language-bash">apt-get update
+apt-get install wget curl -y
+</code></pre>
+
+<p>CentOS</p>
+
+<pre><code class="language-bash">yum update
+yum install wget curl -y
+</code></pre>
+
+<p>安装V2Ray</p>
+
+<pre><code class="language-bash">bash &lt;(curl -L -s https://install.direct/go.sh)
+</code></pre>
+
+<p>如果上面的官方链接失效了可以使用下面的</p>
+
+<pre><code class="language-bash">bash &lt;(curl -L -s https://raw.githubusercontent.com/ojbk8/v2ray-core/master/go.sh)
+</code></pre>
+
+<h2>V2ray配置文件</h2>
+
+<p>备份重命名默认生成的原始V2ray配置文件</p>
+
+<pre><code class="language-bash">mv /etc/v2ray/config.json /etc/v2ray/config_Backup.json
+</code></pre>
+
+<p>按需要改动下面<code>/etc/v2ray/config.json</code>里面的<code>port</code> 和 <code>id</code>和 <code>password</code>等值，建议改成<code>/etc/v2ray/config_Backup.json</code>默认随机生成的值，当然也可以照抄不改直接复制使用。</p>
+
+<p>编辑文件<code>/etc/v2ray/config.json</code></p>
+
+<pre><code class="language-bash">vi /etc/v2ray/config.json
+</code></pre>
+
+<p>加入下面的代码</p>
+
+<pre><code class="language-json">{
+  &quot;inbounds&quot;: [{
+    &quot;port&quot;: 22782,
+    &quot;protocol&quot;: &quot;vmess&quot;,
+    &quot;settings&quot;: {
+      &quot;clients&quot;: [
+        {
+          &quot;id&quot;: &quot;4e0f9136-5ea8-462c-bce9-7dd75376d378&quot;,
+          &quot;alterId&quot;: 64
+        }
+      ]
+    },
+    &quot;streamSettings&quot;: {
+    &quot;network&quot;: &quot;ws&quot;,
+    &quot;security&quot;: &quot;none&quot;,
+    &quot;wsSettings&quot;: {
+        &quot;path&quot;: &quot;/ray&quot;
+        }
+      },
+    &quot;listen&quot;: &quot;127.0.0.1&quot;
+  }],
+    &quot;inboundDetour&quot;: [
+    {
+      &quot;protocol&quot;: &quot;shadowsocks&quot;,
+      &quot;port&quot;: 1008,
+      &quot;settings&quot;: {
+        &quot;method&quot;: &quot;chacha20-ietf-poly1305&quot;,
+        &quot;password&quot;: &quot;yourpassword&quot;,
+        &quot;udp&quot;: true
+      }
+    },
+    {
+      &quot;protocol&quot;: &quot;shadowsocks&quot;,
+      &quot;port&quot;: 1009,
+      &quot;settings&quot;: {
+        &quot;method&quot;: &quot;aes-128-gcm&quot;,
+        &quot;password&quot;: &quot;youpassword&quot;,
+        &quot;udp&quot;: true
+      }
+    }
+  ],
+  &quot;outbounds&quot;: [
+  {
+    &quot;protocol&quot;: &quot;freedom&quot;,
+    &quot;settings&quot;: {}
+  }
+  ]
+}
+</code></pre>
+
+<p><strong>此文件配置可同时兼顾使用</strong></p>
+
+<ol>
+<li>shadowsocks</li>
+<li>WebSocket+TLS+Web</li>
+<li>WebSocket+TLS+Web+Cloudflare_CDN</li>
+</ol>
+
+<h2>管理V2Ray进程</h2>
+
+<pre><code class="language-bash">service v2ray start
+</code></pre>
+
+<p>ubuntu 16.10+ 使用</p>
+
+<pre><code class="language-bash">systemctl start v2ray.service
+systemctl status v2ray.service
+systemctl stop v2ray.service
+systemctl restart v2ray.service
+</code></pre>
+
+<p>此脚本会自动安装以下文件：</p>
+
+<ul>
+<li>/usr/bin/v2ray/v2ray：V2Ray 程序；</li>
+<li>/usr/bin/v2ray/v2ctl：V2Ray 工具；</li>
+<li>/etc/v2ray/config.json：配置文件；</li>
+<li>/usr/bin/v2ray/geoip.dat：IP 数据文件</li>
+<li>/usr/bin/v2ray/geosite.dat：域名数据文件</li>
+</ul>
+
+<p>此脚本会配置自动运行脚本。自动运行脚本会在系统重启之后，自动运行 V2Ray。目前自动运行脚本只支持带有 Systemd 的系统，以及 Debian / Ubuntu 全系列。</p>
+
+<p>运行脚本位于系统的以下位置：</p>
+
+<ul>
+<li>/etc/systemd/system/v2ray.service: Systemd</li>
+<li>/etc/init.d/v2ray: SysV</li>
+</ul>
+
+<p>脚本运行完成后，你需要：</p>
+
+<ol>
+<li>编辑 /etc/v2ray/config.json 文件来配置你需要的代理方式；</li>
+<li>运行 service v2ray start 来启动 V2Ray 进程；</li>
+<li>之后可以使用 service v2ray start|stop|status|reload|restart|force-reload 控制 V2Ray 的运行。</li>
+</ol>
+
+<h2>更新</h2>
+
+<p>停止v2ray覆盖重新安装一次再启动它</p>
+
+<pre><code class="language-bash">service v2ray stop
+bash &lt;(curl -L -s https://install.direct/go.sh)
+service v2ray start
+</code></pre>
+
+<h2>配置WEB服务器WebSocket的规则</h2>
+
+<p>在配置文件中添加v2ray的WebSocket的规则，然后重启在WEB服务器生效。</p>
+
+<h3>Caddy</h3>
+
+<pre><code class="language-bash">    proxy /ray localhost:22782 {
+        websocket
+        header_upstream -Origin
+    }
+</code></pre>
+
+<p>点击查看<a href="/caddy.html">caddy安装教程</a></p>
+
+<h3>Nginx</h3>
+
+<pre><code class="language-bash">location /ray {
+    proxy_redirect off;
+    proxy_pass http://127.0.0.1:22782;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection &quot;upgrade&quot;;
+    proxy_set_header Host $http_host;
+    proxy_read_timeout 300s;
+    }
+</code></pre>
+
+<h3>Apache</h3>
+
+<p>把以下配置加到VirtualHost值</p>
+
+<pre><code class="language-bash">  &lt;Location &quot;/ray/&quot;&gt;
+    ProxyPass ws://127.0.0.1:22782/ray/ upgrade=WebSocket
+    ProxyAddHeaders Off
+    ProxyPreserveHost On
+    RequestHeader append X-Forwarded-For %{REMOTE_ADDR}s
+  &lt;/Location&gt;
+</code></pre>
+
+<h2>Cloudflare设置CDN</h2>
+
+<p>注意：开启Cloudflare的CDN前，确保灰色云朵(用作直连)是没有点亮的，websocket+tls+web祼连可用。</p>
+
+<ul>
+<li>a.yourdomain.com 灰色云朵(用作直连)</li>
+<li>b.yourdomain.com 彩色云朵(套Cloudflare_CDN)</li>
+</ul>
+
+<p>只要把a设置成灰色云朵，b设置成彩色云朵。如下图</p>
+
+<p><img src="data:image/gif;base64,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" data-src="/images/cloudflare-cdn.png" alt="" /></p>
+
+<p>使用Cloudflare的SSL证书</p>
+
+<p>进入Cloudflare的<code>Crypto</code>把<code>SSL</code>选项设置成<code>Full</code>证书生效后是</p>
+
+<pre><code>Universal SSL Status - Active Certificate
+</code></pre>
+
+<p><img src="data:image/gif;base64,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" data-src="/images/cloudflare-Crypto-SSL.png" alt="" /></p>
+
+<p><strong>注意</strong></p>
+
+<p>Cloudflare的<code>Crypto</code>里面的<code>Minimum TLS Version</code>选择<strong>强制TLS1.3需要V2ray服务端和客户端同时使用4.19.1+版本才能用</strong></p>
+
+<p>此时</p>
+
+<p>ping a.yourdomain.com 是VPS的IP</p>
+
+<p>ping b.yourdomain.com 是Cloudflare的IP</p>
+
+<h2>客户端连接使用</h2>
+
+<pre><code class="language-json">{
+  &quot;inbounds&quot;: [
+    {
+      &quot;port&quot;: 1080,
+      &quot;listen&quot;: &quot;127.0.0.1&quot;,
+      &quot;protocol&quot;: &quot;socks&quot;,
+      &quot;sniffing&quot;: {
+        &quot;enabled&quot;: true,
+        &quot;destOverride&quot;: [&quot;http&quot;, &quot;tls&quot;]
+      },
+      &quot;settings&quot;: {
+        &quot;auth&quot;: &quot;noauth&quot;,
+        &quot;udp&quot;: false
+      }
+    }
+  ],
+  &quot;outbounds&quot;: [
+    {
+      &quot;protocol&quot;: &quot;vmess&quot;,
+      &quot;settings&quot;: {
+        &quot;vnext&quot;: [
+          {
+            &quot;address&quot;: &quot;a.yourdomain.com&quot;,
+            &quot;port&quot;: 443,
+            &quot;users&quot;: [
+              {
+                &quot;id&quot;: &quot;4e0f9136-5ea8-462c-bce9-7dd75376d378&quot;,
+                &quot;alterId&quot;: 64
+              }
+            ]
+          }
+        ]
+      },
+      &quot;streamSettings&quot;: {
+        &quot;network&quot;: &quot;ws&quot;,
+        &quot;security&quot;: &quot;tls&quot;,
+        &quot;security&quot;: &quot;none&quot;,
+        &quot;wsSettings&quot;: {
+          &quot;path&quot;: &quot;/ray&quot;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+
+<ul>
+<li>地址(address):a.yourdomain.com</li>
+<li>端口(port):443</li>
+<li>用户ID:4e0f9136-5ea8-462c-bce9-7dd75376d378</li>
+<li>额外ID(alterId):0  #只要≤服务端的值即可，值越少越不占内存</li>
+<li>加密方式(security):none</li>
+<li>传输协议(network):ws</li>
+<li>伪装类型(type):none</li>
+<li>伪装域名(host):留空不填</li>
+<li>路径(path): /ray</li>
+<li>底层传输安全: tls</li>
+</ul>
+
+<p>把域名换成<code>b.yourdomain.com</code>即套用Cloudflare的CDN</p>
+
+<p>查看v2ray版本</p>
+
+<pre><code class="language-bash">/usr/bin/v2ray/v2ray --version
+</code></pre>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/lycamobile-activation-recharge-close-voice-mail.html">美国SIM实体电话卡Lycamobile激活充值关闭语音信箱</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/debian-nodejs-npm.html">linux-ununtu-Debian9安装最新版Node.js和NPM</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        567899.xyz ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>

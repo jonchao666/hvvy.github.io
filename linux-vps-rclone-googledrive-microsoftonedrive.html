@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="567899.xyz">
+<meta name="twitter:description" content="这家伙很懒,什么也没有留下.">
+<meta name="twitter:image:src" content="https://567899.xyz/images/avatar.png">
+
+<meta property="og:url" content="https://567899.xyz">
+<meta property="og:title" content="567899.xyz">
+<meta property="og:description" content="这家伙很懒,什么也没有留下.">
+<meta property="og:site_name" content="567899.xyz">
+<meta property="og:image" content="https://567899.xyz/images/avatar.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="567899.xyz">
+<meta itemprop="description" content="这家伙很懒,什么也没有留下.">
+<meta itemprop="image" content="https://567899.xyz/images/avatar.png">
+
+<link rel="canonical" href="https://567899.xyz">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="rclone,GoogleDrive,onedrive,">
+        <meta name="description" content="在Linux_VPS上使用rclone挂载GoogleDrive云端硬盘和MicrosoftOneDrive">
+        <meta name="author" content="567899.xyz">
+        <title>在Linux_VPS上使用rclone挂载GoogleDrive云端硬盘和MicrosoftOneDrive</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar.png" />
+    567899.xyz
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">在Linux_VPS上使用rclone挂载GoogleDrive云端硬盘和MicrosoftOneDrive</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    
+                    <span class="date" data-time="1528880400"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/rclone/index.html">rclone</a><a class="tag" href="/tag/GoogleDrive/index.html">GoogleDrive</a><a class="tag" href="/tag/onedrive/index.html">onedrive</a></span>
+                </section>
+                <article class="content"><p><a href="https://rclone.org/">rclone</a>可以在Linux上挂载包括</p>
+
+<pre><code class="language-bash">Rclone is a command line program to sync files and directories to and from:
+
+Alibaba Cloud (Aliyun) Object Storage System (OSS)  
+Amazon Drive   (See note)
+Amazon S3  
+Backblaze B2  
+Box  
+Ceph  
+DigitalOcean Spaces  
+Dreamhost  
+Dropbox  
+FTP  
+Google Cloud Storage  
+Google Drive  
+HTTP  
+Hubic  
+Jottacloud  
+IBM COS S3  
+Koofr  
+Memset Memstore  
+Mega  
+Microsoft Azure Blob Storage  
+Microsoft OneDrive  
+Minio  
+Nextcloud  
+OVH  
+OpenDrive  
+Openstack Swift  
+Oracle Cloud Storage  
+ownCloud  
+pCloud  
+put.io  
+QingStor  
+Rackspace Cloud Files  
+Scaleway  
+SFTP  
+Wasabi  
+WebDAV  
+Yandex Disk  
+The local filesystem  
+</code></pre>
+
+<p>且不会占用本地硬盘空间</p>
+
+<h1>安装rclone</h1>
+
+<p>以Debian为例</p>
+
+<pre><code class="language-bash">apt-get install fuse -y
+curl https://rclone.org/install.sh | sudo bash
+</code></pre>
+
+<p>运行以下命令开始配置rclone</p>
+
+<pre><code class="language-bash">rclone config
+</code></pre>
+
+<p>配置文件路径</p>
+
+<pre><code class="language-bash">/root/.config/rclone/rclone.conf
+</code></pre>
+
+<h2>rclone挂载Google Drive</h2>
+
+<pre><code class="language-bash">root@MonstrousPointed-VM:~# rclone config
+Current remotes:
+
+Name                 Type
+====                 ====
+gdname               drive
+odname               onedrive
+
+e) Edit existing remote
+n) New remote
+d) Delete remote
+r) Rename remote
+c) Copy remote
+s) Set configuration password
+q) Quit config
+e/n/d/r/c/s/q&gt; n   #选择n新建
+name&gt; googledrive   #名字随意例如googledrive
+Type of storage to configure.
+Enter a string value. Press Enter for the default (&quot;&quot;).
+Choose a number from below, or type in your own value
+ 1 / A stackable unification remote, which can appear to merge the contents of s                                                                                        everal remotes
+   \ &quot;union&quot;
+ 2 / Alias for a existing remote
+   \ &quot;alias&quot;
+ 3 / Amazon Drive
+   \ &quot;amazon cloud drive&quot;
+ 4 / Amazon S3 Compliant Storage Provider (AWS, Alibaba, Ceph, Digital Ocean, Dr                                                                                        eamhost, IBM COS, Minio, etc)
+   \ &quot;s3&quot;
+ 5 / Backblaze B2
+   \ &quot;b2&quot;
+ 6 / Box
+   \ &quot;box&quot;
+ 7 / Cache a remote
+   \ &quot;cache&quot;
+ 8 / Dropbox
+   \ &quot;dropbox&quot;
+ 9 / Encrypt/Decrypt a remote
+   \ &quot;crypt&quot;
+10 / FTP Connection
+   \ &quot;ftp&quot;
+11 / Google Cloud Storage (this is not Google Drive)
+   \ &quot;google cloud storage&quot;
+12 / Google Drive
+   \ &quot;drive&quot;
+13 / Hubic
+   \ &quot;hubic&quot;
+14 / JottaCloud
+   \ &quot;jottacloud&quot;
+15 / Koofr
+   \ &quot;koofr&quot;
+16 / Local Disk
+   \ &quot;local&quot;
+17 / Mega
+   \ &quot;mega&quot;
+18 / Microsoft Azure Blob Storage
+   \ &quot;azureblob&quot;
+19 / Microsoft OneDrive
+   \ &quot;onedrive&quot;
+20 / OpenDrive
+   \ &quot;opendrive&quot;
+21 / Openstack Swift (Rackspace Cloud Files, Memset Memstore, OVH)
+   \ &quot;swift&quot;
+22 / Pcloud
+   \ &quot;pcloud&quot;
+23 / QingCloud Object Storage
+   \ &quot;qingstor&quot;
+24 / SSH/SFTP Connection
+   \ &quot;sftp&quot;
+25 / Webdav
+   \ &quot;webdav&quot;
+26 / Yandex Disk
+   \ &quot;yandex&quot;
+27 / http Connection
+   \ &quot;http&quot;
+Storage&gt; 12  #选12选定Google Drive
+** See help for drive backend at: https://rclone.org/drive/ **
+
+Google Application Client Id
+Setting your own is recommended.
+See https://rclone.org/drive/#making-your-own-client-id for how to create your o                                                                                        wn.
+If you leave this blank, it will use an internal key which is low performance.
+Enter a string value. Press Enter for the default (&quot;&quot;).
+client_id&gt;
+Google Application Client Secret
+Setting your own is recommended.
+Enter a string value. Press Enter for the default (&quot;&quot;).
+client_secret&gt;
+Scope that rclone should use when requesting access from drive.
+Enter a string value. Press Enter for the default (&quot;&quot;).
+Choose a number from below, or type in your own value
+ 1 / Full access all files, excluding Application Data Folder.
+   \ &quot;drive&quot;
+ 2 / Read-only access to file metadata and file contents.
+   \ &quot;drive.readonly&quot;
+   / Access to files created by rclone only.
+ 3 | These are visible in the drive website.
+   | File authorization is revoked when the user deauthorizes the app.
+   \ &quot;drive.file&quot;
+   / Allows read and write access to the Application Data folder.
+ 4 | This is not visible in the drive website.
+   \ &quot;drive.appfolder&quot;
+   / Allows read-only access to file metadata but
+ 5 | does not allow any access to read or download file content.
+   \ &quot;drive.metadata.readonly&quot;
+scope&gt; 1
+ID of the root folder
+Leave blank normally.
+Fill in to access &quot;Computers&quot; folders. (see docs).
+Enter a string value. Press Enter for the default (&quot;&quot;).
+root_folder_id&gt;
+Service Account Credentials JSON file path
+Leave blank normally.
+Needed only if you want use SA instead of interactive login.
+Enter a string value. Press Enter for the default (&quot;&quot;).
+service_account_file&gt;
+Edit advanced config? (y/n)
+y) Yes
+n) No
+y/n&gt; n
+Remote config
+Use auto config?
+ * Say Y if not sure
+ * Say N if you are working on a remote or headless machine
+y) Yes
+n) No
+y/n&gt; n
+If your browser doesn't open automatically go to the following link: https://accounts.google.com/o/oauth2/auth?access_type=offline&amp;client_id=202xxxxxx5644.apps.gc6d8875f163240ea0bf58
+#注意网址不能有空格，在浏览器中打开并按提示完成授权，获得code码
+Enter verification code&gt; xxxxxxxxxxxxx  #这里填写你刚才获得的code码
+Configure this as a team drive?
+y) Yes
+n) No
+y/n&gt; y
+y) Yes this is OK
+e) Edit this remote
+d) Delete this remote
+y/e/d&gt; y
+Current remotes:
+
+Name                 Type
+====                 ====
+gd                   googledrive
+
+e) Edit existing remote
+n) New remote
+d) Delete remote
+r) Rename remote
+c) Copy remote
+s) Set configuration password
+q) Quit config
+e/n/d/r/c/s/q&gt; q
+
+</code></pre>
+
+<h2>rclone挂载Microsoft OneDrive</h2>
+
+<h3>客户端授权</h3>
+
+<p>在本地Windows电脑上下载<a href="https://rclone.org/downloads">rclone</a> <a href="https://downloads.rclone.org/v1.47.0/rclone-v1.47.0-windows-386.zip">点我下载rclone客户端</a>
+然后解压出来，进入文件夹，按住<code>shift</code>键后右击<code>在此处打开命令窗口</code>键入</p>
+
+<pre><code class="language-bash">rclone authorize &quot;onedrive&quot;
+</code></pre>
+
+<p>这时会自动打开浏览器按提示登陆授权，当网页显示</p>
+
+<pre><code class="language-bash">Success!
+All done. Please go back to rclone.
+</code></pre>
+
+<p>回到CMD界面</p>
+
+<pre><code class="language-bash">C:\Users\Users&gt;cd /d d:\rclone
+d:\rclone&gt;rclone authorize &quot;onedrive&quot;
+2018/12/24 19:14:35 NOTICE: Config file &quot;C:\\Users\\Users\\.config\\rclone\\rclone.conf&quot; not found - using defaults
+If your browser doesn't open automatically go to the following link: http://127.0.0.1:53682/auth
+Log in and authorize rclone for access
+Waiting for code...
+Got code
+Paste the following into your remote machine ---&gt;
+{&quot;access_token&quot;:&quot;EwBwA8l6BxxxxxxxxxxxxacbtK!VgGItbS7sxc&quot;,&quot;expiry&quot;:&quot;2018-12-24T20:15:31.0560991+08:00&quot;}
+&lt;---End paste
+d:\rclone&gt;
+</code></pre>
+
+<p>其中中括号在内就是VPS挂载所需要的result值，包括<strong>{}</strong>中括号在内</p>
+
+<pre><code class="language-bash">{&quot;access_token&quot;:&quot;EwBwA8l6BxxxxxxxxxxxxacbtK!VgGItbS7sxc&quot;,&quot;expiry&quot;:&quot;2018-12-24T20:15:31.0560991+08:00&quot;}
+</code></pre>
+
+<h3>linux上挂载Microsoft OneDrive</h3>
+
+<pre><code class="language-bash">rclone config
+</code></pre>
+
+<p>开始配置</p>
+
+<pre><code class="language-bash">root@MonstrousPointed-VM:~# rclone config
+Current remotes:
+e) Edit existing remote
+n) New remote
+d) Delete remote
+r) Rename remote
+c) Copy remote
+s) Set configuration password
+q) Quit config
+e/n/d/r/c/s/q&gt; n
+name&gt; onedrive    #名字自定义
+Type of storage to configure.
+Enter a string value. Press Enter for the default (&quot;&quot;).
+Choose a number from below, or type in your own value
+ 1 / A stackable unification remote, which can appear to merge the contents of several remotes
+   \ &quot;union&quot;
+ 2 / Alias for a existing remote
+   \ &quot;alias&quot;
+ 3 / Amazon Drive
+   \ &quot;amazon cloud drive&quot;
+ 4 / Amazon S3 Compliant Storage Providers (AWS, Ceph, Dreamhost, IBM COS, Minio)
+   \ &quot;s3&quot;
+ 5 / Backblaze B2
+   \ &quot;b2&quot;
+ 6 / Box
+   \ &quot;box&quot;
+ 7 / Cache a remote
+   \ &quot;cache&quot;
+ 8 / Dropbox
+   \ &quot;dropbox&quot;
+ 9 / Encrypt/Decrypt a remote
+   \ &quot;crypt&quot;
+10 / FTP Connection
+   \ &quot;ftp&quot;
+11 / Google Cloud Storage (this is not Google Drive)
+   \ &quot;google cloud storage&quot;
+12 / Google Drive
+   \ &quot;drive&quot;
+13 / Hubic
+   \ &quot;hubic&quot;
+14 / JottaCloud
+   \ &quot;jottacloud&quot;
+15 / Local Disk
+   \ &quot;local&quot;
+16 / Mega
+   \ &quot;mega&quot;
+17 / Microsoft Azure Blob Storage
+   \ &quot;azureblob&quot;
+18 / Microsoft OneDrive
+   \ &quot;onedrive&quot;
+19 / OpenDrive
+   \ &quot;opendrive&quot;
+20 / Openstack Swift (Rackspace Cloud Files, Memset Memstore, OVH)
+   \ &quot;swift&quot;
+21 / Pcloud
+   \ &quot;pcloud&quot;
+22 / QingCloud Object Storage
+   \ &quot;qingstor&quot;
+23 / SSH/SFTP Connection
+   \ &quot;sftp&quot;
+24 / Webdav
+   \ &quot;webdav&quot;
+25 / Yandex Disk
+   \ &quot;yandex&quot;
+26 / http Connection
+   \ &quot;http&quot;
+Storage&gt; 18  #Microsoft OneDrive
+** See help for onedrive backend at: https://rclone.org/onedrive/ **
+
+Microsoft App Client Id
+Leave blank normally.
+Enter a string value. Press Enter for the default (&quot;&quot;).
+client_id&gt;
+Microsoft App Client Secret
+Leave blank normally.
+Enter a string value. Press Enter for the default (&quot;&quot;).
+client_secret&gt;
+Edit advanced config? (y/n)
+y) Yes
+n) No
+y/n&gt; n
+Remote config
+Use auto config?
+ * Say Y if not sure
+ * Say N if you are working on a remote or headless machine
+y) Yes
+n) No
+y/n&gt; n
+For this to work, you will need rclone available on a machine that has a web browser available.
+Execute the following on your machine:
+        rclone authorize &quot;onedrive&quot;
+Then paste the result below:
+result&gt; {&quot;access_token&quot;:&quot;EwBwA8l6BAAURxxxxxxxxxxxxxxxxxxxxxxxxxxxCMszTZEI27EacbtK!VgGItbS7sxc&quot;,&quot;expiry&quot;:&quot;2018-12-24T20:15:31.0560991+08:00&quot;}
+2018/12/24 06:39:03 ERROR : Failed to save new token in config file: section 'od100' not found
+Choose a number from below, or type in an existing value
+ 1 / OneDrive Personal or Business
+   \ &quot;onedrive&quot;
+ 2 / Root Sharepoint site
+   \ &quot;sharepoint&quot;
+ 3 / Type in driveID
+   \ &quot;driveid&quot;
+ 4 / Type in SiteID
+   \ &quot;siteid&quot;
+ 5 / Search a Sharepoint site
+   \ &quot;search&quot;
+Your choice&gt; 1
+Found 1 drives, please select the one you want to use:
+0:  (personal) id=xxxxxxxxxxxxxx
+Chose drive to use:&gt; 0  #0: 这里输入0
+Found drive 'root' of type 'personal', URL: https://onedrive.live.com/?cid=e164800991cb8f79
+Is that okay?
+y) Yes
+n) No
+y/n&gt; y
+--------------------
+[onedrive]
+type = onedrive
+token = {&quot;access_token&quot;:&quot;EwBwA8l6BAAURxxxxxxxxxxxxxxxxxxxxxxxxxxxCMszTZEI27EacbtK!VgGItbS7sxc&quot;,&quot;expiry&quot;:&quot;2018-12-24T20:15:31.0560991+08:00&quot;}
+drive_id = xxxxxxxxxxxxxx
+drive_type = personal  #personal个人版,Business挂载方法类似。
+--------------------
+y) Yes this is OK
+e) Edit this remote
+d) Delete this remote
+y/e/d&gt; y
+Current remotes:
+
+Name                 Type
+====                 ====
+onedrive                onedrive
+#这里能看到上面自定义名称说明成功了
+e) Edit existing remote
+n) New remote
+d) Delete remote
+r) Rename remote
+c) Copy remote
+s) Set configuration password
+q) Quit config
+e/n/d/r/c/s/q&gt; q
+# 退出
+</code></pre>
+
+<h1>配置rclone开机自动挂载为本地磁盘</h1>
+
+<pre><code class="language-bash">echo &quot;#!/bin/bash
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+export PATH
+NAME_BIN=&quot;rclone&quot;
+### BEGIN INIT INFO
+# Provides:          rclone
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start rclone at boot time
+# Description:       Enable rclone by daemon.
+### END INIT INFO
+
+NAME=&quot;rclone_name&quot; #rclone name名
+REMOTE='/rclone' #远程文件夹，Google Drive网盘里的挂载的一个文件夹
+LOCAL='/mnt/gdrive' #VPS本地挂载目录
+
+Green_font_prefix=&quot;\033[32m&quot; &amp;&amp; Red_font_prefix=&quot;\033[31m&quot; &amp;&amp; Green_background_prefix=&quot;\033[42;37m&quot; &amp;&amp; Red_background_prefix=&quot;\033[41;37m&quot; &amp;&amp; Font_color_suffix=&quot;\033[0m&quot;
+Info=&quot;${Green_font_prefix}[信息]${Font_color_suffix}&quot;
+Error=&quot;${Red_font_prefix}[错误]${Font_color_suffix}&quot;
+RETVAL=0
+
+check_running(){
+    PID=&quot;$(ps -C $NAME_BIN -o pid= |head -n1 |grep -o '[0-9]\{1,\}')&quot;
+    if [[ ! -z ${PID} ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+do_start(){
+    check_running
+    if [[ $? -eq 0 ]]; then
+        echo -e &quot;${Info} $NAME_BIN (PID ${PID}) 正在运行...&quot; &amp;&amp; exit 0
+    else
+        fusermount -zuq $LOCAL &gt;/dev/null 2&gt;&amp;1
+        mkdir -p $LOCAL
+        sudo /usr/bin/rclone mount $NAME:$REMOTE $LOCAL --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --umask 000 &gt;/dev/null 2&gt;&amp;1 &amp;
+        sleep 2s
+        check_running
+        if [[ $? -eq 0 ]]; then
+            echo -e &quot;${Info} $NAME_BIN 启动成功 !&quot;
+        else
+            echo -e &quot;${Error} $NAME_BIN 启动失败 !&quot;
+        fi
+    fi
+}
+do_stop(){
+    check_running
+    if [[ $? -eq 0 ]]; then
+        kill -9 ${PID}
+        RETVAL=$?
+        if [[ $RETVAL -eq 0 ]]; then
+            echo -e &quot;${Info} $NAME_BIN 停止成功 !&quot;
+        else
+            echo -e &quot;${Error} $NAME_BIN 停止失败 !&quot;
+        fi
+    else
+        echo -e &quot;${Info} $NAME_BIN 未运行&quot;
+        RETVAL=1
+    fi
+    fusermount -zuq $LOCAL &gt;/dev/null 2&gt;&amp;1
+}
+do_status(){
+    check_running
+    if [[ $? -eq 0 ]]; then
+        echo -e &quot;${Info} $NAME_BIN (PID $(echo ${PID})) 正在运行...&quot;
+    else
+        echo -e &quot;${Info} $NAME_BIN 未运行 !&quot;
+        RETVAL=1
+    fi
+}
+do_restart(){
+    do_stop
+    do_start
+}
+case &quot;$1&quot; in
+    start|stop|restart|status)
+    do_$1
+    ;;
+    *)
+    echo &quot;使用方法: $0 { start | stop | restart | status }&quot;
+    RETVAL=1
+    ;;
+esac
+exit $RETVAL&quot; &gt;&gt; /etc/init.d/rcloned
+</code></pre>
+
+<p>修改一下内容：</p>
+
+<pre><code class="language-bash">NAME=&quot;rclone_name&quot; #rclone name名
+REMOTE='/rclone' #远程文件夹，Google Drive网盘里的挂载的一个文件夹
+LOCAL='/mnt/gdrive' #VPS本地挂载目录
+</code></pre>
+
+<p>然后</p>
+
+<pre><code class="language-bash">chmod +x /etc/init.d/rcloned
+update-rc.d -f rcloned defaults
+bash /etc/init.d/rcloned start
+</code></pre>
+
+<p>重启一下查看是否成功</p>
+
+<pre><code class="language-bash">df -h
+</code></pre>
+
+<p><img src="data:image/gif;base64,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" data-src="/images/df-honedrivegdrive.png" alt="" /></p>
+
+<p>如果上面脚本的挂载失败,可以手动挂载，以onedrive为例:</p>
+
+<p>先新建一个目录,用于挂载</p>
+
+<pre><code class="language-bash">mkdir -p /mnt/onedrive
+</code></pre>
+
+<p>挂载命令</p>
+
+<pre><code class="language-bash">rclone mount onedrive: /mnt/onedrive --allow-other --allow-non-empty 
+--vfs-cache-mode writes
+</code></pre>
+
+<h1>相关命令</h1>
+
+<pre><code class="language-bash">### 文件上传
+rclone copy /home/backup gdrive:backup # 本地路径 配置名字:谷歌文件夹名字
+### 文件下载
+rclone copy gdrive:backup /home/backup
+### 列表
+rclone ls gdrive:backup
+rclone lsl gdrive:backup # 比上面多一个显示上传时间
+rclone lsd gdrive:backup # 只显示文件夹
+### 新建文件夹
+rclone mkdir gdrive:backup
+### 挂载
+rclone mount gdrive:mm /root/mm &amp;
+### 卸载
+fusermount -u  /root/mm
+</code></pre>
+
+<h4>其他</h4>
+
+<pre><code class="language-bash">rclone config - 以控制会话的形式添加rclone的配置，配置保存在.rclone.conf文件中。
+rclone copy - 将文件从源复制到目的地址，跳过已复制完成的。
+rclone sync - 将源数据同步到目的地址，只更新目的地址的数据。   –dry-run标志来检查要复制、删除的数据
+rclone move - 将源数据移动到目的地址。
+rclone delete - 删除指定路径下的文件内容。
+rclone purge - 清空指定路径下所有文件数据。
+rclone mkdir - 创建一个新目录。
+rclone rmdir - 删除空目录。
+rclone check - 检查源和目的地址数据是否匹配。
+rclone ls - 列出指定路径下所有的文件以及文件大小和路径。
+rclone lsd - 列出指定路径下所有的目录/容器/桶。
+rclone lsl - 列出指定路径下所有文件以及修改时间、文件大小和路径。
+rclone md5sum - 为指定路径下的所有文件产生一个md5sum文件。
+rclone sha1sum - 为指定路径下的所有文件产生一个sha1sum文件。
+rclone size - 获取指定路径下，文件内容的总大小。.
+rclone version - 查看当前版本。
+rclone cleanup - 清空remote。
+rclone dedupe - 交互式查找重复文件，进行删除/重命名操作。
+</code></pre>
+
+<p>挂载服务器</p>
+
+<pre><code class="language-bash">apt-get install -y nload htop fuse p7zip-full
+</code></pre>
+
+<h1>挂载为磁盘</h1>
+
+<pre><code class="language-bash">rclone mount DriveName:Folder LocalFolder --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --umask 000
+</code></pre>
+
+<h1>卸载磁盘</h1>
+
+<pre><code class="language-bash">fusermount -qzu LocalFolder
+</code></pre>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/caddy-php7-sqlite3.html">一键安装 Caddy&#43;PHP7&#43;Sqlite3 环境</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/shadowsocksr.html">秋水逸冰一键shadowsocksR</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        567899.xyz ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>

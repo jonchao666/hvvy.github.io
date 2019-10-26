@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="567899.xyz">
+<meta name="twitter:description" content="这家伙很懒,什么也没有留下.">
+<meta name="twitter:image:src" content="https://567899.xyz/images/avatar.png">
+
+<meta property="og:url" content="https://567899.xyz">
+<meta property="og:title" content="567899.xyz">
+<meta property="og:description" content="这家伙很懒,什么也没有留下.">
+<meta property="og:site_name" content="567899.xyz">
+<meta property="og:image" content="https://567899.xyz/images/avatar.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="567899.xyz">
+<meta itemprop="description" content="这家伙很懒,什么也没有留下.">
+<meta itemprop="image" content="https://567899.xyz/images/avatar.png">
+
+<link rel="canonical" href="https://567899.xyz">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="Debian,Ubuntu,bbr,">
+        <meta name="description" content="Debian/Ubuntu系统手动更新内核并启用TCP BBR拥塞控制算法">
+        <meta name="author" content="567899.xyz">
+        <title>Debian/Ubuntu系统手动更新内核并启用TCP BBR拥塞控制算法</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar.png" />
+    567899.xyz
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">Debian/Ubuntu系统手动更新内核并启用TCP BBR拥塞控制算法</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    
+                    <span class="date" data-time="1513846800"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/Debian/index.html">Debian</a><a class="tag" href="/tag/Ubuntu/index.html">Ubuntu</a><a class="tag" href="/tag/bbr/index.html">bbr</a></span>
+                </section>
+                <article class="content"><p>查看内核版本</p>
+
+<pre><code class="language-bash">uname -r
+</code></pre>
+
+<p>BBR要求内核为kernel4.9以上版本。</p>
+
+<p>如果大于或等于4.9的可以直接开启BBR,开启步骤如下</p>
+
+<p>配置文件</p>
+
+<pre><code class="language-bash">echo &quot;net.core.default_qdisc=fq&quot; &gt;&gt; /etc/sysctl.conf
+echo &quot;net.ipv4.tcp_congestion_control=bbr&quot; &gt;&gt; /etc/sysctl.conf
+</code></pre>
+
+<p>加载配置到内核参数中</p>
+
+<pre><code class="language-bash">sysctl -p
+sysctl net.ipv4.tcp_available_congestion_control
+</code></pre>
+
+<p>顺利的话下面的命令就能看到bbr模块了</p>
+
+<pre><code class="language-bash">lsmod | grep bbr
+</code></pre>
+
+<pre><code class="language-bash">sysctl net.ipv4.tcp_available_congestion_control
+</code></pre>
+
+<p>返回值一般为：</p>
+
+<pre><code class="language-bash">net.ipv4.tcp_available_congestion_control = bbr cubic reno
+</code></pre>
+
+<pre><code class="language-bash">sysctl net.ipv4.tcp_congestion_control
+</code></pre>
+
+<p>返回值一般为：</p>
+
+<pre><code class="language-bash">net.ipv4.tcp_congestion_control = bbr
+</code></pre>
+
+<pre><code class="language-bash">sysctl net.core.default_qdisc
+</code></pre>
+
+<p>返回值一般为：</p>
+
+<pre><code class="language-bash">net.core.default_qdisc = fq
+</code></pre>
+
+<p>如果内核版本低于4.9的需要手动升级到4.9或以上才能开启</p>
+
+<p>去这里<a href="https://kernel.ubuntu.com/~kernel-ppa/mainline/">下载最新版的内核 deb 安装包</a></p>
+
+<ol>
+<li>如果系统是 64 位，则下载 amd64 的 linux-image 中含有 generic 这个 deb 包；</li>
+<li>如果系统是 32 位，则下载 i386 的 linux-image 中含有 generic 这个 deb 包；</li>
+</ol>
+
+<p>安装的命令如下（以最新版的 64 位 4.12.4 举例而已，请替换为下载好的 deb 包）：</p>
+
+<pre><code class="language-bash">wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.12.4/linux-image-4.12.4-041204-generic_4.12.4-041204.201707271932_amd64.deb
+dpkg -i linux-image-4.12.4-041204-generic_4.12.4-041204.201707271932_amd64.deb
+</code></pre>
+
+<p>安装完成后，再执行命令：</p>
+
+<pre><code class="language-bash">/usr/sbin/update-grub
+</code></pre>
+
+<p>最后，重启 VPS 即可。</p>
+
+<pre><code class="language-bash">reboot
+</code></pre>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/crontab.html">Crontab定时执行计划任务</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/oneindex-installation-failed.html">Oneindex程序安装失败解决办法</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        567899.xyz ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="567899.xyz">
+<meta name="twitter:description" content="这家伙很懒,什么也没有留下.">
+<meta name="twitter:image:src" content="https://567899.xyz/images/avatar.png">
+
+<meta property="og:url" content="https://567899.xyz">
+<meta property="og:title" content="567899.xyz">
+<meta property="og:description" content="这家伙很懒,什么也没有留下.">
+<meta property="og:site_name" content="567899.xyz">
+<meta property="og:image" content="https://567899.xyz/images/avatar.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="567899.xyz">
+<meta itemprop="description" content="这家伙很懒,什么也没有留下.">
+<meta itemprop="image" content="https://567899.xyz/images/avatar.png">
+
+<link rel="canonical" href="https://567899.xyz">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="hexo,">
+        <meta name="description" content="hexo文章编辑模版示范">
+        <meta name="author" content="567899.xyz">
+        <title>hexo文章编辑模版示范</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar.png" />
+    567899.xyz
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">hexo文章编辑模版示范</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    
+                    <span class="date" data-time="1532509200"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/hexo/index.html">hexo</a></span>
+                </section>
+                <article class="content"><pre><code class="language-bash">eefef
+</code></pre>
+
+<p><code>这是灰底字</code></p>
+
+<h3>修改字体颜色/大小/背景色</h3>
+
+<p>如果想自定义字体大小以及颜色，可以直接在 Markdown 文档中使用 html 语法</p>
+
+<pre><code class="language-bash">&lt;font size=4 &gt; 这里输入文字，自定义字体大小 &lt;/font&gt;
+&lt;font color=&quot;#FF0000&quot;&gt; 这里输入文字，自定义字体颜色&lt;/font&gt; 
+&lt;span style=&quot;background-color: #ff6600;&quot;&gt;这里输入文字，自定义字体背景色&lt;/span&gt;
+&lt;font color=&quot;#000000&quot; size=4&gt;&lt;span style=&quot;background-color: #ADFF2F;&quot;&gt;这是综合起来的效果 &lt;/span&gt;&lt;/font&gt;
+&lt;font color=&quot;#FFFFFF&quot; size=4&gt;&lt;span style=&quot;background-color: #68228B;&quot;&gt;这是综合起来的效果2 &lt;/span&gt;&lt;/font&gt;
+</code></pre>
+
+<p>其中#FF0000为RGB颜色代码，读者可去<a href="/rgb.html">RGB颜色查询对照表网站</a>查找自己喜欢的颜色。</p>
+
+<p>若想在RGB颜色值与十六进制颜色码之间相互转化，可查看<a href="http://link.zhihu.com/?target=http%3A//www.sioe.cn/yingyong/yanse-rgb-16/">该网站</a>。</p>
+
+<p><font size=4 > 这里输入文字，自定义字体大小 </font>
+<font color="#FF0000"> 这里输入文字，自定义字体颜色</font>
+<span style="background-color: #ff6600;">这里输入文字，自定义字体背景色</span>
+<font color="#000000" size=4><span style="background-color: #ADFF2F;">这是综合起来的效果 </span></font>
+<font color="#FFFFFF" size=4><span style="background-color: #68228B;">这是综合起来的效果2 </span></font></p>
+
+<h3>文本居中对齐</h3>
+
+<pre><code class="language-bash">{% centerquote %}blah blah blah{% endcenterquote %}
+</code></pre>
+
+<p>展示如下</p>
+
+<p>{% centerquote %}blah blah blah{% endcenterquote %}</p>
+
+<h3>插入代码</h3>
+
+<pre><code class="language-bash">``` bash
+</code></pre>
+
+<p>演示效果</p>
+
+<pre><code class="language-bash">bash xxx.sh
+</code></pre>
+
+<h3>插入表格</h3>
+
+<pre><code class="language-bash">|函数名|功能|其它|
+|----|----|----|
+|max|求最大值|其它1|
+|min|求最小值|其它2|
+</code></pre>
+
+<p>演示效果</p>
+
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+<th>其它</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>max</td>
+<td>求最大值</td>
+<td>其它1</td>
+</tr>
+
+<tr>
+<td>min</td>
+<td>求最小值</td>
+<td>其它2</td>
+</tr>
+</tbody>
+</table>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/openwrt.html">从零开始编译OpenWRT lean软路由固件教程x86</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/docker-images.html">docker创建删除使用容器或镜像</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        567899.xyz ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>

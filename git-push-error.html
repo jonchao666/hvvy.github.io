@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="567899.xyz">
+<meta name="twitter:description" content="这家伙很懒,什么也没有留下.">
+<meta name="twitter:image:src" content="https://567899.xyz/images/avatar.png">
+
+<meta property="og:url" content="https://567899.xyz">
+<meta property="og:title" content="567899.xyz">
+<meta property="og:description" content="这家伙很懒,什么也没有留下.">
+<meta property="og:site_name" content="567899.xyz">
+<meta property="og:image" content="https://567899.xyz/images/avatar.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="567899.xyz">
+<meta itemprop="description" content="这家伙很懒,什么也没有留下.">
+<meta itemprop="image" content="https://567899.xyz/images/avatar.png">
+
+<link rel="canonical" href="https://567899.xyz">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="GitHub,">
+        <meta name="description" content="推送发布到GitHub及错误提示">
+        <meta name="author" content="567899.xyz">
+        <title>推送发布到GitHub及错误提示</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar.png" />
+    567899.xyz
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">推送发布到GitHub及错误提示</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    
+                    <span class="date" data-time="1553850000"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/GitHub/index.html">GitHub</a></span>
+                </section>
+                <article class="content"><p>安装git</p>
+
+<pre><code class="language-bash">apt-get install git -y
+</code></pre>
+
+<p>进入目录后初始化</p>
+
+<pre><code class="language-bash">git init
+</code></pre>
+
+<h1>排除不需要备份的文件和目录</h1>
+
+<p>在根目录下创建<code>.gitignore</code>文件，里面的文件或目录不会被上传到github. 例：</p>
+
+<pre><code class="language-bash">public
+themes
+dev
+.git
+.DS_Store
+*.bak
+*_bak
+*.old
+*.log
+</code></pre>
+
+<h1>使用 SSH 密钥登录 GitHub</h1>
+
+<pre><code class="language-bash">git config --global user.name &quot;username&quot;
+git config --global user.email &quot;username168@gmail.com&quot;
+ssh-keygen -t rsa -C 'username@gmail.com'
+</code></pre>
+
+<p>然后使用</p>
+
+<pre><code class="language-bash">cat /root/.ssh/id_rsa.pub
+</code></pre>
+
+<p>把里面的文本全部复制到
+<a href="https://github.com/username/branchname/settings/keys">https://github.com/username/branchname/settings/keys</a> <code>Add deploy key</code></p>
+
+<pre><code class="language-bash">ssh -T git@github.com
+</code></pre>
+
+<p>测试是否连接成功</p>
+
+<h1>推送到github</h1>
+
+<pre><code class="language-bash">git commit -m &quot;自定义描述&quot;
+git remote add origin git@github.com:username/branchname.git
+git push -u origin master
+</code></pre>
+
+<h1>git push错误提示</h1>
+
+<p>使用<code>git push -u origin master</code>时弹出错误提示</p>
+
+<ul>
+<li>src refspec master does not match any.</li>
+</ul>
+
+<pre><code class="language-bash">error: src refspec master does not match any.
+error: failed to push some refs to 'git@github.com:username/branchname.git'
+</code></pre>
+
+<p>然后用如下方法解决了：</p>
+
+<pre><code class="language-bash">git add .
+git commit -m &quot;write your meaaage&quot;  
+</code></pre>
+
+<ul>
+<li>ERROR: Repository not found.</li>
+</ul>
+
+<pre><code class="language-bash">ERROR: Repository not found.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+</code></pre>
+
+<p>解决方案是</p>
+
+<pre><code class="language-bash">git remote set-url origin git@github.com:username/branchname.git
+</code></pre>
+
+<h1>更新push</h1>
+
+<p>以后当有更新时，使用以下三步曲上传。</p>
+
+<pre><code class="language-bash">git add .
+git commit -m &quot;自定义描述&quot; 
+git push -u origin master
+</code></pre>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/linux-vps-dd-debian-ubuntu-centos.html">Linux VPS Debian/Ubuntu/CentOS DD系统网络安装/网络重装/纯净安装 一键脚本</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/microsoft-windows7-2019update-iso-download.html">Win7用户福音：微软集成2019更新的新版Windows 7镜像</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        567899.xyz ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>

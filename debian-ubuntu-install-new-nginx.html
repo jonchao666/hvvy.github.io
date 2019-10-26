@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="567899.xyz">
+<meta name="twitter:description" content="这家伙很懒,什么也没有留下.">
+<meta name="twitter:image:src" content="https://567899.xyz/images/avatar.png">
+
+<meta property="og:url" content="https://567899.xyz">
+<meta property="og:title" content="567899.xyz">
+<meta property="og:description" content="这家伙很懒,什么也没有留下.">
+<meta property="og:site_name" content="567899.xyz">
+<meta property="og:image" content="https://567899.xyz/images/avatar.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="567899.xyz">
+<meta itemprop="description" content="这家伙很懒,什么也没有留下.">
+<meta itemprop="image" content="https://567899.xyz/images/avatar.png">
+
+<link rel="canonical" href="https://567899.xyz">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="Debian,Nginx,">
+        <meta name="description" content="Debian9安装最新版Nginx">
+        <meta name="author" content="567899.xyz">
+        <title>Debian9安装最新版Nginx</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar.png" />
+    567899.xyz
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">Debian9安装最新版Nginx</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    
+                    <span class="date" data-time="1542790800"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/Debian/index.html">Debian</a><a class="tag" href="/tag/Nginx/index.html">Nginx</a></span>
+                </section>
+                <article class="content"><p>apt-get默认安装的nginx为1.10，如果嫌太老了可以修改安装源的方式来获得更新的版本；</p>
+
+<p>一、添加Nginx源
+新建一个nginx.list文件</p>
+
+<pre><code class="language-bash">vi /etc/apt/sources.list.d/nginx.list
+</code></pre>
+
+<p>加入以下内容：</p>
+
+<pre><code class="language-bash">deb http://nginx.org/packages/mainline/debian/ stretch nginx
+deb-src http://nginx.org/packages/mainline/debian/ stretch nginx
+</code></pre>
+
+<p>下面这个我也不晓得干什么的，反正老外是这样写的</p>
+
+<pre><code class="language-bash">wget -qO - http://nginx.org/keys/nginx_signing.key | apt-key add -
+</code></pre>
+
+<p>更新一下让源生效</p>
+
+<pre><code class="language-bash">apt update
+</code></pre>
+
+<p>二、安装更新版本nginx</p>
+
+<p>如果之前用apt命令安装了旧版本nginx,需要卸载掉才行</p>
+
+<pre><code class="language-bash">apt remove nginx-common
+</code></pre>
+
+<p>正式开始安装</p>
+
+<pre><code class="language-bash">apt install nginx
+</code></pre>
+
+<p>安装完成查看版本:</p>
+
+<pre><code class="language-bash">nginx -v
+</code></pre>
+
+<p>会列出<code>Nginx</code> <code>OpenSSL</code>相关配置文件路径&hellip;</p>
+
+<p>查看nginx进程</p>
+
+<pre><code class="language-bash">ps aux | grep nginx
+pgrep nginx
+</code></pre>
+
+<p>安装好的文件位置：</p>
+
+<pre><code class="language-bash">/usr/sbin/nginx  #主程序
+/etc/nginx  #存放配置文件
+/usr/share/nginx  #存放静态文件
+/var/log/nginx  #存放日志
+/etc/nginx/nginx.conf  #默认nginx配置文件
+</code></pre>
+
+<p>Nginx控制命令：</p>
+
+<pre><code class="language-bash">###启动
+systemctl enable nginx
+###重启
+systemctl restart nginx
+###停止
+systemctl stop nginx
+###也可以使用
+/etc/init.d/nginx start # 启动Nginx服务
+/etc/init.d/nginx stop # 停止Nginx服务
+/etc/init.d/nginx  restart # 重启Nginx服务
+</code></pre>
+
+<h1>增加 Nginx 虚拟主机</h1>
+
+<p>检查<code>/etc/nginx/nginx.conf</code>配置文件，确保文件中有：<code>include /etc/nginx/conf.d/*.conf;</code> 默认已经有了的。</p>
+
+<p>然后在目录<code>/etc/nginx/conf.d/</code>下面新建文件<code>site1.conf</code>，<code>site2.conf</code>&hellip;文件名任意写，自己看明白就OK</p>
+
+<p>Nginx配置支持PHP</p>
+
+<pre><code class="language-bash">location ~ \.php$ {
+fastcgi_pass 127.0.0.1:9000;
+fastcgi_index index.php;
+fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+include fastcgi_params;
+}
+</code></pre>
+
+<p>或者</p>
+
+<pre><code class="language-bash">location ~ \.php$ {
+fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+fastcgi_index index.php;
+fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+include fastcgi_params;
+}
+</code></pre>
+
+<p>又或者</p>
+
+<pre><code class="language-bash">location ~ \.php$ {
+include snippets/fastcgi-php.conf;
+fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+}
+</code></pre>
+
+<h1>解决Nginx php-fpm配置有误引起的502错误</h1>
+
+<p>针对该问题的解决方案是，修改<code>/etc/nginx/conf/vhosts</code>下的conf文件，</p>
+
+<p>将<code>fastcgi_pass 127.0.0.1:9000;</code>修改为<code>fastcgi_pass unix:/run/php/php7.0-fpm.sock;</code></p>
+
+<p>重启Nginx服务后，WEB访问依然报错502，继续定位分析。</p>
+
+<p>在nginx error_log日志<code>/var/log/nginx/error.log</code>中出现了以下新的报错内容：</p>
+
+<pre><code class="language-bash">2017/07/29 11:24:47 [crit] 6114#0: *1 connect() to unix:/run/php/php7.2-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 183.14.134.xx, server: 112.74.89.xx, request: “GET / HTTP/1.1”, upstream: “fastcgi://unix:/run/php/php7.2-fpm.sock:”, host: “112.74.89.xx”
+</code></pre>
+
+<p>编辑文件<code>/etc/php/7.2/fpm/pool.d/www.conf</code>找到</p>
+
+<pre><code class="language-bash">listen.owner = www-data
+listen.group = www-data
+;listen.mode = 0660
+</code></pre>
+
+<p>修改为</p>
+
+<pre><code class="language-bash">;listen.owner = www-data
+;listen.group = www-data
+listen.mode = 0666
+</code></pre>
+
+<p>重启下Nginx和php</p>
+
+<pre><code class="language-bash">systemctl restart nginx
+systemctl restart php7.2-fpm
+</code></pre>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/toyodadoubi-ssh.html">一个逗比写的逗比脚本</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/debian-ubuntu-nginx-certbot-let%e2%80%99s-encrypt-ssl.html">Nginx使用官方工具 Certbot 配置申请 Let’s Encrypt SSL 安全证书详细教程</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        567899.xyz ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>

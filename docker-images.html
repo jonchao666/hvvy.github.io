@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="567899.xyz">
+<meta name="twitter:description" content="这家伙很懒,什么也没有留下.">
+<meta name="twitter:image:src" content="https://567899.xyz/images/avatar.png">
+
+<meta property="og:url" content="https://567899.xyz">
+<meta property="og:title" content="567899.xyz">
+<meta property="og:description" content="这家伙很懒,什么也没有留下.">
+<meta property="og:site_name" content="567899.xyz">
+<meta property="og:image" content="https://567899.xyz/images/avatar.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="567899.xyz">
+<meta itemprop="description" content="这家伙很懒,什么也没有留下.">
+<meta itemprop="image" content="https://567899.xyz/images/avatar.png">
+
+<link rel="canonical" href="https://567899.xyz">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="docker,">
+        <meta name="description" content="docker创建删除使用容器或镜像">
+        <meta name="author" content="567899.xyz">
+        <title>docker创建删除使用容器或镜像</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar.png" />
+    567899.xyz
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">docker创建删除使用容器或镜像</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    
+                    <span class="date" data-time="1532509200"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/docker/index.html">docker</a></span>
+                </section>
+                <article class="content"><p><em>更多容器可以访问<a href="https://www.docker.com/">docker</a>的<a href="https://hub.docker.com/">Docker Hub</a></em></p>
+
+<p>操作系统内核大于等于 3.10 的都可以安装最新版 Docker 查看内核版本</p>
+
+<pre><code class="language-bash">uname -r
+</code></pre>
+
+<h3>安装docker</h3>
+
+<pre><code class="language-bash">wget -qO- get.docker.com | bash 
+</code></pre>
+
+<p>安装完成后，运行下面的命令，验证是否安装成功。</p>
+
+<pre><code class="language-bash">docker version 
+</code></pre>
+
+<p>启动 Docker</p>
+
+<pre><code class="language-bash">systemctl start docker 
+</code></pre>
+
+<p>查看 Docker 启动状态</p>
+
+<pre><code class="language-bash">systemctl status docker
+</code></pre>
+
+<p>允许 Docker 开机自启</p>
+
+<pre><code class="language-bash">systemctl enable docker 
+</code></pre>
+
+<p>解决<code>docker-compose: command not found</code>的方法</p>
+
+<p>您还需要安装Docker Compose。见 <a href="https://docs.docker.com/compose/install/">手册</a>。以下是您需要执行的命令</p>
+
+<pre><code>curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` &gt; ./docker-compose
+sudo mv ./docker-compose /usr/bin/docker-compose
+sudo chmod +x /usr/bin/docker-compose
+</code></pre>
+
+<h3>Docker 清理命令</h3>
+
+<p>杀死所有正在运行的容器.</p>
+
+<pre><code class="language-bash">alias dockerkill='docker kill $(docker ps -a -q)'
+</code></pre>
+
+<p>删除所有已经停止的容器.</p>
+
+<pre><code class="language-bash">alias dockercleanc='docker rm $(docker ps -a -q)'
+</code></pre>
+
+<p>删除所有未打标签的镜像.</p>
+
+<pre><code class="language-bash">alias dockercleani='docker rmi $(docker images -q -f dangling=true)'
+</code></pre>
+
+<p>删除所有已经停止的容器和未打标签的镜像.</p>
+
+<pre><code class="language-bash">alias dockerclean='dockercleanc || true &amp;&amp; dockercleani'
+</code></pre>
+
+<p>删除所有未运行 Docker 容器
+docker rm $(docker ps -a -q)
+删除所有 Docker 镜像
+删除所有未打 tag 的镜像</p>
+
+<p>docker rmi $(docker images -q | awk &lsquo;/^<none>/ { print $3 }&lsquo;)
+删除所有镜像</p>
+
+<p>docker rmi $(docker images -q)
+根据格式删除所有镜像</p>
+
+<p>docker rm $(docker ps -qf status=exited)</p>
+
+<p>docker images
+docker tag IMAGE_ID  <hub-user>/<repo-name>[:<tag>]
+docker login
+#docker push 镜像到docker hub 的仓库
+docker push <hub-user>/<repo-name>:<tag>
+docker images
+镜像的保存
+docker save IMAGE_ID &gt; newname.tar
+镜像的导入
+docker load &lt; tnewname.tar</p>
+
+<p>保存对容器的修改，示范
+docker commit cb439fb2c714 mxnet/python:gpu</p>
+
+<p>停用全部运行中的容器:</p>
+
+<pre><code>docker stop $(docker ps -q)
+</code></pre>
+
+<p>删除全部容器：</p>
+
+<pre><code>docker rm $(docker ps -aq)
+</code></pre>
+
+<p>一条命令实现停用并删除容器：</p>
+
+<pre><code class="language-bash">docker stop $(docker ps -q) &amp; docker rm $(docker ps -aq)
+</code></pre>
+
+<pre><code class="language-bash">docker system prune -y
+docker image prune --force --all -y
+</code></pre>
+
+<p>更新docker 1.13 中增加了 <code>docker system prune</code>的命令，针对container、image可以使用<code>docker container prune</code>、<code>docker image prune</code>命令。</p>
+
+<ul>
+<li><code>docker image prune --force --all</code>或者<code>docker image prune -f -a</code> : 删除所有不使用的镜像</li>
+<li><code>docker container prune -f</code>: 删除所有停止的容器</li>
+</ul>
+
+<p>docker中如何删除image（镜像）</p>
+
+<pre><code class="language-bash">docker images
+docker ps -a
+</code></pre>
+
+<p>查看docker的帮助会发现有两个与删除有关的命令rm和rmi</p>
+
+<pre><code class="language-bash">rm Remove one or more containers
+rmi Remove one or more images
+</code></pre>
+
+<pre><code class="language-bash">docker rmi ID
+</code></pre>
+
+<pre><code class="language-bash">docker pull ubuntu
+docker run -t -i ubuntu /bin/bash
+</code></pre>
+
+<h3>使用示例</h3>
+
+<ol>
+<li>nginx</li>
+</ol>
+
+<pre><code class="language-bash">docker pull nginx
+docker run --name some-nginx -d -p 8080:80 some-content-nginx
+</code></pre>
+
+<p>Then you can hit <a href="http://localhost:8080">http://localhost:8080</a> or <a href="http://host-ip:8080">http://host-ip:8080</a> in your browser.</p>
+
+<ol>
+<li>shadowsocks-libev-teddysun</li>
+</ol>
+
+<pre><code class="language-bash">docker pull teddysun/shadowsocks-libev:alpine
+</code></pre>
+
+<p>在宿主机上创建配置文件</p>
+
+<pre><code class="language-bash">echo &quot;{
+    &quot;server&quot;:&quot;0.0.0.0&quot;,
+    &quot;server_port&quot;:9000,
+    &quot;password&quot;:&quot;password0&quot;,
+    &quot;timeout&quot;:300,
+    &quot;method&quot;:&quot;aes-256-gcm&quot;,
+    &quot;fast_open&quot;:true,
+    &quot;nameserver&quot;:&quot;8.8.8.8&quot;,
+    &quot;mode&quot;:&quot;tcp_and_udp&quot;,
+    &quot;plugin&quot;:&quot;obfs-server&quot;,
+    &quot;plugin_opts&quot;:&quot;obfs=tls&quot;
+} &quot; &gt; /etc/shadowsocks-libev/config.json
+</code></pre>
+
+<p>启动容器</p>
+
+<pre><code class="language-bash">docker run -d -p 9000:9000 -p 9000:9000/udp --name ss-libev -v /etc/shadowsocks-libev:/etc/shadowsocks-libev teddysun/shadowsocks-libev 
+</code></pre>
+
+<p>介绍</p>
+
+<ul>
+<li>docker run：开始运行一个容器。</li>
+<li>-d 参数：容器以后台运行并输出容器 ID。</li>
+<li>-p 参数：容器的 9000 端口映射到本机的 9000 端口。默认是映射 TCP，当需要映射 UDP 时，那就再追加一次 UDP 的映射。冒号后面是容器端口，冒号前面是宿主机端口，可以写成一致，也可以不一致。</li>
+<li>–name 参数：给容器分配一个识别符，方便将来的启动，停止，删除等操作。</li>
+<li>-v 参数：挂载卷(volume)，冒号后面是容器的路径，冒号前面是宿主机的路径，可以写成一致，也可以不一致。</li>
+<li>teddysun/shadowsocks-libev：这是拉取回来的镜像路径。</li>
+</ul>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/hexo-edit-markdown.html">hexo文章编辑模版示范</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/debian-ubuntu-install-mysql-uninstall.html">Debian和Ubuntu安装最新的MySQL修改密码卸载清理</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        567899.xyz ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>
