@@ -45,10 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="Node.js,NPM,linux,">
-        <meta name="description" content="linux-ununtu-Debian9安装最新版Node.js和NPM">
+        <meta name="keywords" content="besttrace,traceroute,">
+        <meta name="description" content="Linux VPS使用BestTrace进行路由跟踪">
         <meta name="author" content="567899.xyz">
-        <title>linux-ununtu-Debian9安装最新版Node.js和NPM</title>
+        <title>Linux VPS使用BestTrace进行路由跟踪</title>
     </head>
     <body>
         <article class="container">
@@ -65,74 +65,69 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">linux-ununtu-Debian9安装最新版Node.js和NPM</h1>
+                <h1 class="title">Linux VPS使用BestTrace进行路由跟踪</h1>
                 <section class="info">
                     <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
                     <a class="name" href="/about.me.html">567899.xyz</a>
                     
-                    <span class="date" data-time="1547542800"><span class="from"></span></span>
+                    <span class="date" data-time="1420621200"><span class="from"></span></span>
                     
-                    <span class="tags"><a class="tag" href="/tag/Node.js/index.html">Node.js</a><a class="tag" href="/tag/NPM/index.html">NPM</a><a class="tag" href="/tag/linux/index.html">linux</a></span>
+                    <span class="tags"><a class="tag" href="/tag/besttrace/index.html">besttrace</a><a class="tag" href="/tag/traceroute/index.html">traceroute</a></span>
                 </section>
-                <article class="content"><p><code>Node.js</code>是一个基于Chrome V8 JavaScript引擎构建的平台.Nodejs可用于轻松构建快速，可扩展的网络应用程序。最新版本node.js ppa由其官方网站维护。我们可以将这个PPA添加到Debian 9（Stretch） Debian 8（Jessie）和Debian 7（Wheezy）系统中。这篇我抄来的文章可以帮助你在Debian 9/8/7系统上安装最新的Nodejs和NPM。</p>
+                <article class="content"><p>VPS回程路由指的是你的远程VPS的IP地址到你本地ISP的IP。</p>
 
-<h1>添加Node.js PPA</h1>
+<p>使用<code>traceroute</code>命令进行路由跟踪,但不能显示IP归属地。</p>
 
-<p>首先，您需要在我们的系统中由Nodejs官方网站提供node.js PPA。如果尚未安装，我们还需要安装python-software-properties软件包。您可以选择安装最新的Node.js版本或LTS版本。</p>
+<p><a href="https://www.ipip.net/product/client.html">下载BestTrace</a></p>
 
-<p>最新版安装命令：</p>
+<ul>
+<li><a href="https://cdn.ipip.net/17mon/besttrace.exe">Windows</a></li>
+<li><a href="https://itunes.apple.com/us/app/best-trace/id1037779758?l=zh&amp;ls=1&amp;mt=12">Mac OS</a></li>
+<li><a href="https://itunes.apple.com/cn/app/best-trace/id1026747589?ls=1&amp;mt=8">iOS</a></li>
+<li><a href="https://cdn.ipip.net/17mon/besttrace.apk">Android</a></li>
+<li><a href="https://cdn.ipip.net/17mon/besttrace4linux.zip">Linux</a></li>
+</ul>
 
-<pre><code class="language-bash">curl -sL https://deb.nodesource.com/setup_9.x | sudo bash
+<p>Linux使用方法如下</p>
+
+<pre><code class="language-bash">wget https://cdn.ipip.net/17mon/besttrace4linux.zip
+unzip besttrace4linux.zip
+chmod +x besttrace
+./besttrace -q1 -g cn IP地址
 </code></pre>
 
-<p>安装LTS长期维护版：</p>
+<p>更多使用说明可输入<code>./besttrace --help</code>进行查看，完整的参数如下：</p>
 
-<pre><code class="language-bash">apt-get install curl python-software-properties
-curl -sL https://deb.nodesource.com/setup_8.x |  bash
-</code></pre>
-
-<h1>安装Node.js和NPM</h1>
-
-<p>添加所需的PPA文件后，可以安装Nodejs包。NPM也将与node.js一起安装。该命令还会在您的系统上安装许多其他相关软件包。</p>
-
-<pre><code class="language-bash">apt-get install nodejs
-</code></pre>
-
-<h1>检查Node.js和NPM版本</h1>
-
-<p>安装node.js后，验证并检查安装的版本。你可以在node.js 官方网站上找到关于当前版本的更多细节。</p>
-
-<p>检查Node.js版本</p>
-
-<pre><code class="language-bash">node -v 
-</code></pre>
-
-<p>检查npm版本</p>
-
-<pre><code class="language-bash">npm -v 
-</code></pre>
-
-<p>下载 Node.js 源码或预编译安装包 Latest Current Version: 12.11.1 (includes npm 6.11.3)。</p>
-
-<p>从官网 <a href="https://nodejs.org/zh-cn/download/">下载 | Node.js</a> 的编译好的二进制文件</p>
-
-<pre><code class="language-bash">wget https://nodejs.org/dist/v12.11.1/node-v12.11.1-linux-x64.tar.xz
-tar xf node-v12.11.1-linux-x64.tar.xz
-cp node-v12.11.1-linux-x64/bin/node /usr/local/bin/node
-cp node-v12.11.1-linux-x64/bin/npm /usr/local/bin/npm
-cp node-v12.11.1-linux-x64/bin/npx /usr/local/bin/npx
-rm -rf node-v12.11.1-linux-x64
-node -v
-npm -v
-</code></pre>
-
-<p><del>删除卸载</del></p>
-
-<pre><code class="language-bash">rm -rf node-v12.11.1-linux-x64
-rm node-v12.11.1-linux-x64.tar.xz
-rm /usr/local/bin/node
-rm /usr/local/bin/npm
-rm /usr/local/bin/npx
+<pre><code class="language-bash">-6， - ipv6
+    使用ipv6。
+  -J， - json
+    使用JSON格式打印traceroute结果。
+  -g， - lang string
+    语言现在仅支持cn和en。
+  -m， - maxhop int
+    指定traceroute将探测的最大跳数（最大生存时间值）。默认值为30.（默认为30）
+  -a， - noas
+    显示时，请勿尝试将IP地址映射到AS。
+  -n， - nodomain
+    显示时，请勿尝试将IP地址映射到主机名。
+  -l， - location
+    显示时，请勿尝试将IP地址映射到位置。
+  -q， - query int
+    设置每跳的探测包数。默认值为3.（默认值为3）
+  -z， - sendtime int
+    探针之间的最小时间间隔（默认为0）。
+    如果该值大于10，则它指定一个以毫秒为单位的数字，否则它是一个秒数（也允许浮点值）。
+    当某些路由器对ICMP消息使用速率限制时很有用。
+  -f， - stopop int
+    指定要启动的TTL。默认为1.（默认值为1）
+   - 同步
+    通过同步发送icmp包。
+  -T， - tcp
+    使用TCP SYN进行探测。
+  -V， - 版本
+    打印版本并退出。
+  -w， - waittime int
+    设置等待探测响应的时间（以秒为单位）。 （默认3）
 </code></pre>
 </article>
                 <section class="author">
@@ -142,16 +137,11 @@ rm /usr/local/bin/npx
                 </section>
                 <section class="recommend">
                     
-                    <section class="nav prev more">
+                    <section class="nav prev">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/v2ray-config-shadowsocks-websocket-tls&#43;webcloudflare_cdn.html">V2ray官方安装配置shadowsocks&#43;WebSocket&#43;TLS&#43;Web&#43;Cloudflare_CDN</a>
+                        <a class="link" href="/nano.html">nano文本编辑器使用复制剪切粘贴查找替换</a>
                     </section>
                     
-                    
-                    <section class="nav next more">
-                        <div class="head">下篇文章</div>
-                        <a class="link" href="/baidupcs-go.html">BaiduPCS-Go上传下载不限速的百度网盘客户端</a>
-                    </section>
                     
                 </section>
                 
