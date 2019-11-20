@@ -1,110 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
-  <title>567899.xyz</title>
-  <id>https://567899.xyz</id>
-  <updated>2019-11-06T16:03:37+03:00</updated>
-  <subtitle>这家伙很懒,什么也没有留下.</subtitle>
-  <link href="https://567899.xyz"></link>
+  <title>纸小墨官方博客</title>
+  <id>http://www.chole.io/blog</id>
+  <updated>2019-11-20T06:40:45Z</updated>
+  <subtitle>构建只为纯粹书写的博客</subtitle>
+  <link href="http://www.chole.io/blog"></link>
   <author>
-    <name>567899.xyz</name>
+    <name>纸小墨官方博客</name>
   </author>
   <entry>
     <title>Folderclone谷歌google共享云端硬盘转存相互转移拷贝复制文件的正确姿势</title>
     <updated>2019-09-18T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2019-09-18:/google_drive_folderclone.html</id>
+    <id>tag:www.chole.io,2019-09-18:/blog/google_drive_folderclone.html</id>
     <content type="html">&lt;p&gt;超级详细Folderclone使用的图文教程&lt;/p&gt;&#xA;</content>
-    <link href="https://567899.xyz/google_drive_folderclone.html"></link>
+    <link href="http://www.chole.io/blog/google_drive_folderclone.html"></link>
     <author>
-      <name>567899.xyz</name>
+      <name>纸小墨</name>
     </author>
   </entry>
   <entry>
     <title>QQ·Linux版更新2019-10-24</title>
     <updated>2019-10-25T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2019-10-25:/qq-for-linux.html</id>
+    <id>tag:www.chole.io,2019-10-25:/blog/qq-for-linux.html</id>
     <content type="html"></content>
-    <link href="https://567899.xyz/qq-for-linux.html"></link>
+    <link href="http://www.chole.io/blog/qq-for-linux.html"></link>
     <author>
-      <name>567899.xyz</name>
+      <name>纸小墨</name>
     </author>
   </entry>
   <entry>
     <title>Ubuntu &amp; Debian &amp; CentOS手动编译安装 TCP BBR v2 Alpha/Preview 内核</title>
     <updated>2019-10-22T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2019-10-22:/bbr2.html</id>
+    <id>tag:www.chole.io,2019-10-22:/blog/bbr2.html</id>
     <content type="html">&lt;p&gt;手动编译下载安装 TCP BBR v2 Alpha/Preview 内核Ubuntu &amp;amp; Debian &amp;amp; CentOS 删除Linux旧内核linux-headers-5.2.0-rc3+_5.2.0-rc3+-1_amd64.deb,linux-image-5.2.0-rc3+_5.2.0-rc3+-1_amd64.deb&lt;/p&gt;&#xA;</content>
-    <link href="https://567899.xyz/bbr2.html"></link>
+    <link href="http://www.chole.io/blog/bbr2.html"></link>
     <author>
-      <name>567899.xyz</name>
+      <name>纸小墨</name>
     </author>
   </entry>
   <entry>
     <title>Windows10 LTSC 2019 安装和卸载 linux 子系统</title>
     <updated>2019-10-18T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2019-10-18:/windows10-ltsc-2019-linux.html</id>
+    <id>tag:www.chole.io,2019-10-18:/blog/windows10-ltsc-2019-linux.html</id>
     <content type="html">&lt;p&gt;Windows10企业版LTSC 2019 1809安装和卸载linux子系统&lt;/p&gt;&#xA;</content>
-    <link href="https://567899.xyz/windows10-ltsc-2019-linux.html"></link>
+    <link href="http://www.chole.io/blog/windows10-ltsc-2019-linux.html"></link>
     <author>
-      <name>567899.xyz</name>
+      <name>纸小墨</name>
     </author>
   </entry>
   <entry>
     <title>甲骨文Oracle通过API或Chrome脚本获得免费VPS</title>
     <updated>2019-10-10T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2019-10-10:/oracle.html</id>
+    <id>tag:www.chole.io,2019-10-10:/blog/oracle.html</id>
     <content type="html">&lt;p&gt;甲骨文Oracle通过API或Chrome脚本获得2台免费VPS及DD成win7或debian&lt;/p&gt;&#xA;</content>
-    <link href="https://567899.xyz/oracle.html"></link>
+    <link href="http://www.chole.io/blog/oracle.html"></link>
     <author>
-      <name>567899.xyz</name>
+      <name>纸小墨</name>
     </author>
   </entry>
   <entry>
     <title>俄罗斯IP上P站添加规则跳过VK免登陆验证安卓Via浏览器AdBlock</title>
     <updated>2019-10-05T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2019-10-05:/russia-pronhub-vkontakte-adblock-via.html</id>
+    <id>tag:www.chole.io,2019-10-05:/blog/russia-pronhub-vkontakte-adblock-via.html</id>
     <content type="html"></content>
-    <link href="https://567899.xyz/russia-pronhub-vkontakte-adblock-via.html"></link>
+    <link href="http://www.chole.io/blog/russia-pronhub-vkontakte-adblock-via.html"></link>
     <author>
-      <name>567899.xyz</name>
+      <name>纸小墨</name>
     </author>
   </entry>
   <entry>
     <title>通过cookies免费看Netflix</title>
     <updated>2019-09-01T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2019-09-01:/free-netflix-account-cookies.html</id>
+    <id>tag:www.chole.io,2019-09-01:/blog/free-netflix-account-cookies.html</id>
     <content type="html"></content>
-    <link href="https://567899.xyz/free-netflix-account-cookies.html"></link>
+    <link href="http://www.chole.io/blog/free-netflix-account-cookies.html"></link>
     <author>
-      <name>567899.xyz</name>
+      <name>纸小墨</name>
     </author>
   </entry>
   <entry>
     <title>Kiwi Browser让你的安卓Android手机端也能使用Chrome扩展插件</title>
     <updated>2019-07-22T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2019-07-22:/kiwi-browser.html</id>
+    <id>tag:www.chole.io,2019-07-22:/blog/kiwi-browser.html</id>
     <content type="html">&lt;p&gt;Kiwi Browser是一款基于Chromium二次开发的增强版的Chrome浏览器，引入了对Chrome扩展程序插件的支持。&lt;/p&gt;&#xA;</content>
-    <link href="https://567899.xyz/kiwi-browser.html"></link>
+    <link href="http://www.chole.io/blog/kiwi-browser.html"></link>
     <author>
-      <name>567899.xyz</name>
+      <name>纸小墨</name>
     </author>
   </entry>
   <entry>
     <title>GoogleDrive云端硬盘Microsoft_OneDrive对比下A1_E3_GD版本区别</title>
     <updated>2019-07-10T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2019-07-10:/microsoft-onedrive-google-drive-gsuite-e3-edu-version-difference.html</id>
+    <id>tag:www.chole.io,2019-07-10:/blog/microsoft-onedrive-google-drive-gsuite-e3-edu-version-difference.html</id>
     <content type="html"></content>
-    <link href="https://567899.xyz/microsoft-onedrive-google-drive-gsuite-e3-edu-version-difference.html"></link>
+    <link href="http://www.chole.io/blog/microsoft-onedrive-google-drive-gsuite-e3-edu-version-difference.html"></link>
     <author>
-      <name>567899.xyz</name>
+      <name>纸小墨</name>
     </author>
   </entry>
   <entry>
     <title>Chrome谷歌浏览器插件离线下载安装油猴脚本</title>
     <updated>2019-07-10T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2019-07-10:/chrome-crx-tampermonkey-extensions.html</id>
+    <id>tag:www.chole.io,2019-07-10:/blog/chrome-crx-tampermonkey-extensions.html</id>
     <content type="html"></content>
-    <link href="https://567899.xyz/chrome-crx-tampermonkey-extensions.html"></link>
+    <link href="http://www.chole.io/blog/chrome-crx-tampermonkey-extensions.html"></link>
     <author>
-      <name>567899.xyz</name>
+      <name>纸小墨</name>
     </author>
   </entry>
 </feed>
