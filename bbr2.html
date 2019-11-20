@@ -202,6 +202,21 @@ reboot
 
 <pre><code class="language-bash">yum remove kernel-3.10.0-693.21.1.el7.x86_64  #替换自己的内核名
 </code></pre>
+
+<hr />
+
+<p>Linux kernel 5.4-rc6
+make on <sup>11</sup>&frasl;<sub>20</sub> 2019</p>
+
+<pre><code class="language-bash">wget https://github.com/hvvy/bbr/releases/download/0.1.1/linux-headers-5.4.0-rc6_5.4.0-rc6-1_amd64.deb
+wget https://github.com/hvvy/bbr/releases/download/0.1.1/linux-image-5.4.0-rc6_5.4.0-rc6-1_amd64.deb
+wget https://github.com/hvvy/bbr/releases/download/0.1.1/linux-libc-dev_5.4.0-rc6-1_amd64.deb
+dpkg -i linux-headers-5.4.0-rc6_5.4.0-rc6-1_amd64.deb
+dpkg -i linux-image-5.4.0-rc6_5.4.0-rc6-1_amd64.deb
+dpkg -i linux-libc-dev_5.4.0-rc6-1_amd64.deb
+update-grub
+reboot
+</code></pre>
 </article>
                 <section class="author">
                     <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
