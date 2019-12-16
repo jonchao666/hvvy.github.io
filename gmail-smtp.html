@@ -45,10 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="besttrace,traceroute,">
-        <meta name="description" content="Linux VPS使用BestTrace进行路由跟踪">
+        <meta name="keywords" content="Gmail,">
+        <meta name="description" content="Gmail邮件客户端中SMTP的设置">
         <meta name="author" content="567899.xyz">
-        <title>Linux VPS使用BestTrace进行路由跟踪</title>
+        <title>Gmail邮件客户端中SMTP的设置</title>
     </head>
     <body>
         <article class="container">
@@ -65,69 +65,38 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">Linux VPS使用BestTrace进行路由跟踪</h1>
+                <h1 class="title">Gmail邮件客户端中SMTP的设置</h1>
                 <section class="info">
                     <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
                     <a class="name" href="/about.me.html">567899.xyz</a>
                     
-                    <span class="date" data-time="1420621200"><span class="from"></span></span>
+                    <span class="date" data-time="1382432400"><span class="from"></span></span>
                     
-                    <span class="tags"><a class="tag" href="/tag/besttrace/index.html">besttrace</a><a class="tag" href="/tag/traceroute/index.html">traceroute</a></span>
+                    <span class="tags"><a class="tag" href="/tag/Gmail/index.html">Gmail</a></span>
                 </section>
-                <article class="content"><p>VPS回程路由指的是你的远程VPS的IP地址到你本地ISP的IP。</p>
+                <article class="content"><h3>已启用安全性较低的应用的访问权限</h3>
 
-<p>使用<code>traceroute</code>命令进行路由跟踪,但不能显示IP归属地。</p>
+<ol>
+<li>个人邮箱登录google账号输入网址<a href="https://myaccount.google.com/lesssecureapps">安全性较低的应用的访问权限</a>开启启用【允许安全性较低的应用】即可正常发送邮件。</li>
+<li>企业邮箱登录之后，打开网址<a href="https://myaccount.google.com/lesssecureapps">安全性</a> 查看 <a href="https://support.google.com/a/answer/6260879?hl=zh-Hans">具体设置方法</a> 或者 <a href="https://admin.google.com/AdminHome#ServiceSettings/notab=1&amp;service=securitysetting&amp;subtab=lesssecureappsaccess">直接打开</a></li>
+</ol>
 
-<p><a href="https://www.ipip.net/product/client.html">下载BestTrace</a></p>
+<h3>电子邮件客户端中更改 SMTP 和其他设置</h3>
 
-<ul>
-<li><a href="https://cdn.ipip.net/17mon/besttrace.exe">Windows</a></li>
-<li><a href="https://itunes.apple.com/us/app/best-trace/id1037779758?l=zh&amp;ls=1&amp;mt=12">Mac OS</a></li>
-<li><a href="https://itunes.apple.com/cn/app/best-trace/id1026747589?ls=1&amp;mt=8">iOS</a></li>
-<li><a href="https://cdn.ipip.net/17mon/besttrace.apk">Android</a></li>
-<li><a href="https://cdn.ipip.net/17mon/besttrace4linux.zip">Linux</a></li>
-</ul>
+<p><a href="https://support.google.com/mail/answer/7126229?hl=zh-Hans">参考链接</a></p>
 
-<p>Linux使用方法如下</p>
-
-<pre><code class="language-bash">wget https://cdn.ipip.net/17mon/besttrace4linux.zip
-unzip besttrace4linux.zip
-chmod +x besttrace
-./besttrace -q1 -g cn IP地址
-</code></pre>
-
-<p>更多使用说明可输入<code>./besttrace --help</code>进行查看，完整的参数如下：</p>
-
-<pre><code class="language-bash">-6， - ipv6
-    使用ipv6。
-  -J， - json
-    使用JSON格式打印traceroute结果。
-  -g， - lang string
-    语言现在仅支持cn和en。
-  -m， - maxhop int
-    指定traceroute将探测的最大跳数（最大生存时间值）。默认值为30.（默认为30）
-  -a， - noas
-    显示时，请勿尝试将IP地址映射到AS。
-  -n， - nodomain
-    显示时，请勿尝试将IP地址映射到主机名。
-  -l， - location
-    显示时，请勿尝试将IP地址映射到位置。
-  -q， - query int
-    设置每跳的探测包数。默认值为3.（默认值为3）
-  -z， - sendtime int
-    探针之间的最小时间间隔（默认为0）。
-    如果该值大于10，则它指定一个以毫秒为单位的数字，否则它是一个秒数（也允许浮点值）。
-    当某些路由器对ICMP消息使用速率限制时很有用。
-  -f， - stopop int
-    指定要启动的TTL。默认为1.（默认值为1）
-   - 同步
-    通过同步发送icmp包。
-  -T， - tcp
-    使用TCP SYN进行探测。
-  -V， - 版本
-    打印版本并退出。
-  -w， - waittime int
-    设置等待探测响应的时间（以秒为单位）。 （默认3）
+<pre><code class="language-json">接收邮件 (IMAP) 服务器:imap.gmail.com
+要求 SSL：是
+端口：993
+发送邮件 (SMTP) 服务器:smtp.gmail.com
+要求 SSL：是
+要求 TLS：是（如适用）
+使用身份验证：是
+SSL 端口：465
+TLS/STARTTLS 端口：587
+完整名称或显示名称:您的姓名
+帐号名、用户名或电子邮件地址:您的完整电子邮件地址
+密码:您的 Gmail 密码
 </code></pre>
 </article>
                 <section class="author">
@@ -137,16 +106,11 @@ chmod +x besttrace
                 </section>
                 <section class="recommend">
                     
-                    <section class="nav prev more">
+                    <section class="nav prev">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/nano.html">nano文本编辑器使用复制剪切粘贴查找替换</a>
+                        <a class="link" href="/besttrace.html">Linux VPS使用BestTrace进行路由跟踪</a>
                     </section>
                     
-                    
-                    <section class="nav next more">
-                        <div class="head">下篇文章</div>
-                        <a class="link" href="/gmail-smtp.html">Gmail邮件客户端中SMTP的设置</a>
-                    </section>
                     
                 </section>
                 
