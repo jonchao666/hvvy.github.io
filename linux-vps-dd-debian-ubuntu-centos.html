@@ -241,6 +241,19 @@ bash InstallNET.sh -c 6.10 -v 64 -a --mirror 'http://mirror.centos.org/centos'
 <p>转载自<a href="https://moeclub.org/2018/04/03/603/?spm=22.5">https://moeclub.org/2018/04/03/603/?spm=22.5</a></p>
 
 <p><a href="/bash/LinuxShell-InstallNET.sh">InstallNET.sh</a></p>
+
+<hr />
+
+<p>指定网路参数安装（比如GCP谷歌云）将X.X.X.X替换为自己的网络参数.</p>
+
+<ol>
+<li>&ndash;ip-addr :IP Address/内网IP地址</li>
+<li>&ndash;ip-mask :Netmask /子网掩码</li>
+<li>&ndash;ip-gate :Gateway /网关</li>
+</ol>
+
+<pre><code>wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh' &amp;&amp; bash InstallNET.sh --ip-addr X.X.X.X --ip-mask X.X.X.X --ip-gate X.X.X.X -dd 'DD包 直链地址'
+</code></pre>
 </article>
                 <section class="author">
                     <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
