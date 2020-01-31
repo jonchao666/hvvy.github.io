@@ -128,6 +128,42 @@
 <li>回调地址填写你的网址，例如<code>https://xxx.abc.com</code></li>
 </ol>
 
+<h4>命令行功能</h4>
+
+<p>仅能在php cli模式下运行</p>
+
+<p>清除缓存:</p>
+
+<pre><code class="language-bash">php one.php cache:clear
+</code></pre>
+
+<p>刷新缓存:</p>
+
+<pre><code class="language-bash">php one.php cache:refresh
+</code></pre>
+
+<p>刷新令牌:</p>
+
+<pre><code class="language-bash">php one.php token:refresh
+</code></pre>
+
+<p>上传文件:</p>
+
+<pre><code class="language-bash">php one.php upload:file 本地文件 [onedrive文件]
+</code></pre>
+
+<p>例如：</p>
+
+<pre><code class="language-bash">//上传demo.zip 到onedrive 根目录  
+php one.php upload:file demo.zip  
+
+//上传demo.zip 到onedrive /test/目录  
+php one.php upload:file demo.zip /test/  
+
+//上传demo.zip 到onedrive /test/目录并命名为 d.zip
+php one.php upload:file demo.zip /test/d.zip  
+</code></pre>
+
 <h4>NGINX伪静态规则</h4>
 
 <pre><code class="language-bash">if (!-f $request_filename){
