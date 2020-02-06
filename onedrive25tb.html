@@ -45,10 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="chrome,">
-        <meta name="description" content="更新国内直连可以下载chrome官方的链接">
+        <meta name="keywords" content="OneDrive,">
+        <meta name="description" content="OneDrive存储空间升级到25T的教程">
         <meta name="author" content="567899.xyz">
-        <title>更新国内直连可以下载chrome官方的链接</title>
+        <title>OneDrive存储空间升级到25T的教程</title>
     </head>
     <body>
         <article class="container">
@@ -65,19 +65,74 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">更新国内直连可以下载chrome官方的链接</h1>
+                <h1 class="title">OneDrive存储空间升级到25T的教程</h1>
                 <section class="info">
                     <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
                     <a class="name" href="/about.me.html">567899.xyz</a>
                     
-                    <span class="date" data-time="1560848400"><span class="from"></span></span>
+                    <span class="date" data-time="1552554000"><span class="from"></span></span>
                     
-                    <span class="tags"><a class="tag" href="/tag/chrome/index.html">chrome</a></span>
+                    <span class="tags"><a class="tag" href="/tag/OneDrive/index.html">OneDrive</a></span>
                 </section>
-                <article class="content"><p>更新可以下载chrome企业包，全路径识别替换更新。国内可正常访问 企业版
-MSI：</p>
+                <article class="content"><p>支持升级到OneDrive 25T的订阅如下：</p>
 
-<p><a href="https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise.msi">32位</a> or <a href="https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi">64位</a></p>
+<pre><code class="language-bash">Office 365 企业版 E3
+Office 365 企业版 E5
+OneDrive for Business 计划 2
+SharePoint Online 计划 2
+Office 365 企业版 E3
+Office 365 企业版 E5
+Office 365 A1
+Office 365 A3
+Office 365 A5
+Office 365 美国政府版 G3
+Office 365 美国政府版 G5
+Office 365 非营利版 E3
+Office 365 非赢利组织版 E5
+Microsoft 365 企业版 E3
+Microsoft 365 企业版 E5
+Microsoft 365 A3
+Microsoft 365 A5
+Microsoft 365 美国政府版 G3
+Microsoft 365 美国政府版 G5
+Microsoft 365 非营利组织版 E3
+Microsoft 365 非营利组织版 E5
+</code></pre>
+
+<p>如果用户已使用5TB存储空间的至少90%容量，Microsoft最多会将OneDrive中的默认存储空间增加到每用户25 TB（需要全局管理员工单申请并设置）。</p>
+
+<h4>提交工单申请扩容25TB</h4>
+
+<p>以全局管理员登录<a href="https://admin.microsoft.com/Adminportal/Home">Microsoft 365 admin center - Home</a> 点击左侧<code>全部显示</code> <code>支持</code> <code>新建服务请求</code> 内容大概意思就是<code>请帮我把user1111@xxx.onmicrosoft.com的onedrive容量从5TB升级到25TB</code> 然后填上管理员邮箱、电话，附件上传几张该账号容量超过90%的截图，包括账户信息（浏览器缩小百分比），等待电话或邮件告知成功</p>
+
+<h4><a href="https://docs.microsoft.com/zh-cn/onedrive/change-user-storage">更改特定用户的 OneDrive 存储空间</a></h4>
+
+<ol>
+<li>假设onedrive管理地址是<a href="https://xxx-my.sharepoint.com/">https://xxx-my.sharepoint.com/</a></li>
+<li>假设你的全局管理邮箱是admin@xxx.onmicrosoft.com</li>
+<li>全局管理邮箱密码是:mypassword</li>
+<li>需要把用户user1111@xxx.onmicrosoft.com的onedrive容量从5TB升级到25TB</li>
+</ol>
+
+<p>最小值为 1024 MB （1 GB）以MB为单位,5242880MB=5TB  26214400MB=25TB</p>
+
+<p><a href="https://www.microsoft.com/zh-cn/download/details.aspx?id=35588">下载最新版 SharePoint Online 命令行管理程序</a>安装后打开，执行以下命令。</p>
+
+<pre><code class="language-bash">PS C:\Windows\system32&gt; $adminUPN=&quot;admin@xxx.onmicrosoft.com&quot;
+PS C:\Windows\system32&gt; $adminPWD=&quot;mypassword&quot;
+PS C:\Windows\system32&gt; $userCredential = Get-Credential -UserName $adminUPN -Message &quot;Type the password.&quot;            #弹窗登陆
+PS C:\Windows\system32&gt; Connect-SPOService -Url https://xxx-admin.sharepoint.com -Credential $admin                   #弹窗登陆
+PS C:\Windows\system32&gt; Set-SPOSite -Identity https://xxx-my.sharepoint.com/personal/user1111_xxx_onmicrosoft_com -StorageQuota 26214400
+PS C:\Windows\system32&gt;
+</code></pre>
+
+<p><strong>自行替换成自己的邮箱ID、密码等等</strong></p>
+
+<hr />
+
+<h4><a href="https://docs.microsoft.com/zh-cn/onedrive/set-default-storage-space">设置 OneDrive 用户的默认存储空间</a></h4>
+
+<p>以全局或 SharePoint 管理员的身份登录到<a href="https://admin.onedrive.com">OneDrive 管理中心</a>并在左窗格中选择<code>存储</code>。在 <code>默认存储空间</code> 框中输入默认存储量（以 GB 为单位），然后单击 <code>保存</code>。</p>
 </article>
                 <section class="author">
                     <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
@@ -88,13 +143,13 @@ MSI：</p>
                     
                     <section class="nav prev more">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/chrome-crx-tampermonkey-extensions.html">Chrome谷歌浏览器插件离线下载安装油猴脚本</a>
+                        <a class="link" href="/apply-alipay-dangmianfu-zfaka.html">免费申请开通支付宝当面付基础版费率0.38%对接ZFAKA教程</a>
                     </section>
                     
                     
                     <section class="nav next more">
                         <div class="head">下篇文章</div>
-                        <a class="link" href="/ubuntu-iptables.html">Ubuntu18.04关闭防火墙开放所有端口</a>
+                        <a class="link" href="/ubuntu-1804-rc-local-systemctl.html">ubuntu-18.04设置systemctl开机启动脚本rc.local</a>
                     </section>
                     
                 </section>
