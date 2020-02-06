@@ -307,6 +307,19 @@ rm -rf /opt/OneList /etc/systemd/system/onelist.service
 <p>最后如果我们只想显示网盘的某些文件夹，那么可以分别挂载该网盘的不同目录即可，具体操作看配置文件说明。</p>
 
 <p>转载自：<a href="https://www.moerats.com/archives/1016/">https://www.moerats.com/archives/1016/</a></p>
+
+<hr />
+
+<p>nginx反代</p>
+
+<pre><code class="language-bash">	#反代127.0.0.1:3000
+    location ^~ /25tb/ {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_pass http://127.0.0.1:3000;
+    }
+	#301跳转
+	rewrite / /25tb/ last;
+</code></pre>
 </article>
                 <section class="author">
                     <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
