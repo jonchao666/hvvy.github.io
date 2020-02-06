@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="567899.xyz">
+<meta name="twitter:description" content="这家伙很赖，什么也没有留下。">
+<meta name="twitter:image:src" content="https://567899.xyz/images/avatar.png">
+
+<meta property="og:url" content="https://567899.xyz">
+<meta property="og:title" content="567899.xyz">
+<meta property="og:description" content="这家伙很赖，什么也没有留下。">
+<meta property="og:site_name" content="567899.xyz">
+<meta property="og:image" content="https://567899.xyz/images/avatar.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="567899.xyz">
+<meta itemprop="description" content="这家伙很赖，什么也没有留下。">
+<meta itemprop="image" content="https://567899.xyz/images/avatar.png">
+
+<link rel="canonical" href="https://567899.xyz">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="OneList,OneDrive,">
+        <meta name="description" content="OneList又一款OneDrive列目录程序,解决API抽风问题">
+        <meta name="author" content="567899.xyz">
+        <title>OneList又一款OneDrive列目录程序,解决API抽风问题</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar.png" />
+    567899.xyz
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">OneList又一款OneDrive列目录程序,解决API抽风问题</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    
+                    <span class="date" data-time="1580979600"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/OneList/index.html">OneList</a><a class="tag" href="/tag/OneDrive/index.html">OneDrive</a></span>
+                </section>
+                <article class="content"><blockquote>
+<p><a href="https://github.com/MoeClub/OneList">Github地址</a></p>
+</blockquote>
+
+<p>目前OneDrive目录程序已经很多了，比如：PyOne、OneIndex和OLAINDEX。</p>
+
+<p>OneList主要特色就是解决了因OneDrive API抽风导致的很多问题，稳定性和访问速度都是不错的。</p>
+
+<h3>更新</h3>
+
+<pre><code class="language-bash">【2020.01.09】
+修复内存占用过大。
+新增支持在线视频播放的移动端自适应主题。
+
+【2019.12.29】
+新增隐藏目录或者文件。直接跳过缓存，减少API调用。
+新增目录加密，支持不同目录不同账户密码。HTTP 401认证。
+
+【2019.12.28】
+新增搜索功能。
+功能
+支持国际版、个人免费版(家庭版)、中国版(世纪互联)。
+支持同时列出多个盘的目录。(要求每个盘的SubPath唯一)
+支持文件夹内超过200个项目。
+支持后台自动刷新缓存。
+支持路径中含有特殊字符。
+数据储存在内存中，响应更加迅速。
+</code></pre>
+
+<h3>安装</h3>
+
+<p>Github地址：<a href="https://github.com/MoeClub/OneList/tree/master/Rewrite">https://github.com/MoeClub/OneList/tree/master/Rewrite</a></p>
+
+<p>1、授权认证</p>
+
+<p>点击右侧URL登录并授权，授权<a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=78d4dc35-7e46-42c6-9023-2d39314433a5&amp;response_type=code&amp;redirect_uri=http://localhost/onedrive-login&amp;response_mode=query&amp;scope=offline_access%20User.Read%20Files.ReadWrite.All">国际版\个人版\家庭版</a> 、<a href="https://login.chinacloudapi.cn/common/oauth2/v2.0/authorize?client_id=dfe36e60-6133-48cf-869f-4d15b8354769&amp;response_type=code&amp;redirect_uri=http://localhost/onedrive-login&amp;response_mode=query&amp;scope=offline_access%20User.Read%20Files.ReadWrite.All">中国世纪互联版</a>。</p>
+
+<p>授权后会获取一个localhost开头打不开的链接，这里复制好整个链接地址，包括localhost。</p>
+
+<p>2、安装OneList</p>
+
+<pre><code class="language-bash">#新建并进入OneList目录
+mkdir /opt/OneList &amp;&amp; cd $_
+
+#64位系统下载
+wget https://raw.githubusercontent.com/MoeClub/OneList/master/Rewrite/amd64/linux/OneList
+#32位系统下载
+wget https://raw.githubusercontent.com/MoeClub/OneList//master/Rewrite/i386/linux/OneList
+#arm架构下载
+wget https://raw.githubusercontent.com/MoeClub/OneList/master/Rewrite/arm/linux/OneList
+    
+#给予权限
+chmod +x OneList
+</code></pre>
+
+<h3>使用命令</h3>
+
+<pre><code class="language-bash">Usage of OneList:
+  -a string
+        // 初始化配置文件,添加新配置
+        Setup and Init auth.json.
+  -bind string
+        // 绑定IP地址(公网: 0.0.0.0)
+        Bind Address (default &quot;127.0.0.1&quot;)
+  -port string
+        // 绑定端口(HTTP:80)
+        Port (default &quot;5288&quot;)
+  -s string
+        // 设置 SubPath 项, 需要与 -a 一起使用.
+        Set SubPath. [unique per account] (default &quot;/&quot;)
+  -c string
+        // 配置文件
+        Config file. (default &quot;config.json&quot;)
+  -t string
+        // Index.html 目录样式文件
+        Index file. (default &quot;index.html&quot;)
+  -cn
+        // 开关
+        // 授权中国版(世纪互联), 需要此参数.
+        OneDrive by 21Vianet.
+  -ms
+        // 开关
+        // 授权个人版(家庭版), 需要此参数.
+        OneDrive by Microsoft.
+</code></pre>
+
+<p>4、生成配置文件</p>
+
+<pre><code class="language-bash">#国际版，将url换成你上面复制的授权地址，包括http://loaclhost。
+./OneList -a &quot;url&quot; -s &quot;/onedrive01&quot;
+
+#个人版(家庭版)，将url换成你上面复制的授权地址，包括http://loaclhost。
+./OneList -ms -a &quot;url&quot; -s &quot;/onedrive02&quot;
+
+#中国版(世纪互联)，将url换成你上面复制的授权地址，包括http://loaclhost。
+./OneList -cn -a &quot;url&quot; -s &quot;/onedrive03&quot;
+</code></pre>
+
+<p>提示<strong>Success! Add config. &lsquo;/path/to/config.json&rsquo;</strong>信息，则添加成功。</p>
+
+<p>这里要注意的是：</p>
+
+<pre><code class="language-bash">1、授权url地址只能用一次，超过需要重新授权。
+2、命令中的/onedrive01参数为指定网盘地址后缀，比如http://domain.com/onedrive01。
+3、授权多个网盘的话，重复授权多次即可，参数均会添加到一个配置文件，且后缀不能重复。
+4、地址后缀填错了的，可以稍后在配置文件中修改。
+</code></pre>
+
+<p>本文默认的配置文件路径<code>/opt/OneList/config.json</code>，参数详解，可自行修改：</p>
+
+<pre><code class="language-bash">[
+  {
+    // 如果是家庭版或者个人免费版, 此项应为 true.
+    &quot;MSAccount&quot;: false,
+    // 如果是中国版(世纪互联), 此项应为 true.
+    &quot;MainLand&quot;: false,
+    // 授权令牌
+    &quot;RefreshToken&quot;: &quot;1234564567890ABCDEF&quot;,
+    // 单配置文件中,此项要唯一.将此OneDrive中设置为`RootPath`目录映射在`http://127.0.0.1:5288/onedrive` 下.
+    // (只推荐一个盘位的时候使用根目录&quot;/&quot;.)
+    &quot;SubPath&quot;: &quot;/onedrive&quot;,
+    // 读取OneDrive的某个目录作为根目录. (支持根目录&quot;/&quot;)
+    &quot;RootPath&quot;: &quot;/Test&quot;,
+    // 隐藏OneDrive目录中的文件夹和文件, 条目间使用 &quot;|&quot; 分割. (跳过缓存设置的条目.)
+    &quot;HidePath&quot;: &quot;/Test/Obj01|/Test/Obj02&quot;,
+    // 使用用户名和密码加密OneDrive目录. 目录和用户名密码间使用 &quot;?&quot; 分割, 用户名密码使用 &quot;:&quot; 分割, 条目间使用 &quot;|&quot; 分割. 无效条目将跳过.
+    &quot;AuthPath&quot;: &quot;/Test/Auth01?user01:pwd01|/Test/Auth02?user02:pwd02&quot;,
+    // 缓存刷新间隔.(所有项目中的刷新时间取最小值为有效刷新间隔)
+    &quot;RefreshInterval&quot;: 900
+  }
+]
+</code></pre>
+
+<p>这里注意，挂载多个盘符的时候，<code>SubPath</code>参数请不要为<code>/</code>，单个网盘建议为<code>/</code>。</p>
+
+<h3>运行OneList</h3>
+
+<pre><code class="language-bash">#下载默认的index.html主题，与config.json同目录，即本文默认的/opt/OneList
+wget https://raw.githubusercontent.com/MoeClub/OneList/master/Rewrite/index.html -P /opt/OneList
+#监听8000地址，自行修改
+/opt/OneList/OneList -bind 0.0.0.0 -port 8000
+最后打开ip:端口访问即可，如果你挂载网盘的时候SubPath为/，那么直接通过根目录查看，如果为/onedrive1，那么通过ip:端口/onedrive1查看，如果该路径不存在，则会提示No Found.。
+</code></pre>
+
+<p>且首次运行会异步缓存，也就是至少有一个盘缓存成功了，才会显示。</p>
+
+<h3>开机自启</h3>
+
+<p>这里新建一个简单的systemd配置文件，适用CentOS 7、Debian 8+、Ubuntu 16+。</p>
+
+<p>使用命令：</p>
+
+<pre><code class="language-bash">#设置你的运行监听端口，即你可以通过ip:端口访问程序，这里默认8000。
+port=&quot;8000&quot;
+#将以下代码一起复制到SSH运行
+cat &gt; /etc/systemd/system/onelist.service &lt;&lt;EOF
+[Unit]
+Description=onelist
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/OneList/OneList -bind 0.0.0.0 -port ${port}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+#启动并设置开机自启
+systemctl start onelist
+systemctl enable onelist
+</code></pre>
+
+<h3>更换主题</h3>
+
+<p>提示：下载主题的index.html文件，覆盖默认index.html文件，本文默认存放/opt/OneList，然后重启程序即可</p>
+
+<p>主题地址：<a href="https://github.com/MoeClub/OneList/tree/master/Rewrite/@Theme">https://github.com/MoeClub/OneList/tree/master/Rewrite/@Theme</a></p>
+
+<p>1、HaorWu</p>
+
+<pre><code class="language-bash">#作者
+https://github.com/HaorWu
+
+#特点
+支持移动端自适应
+支持当页搜索
+支持按文件名, 日期, 大小排序
+支持主动查看图片
+支持在线播放视频
+
+#下载地址
+https://raw.githubusercontent.com/MoeClub/OneList/master/Rewrite/%40Theme/HaorWu/index.html
+</code></pre>
+
+<p>2、jackjieYYY</p>
+
+<pre><code class="language-bash">#作者
+https://github.com/jackjieYYY
+https://www.hostloc.com/space-uid-38920.html
+
+#特点
+支持移动端自适应
+支持当页搜索
+支持按文件名, 日期, 大小排序
+支持在线播放视频
+
+#下载地址
+https://raw.githubusercontent.com/MoeClub/OneList/master/Rewrite/%40Theme/jackjieYYY/index.html
+</code></pre>
+
+<h3>相关命令</h3>
+
+<pre><code class="language-bash">启动：systemctl start onelist
+停止：systemctl stop onelist
+重启：systemctl restart onelist
+查看状态：systemctl status onelist
+</code></pre>
+
+<h3>卸载</h3>
+
+<pre><code class="language-bash">#未设置开机自启
+rm -rf /opt/OneList
+
+#设置过开机自启
+systemctl stop onelist
+systemctl disable onelist
+rm -rf /opt/OneList /etc/systemd/system/onelist.service
+</code></pre>
+
+<p>最后如果我们只想显示网盘的某些文件夹，那么可以分别挂载该网盘的不同目录即可，具体操作看配置文件说明。</p>
+
+<p>转载自：<a href="https://www.moerats.com/archives/1016/">https://www.moerats.com/archives/1016/</a></p>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/google_drive_folderclone.html">Folderclone谷歌google共享云端硬盘转存相互转移拷贝复制文件的正确姿势</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/rclone-onedrive-cn.html">使用Rclone挂载世纪互联OneDrive</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        567899.xyz ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>
