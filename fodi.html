@@ -104,9 +104,7 @@ https://service-36wivxsc-1256127833.ap-hongkong.apigateway.myqcloud.com/release/
 
 <h3>部署FODI后端</h3>
 
-<p>创建<a href="https://workers.cloudflare.com">Cloudflare Workers</a>编辑界面里面的代码替换成下面的</p>
-
-<p><a href="https://raw.githubusercontent.com/vcheckzen/FODI/master/back-end-cf/index.js">https://raw.githubusercontent.com/vcheckzen/FODI/master/back-end-cf/index.js</a></p>
+<p>创建<a href="https://workers.cloudflare.com">Cloudflare Workers</a>编辑界面里面的代码替换成<a href="https://raw.githubusercontent.com/vcheckzen/FODI/master/back-end-cf/index.js">index.js</a></p>
 
 <p>找到并修改<code>const ONEDRIVE_REFRESHTOKEN = &quot;xxxxxxxxxxxxxxxxx&quot;</code></p>
 
@@ -114,9 +112,7 @@ https://service-36wivxsc-1256127833.ap-hongkong.apigateway.myqcloud.com/release/
 
 <h3>通过<a href="https://pages.github.com">Github Pages</a>部署前端</h3>
 
-<p>打开<a href="https://raw.githubusercontent.com/vcheckzen/FODI-FRONT-END/master/index.html">https://raw.githubusercontent.com/vcheckzen/FODI-FRONT-END/master/index.html</a></p>
-
-<p>在<code>SCF_GATEWAY</code>中填上你的<a href="https://workers.cloudflare.com">Cloudflare Workers</a>地址</p>
+<p>打开<a href="https://raw.githubusercontent.com/vcheckzen/FODI-FRONT-END/master/index.html">index.html</a>在<code>SCF_GATEWAY</code>中填上你的<a href="https://workers.cloudflare.com">Cloudflare Workers</a>地址</p>
 
 <pre><code class="language-bash">/**
 * SCF_GATEWAY：SCF 云函数网关地址
