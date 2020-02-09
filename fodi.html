@@ -92,8 +92,10 @@
 
 <p>下面是修改前后的网址对比：</p>
 
-<pre><code class="language-bash">https://service-36wivxsc-1256127833.ap-hongkong.apigateway.myqcloud.com/release/scf_onedrive_filelistor/?authorization_code&amp;code=...   #修改前
-https://service-36wivxsc-1256127833.ap-hongkong.apigateway.myqcloud.com/release/scf_onedrive_filelistor/authorization_code?code=...    #修改后
+<pre><code class="language-bash">#修改前
+https://service-36wivxsc-1256127833.ap-hongkong.apigateway.myqcloud.com/release/scf_onedrive_filelistor/?authorization_code&amp;code=...
+#修改后
+https://service-36wivxsc-1256127833.ap-hongkong.apigateway.myqcloud.com/release/scf_onedrive_filelistor/authorization_code?code=...
 </code></pre>
 
 <p>修改完毕后直接回车，稍等片刻页面将返回 <code>refresh_token</code>，复制保存。</p>
@@ -116,18 +118,18 @@ https://service-36wivxsc-1256127833.ap-hongkong.apigateway.myqcloud.com/release/
 
 <p>在<code>SCF_GATEWAY</code>中填上你的<a href="https://workers.cloudflare.com">Cloudflare Workers</a>地址</p>
 
-<pre><code class="language-bash">        /**
-        * SCF_GATEWAY：SCF 云函数网关地址
-        * SITE_NAME：站点名称
-        */
-        window.GLOBAL_CONFIG = {
-            SCF_GATEWAY: &quot;https://xxxx.xxx.workers.dev/&quot;,
-            SITE_NAME: &quot;FODI&quot;,
-            IS_CF: true
-        };
+<pre><code class="language-bash">/**
+* SCF_GATEWAY：SCF 云函数网关地址
+* SITE_NAME：站点名称
+*/
+window.GLOBAL_CONFIG = {
+    SCF_GATEWAY: &quot;https://xxxx.xxx.workers.dev/&quot;,
+    SITE_NAME: &quot;FODI&quot;,
+    IS_CF: true
+};
 </code></pre>
 
-<h3>加密文件夹</h3>
+<h3>其它</h3>
 
 <p>在某个文件夹下添加<code>.password</code>文件加密码,<code>README.md</code>Markdown语法自述文件.注意文件必须以<code>UTF8NoBOM</code>编码，且密码前后不能有空格或空行</p>
 
