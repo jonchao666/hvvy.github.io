@@ -45,10 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="hexo,">
-        <meta name="description" content="hexo备份更换设备后同步编辑">
+        <meta name="keywords" content="Python,">
+        <meta name="description" content="在Debian、Ubuntu系统上为Python 2/3安装和使用Pip的方法">
         <meta name="author" content="567899.xyz">
-        <title>hexo备份更换设备后同步编辑</title>
+        <title>在Debian、Ubuntu系统上为Python 2/3安装和使用Pip的方法</title>
     </head>
     <body>
         <article class="container">
@@ -65,77 +65,87 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">hexo备份更换设备后同步编辑</h1>
+                <h1 class="title">在Debian、Ubuntu系统上为Python 2/3安装和使用Pip的方法</h1>
                 <section class="info">
                     <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
                     <a class="name" href="/about.me.html">567899.xyz</a>
                     
-                    <span class="date" data-time="1523437200"><span class="from"></span></span>
+                    <span class="date" data-time="1474275600"><span class="from"></span></span>
                     
-                    <span class="tags"><a class="tag" href="/tag/hexo/index.html">hexo</a></span>
+                    <span class="tags"><a class="tag" href="/tag/Python/index.html">Python</a></span>
                 </section>
-                <article class="content"><h3>备份hexo原始配置文件</h3>
+                <article class="content"><h3>为Python 3安装pip3</h3>
 
-<p>压缩打包备份原始的hexo配置文件scaffolds, source, themes 和 _config.yml</p>
+<p><strong>以具有sudo权限的非root用户身份执行</strong>以下步骤</p>
 
-<h3>在新电脑上重新布署安装一次hexo</h3>
+<p>首先更新包列表：</p>
 
-<pre><code class="language-bash">cd /d
-npm install hexo-cli -g
-hexo init blog
-cd blog
-npm install
-npm install hexo-deployer-git --save
-git init
-npm install hexo-generator-feed --save
-npm install hexo-generator-sitemap --save
-npm install hexo-generator-baidu-sitemap --save
-npm install hexo-generator-searchdb --save
-git clone https://github.com/iissnan/hexo-theme-next themes/next
+<pre><code class="language-bash">sudo apt update
 </code></pre>
 
-<p>然后覆盖替换掉原有的文件scaffolds, source, themes 和 _config.yml</p>
+<p>使用以下命令为Python 3及其所有依赖项安装pip：</p>
 
-<!-- more -->
-
-<h3>hexo远程同步到github</h3>
-
-<p><a href="https://github.com/login">登陆GitHub</a>并创建分支为username.github.io 可以点击<a href="https://github.com/join?source=header-home">Join GitHub</a>注册账号</p>
-
-<pre><code class="language-bash">git config --global user.name &quot;username&quot;
-git config --global user.email &quot;youremail@gmail.com&quot;
-ssh-keygen -t rsa -C 'youremail@gmail.com'
+<pre><code class="language-bash">sudo apt install python3-pip
 </code></pre>
 
-<p>Your public key has been saved in /c/Users/admin/.ssh/id_rsa.pub.
-按提示一路回车即可以得到KEY,并收到邮件提醒。
-用文本编辑器打开/c/Users/admin/.ssh/id_rsa.pub这个文件将里面的所有文本文字
-复制到repo－Settings－Deploy keys－Add deploy key中，Title可以随便填写
-回到Git Bash</p>
+<p>查看pip3、Python版本以验证安装：</p>
 
-<pre><code class="language-bash">ssh -T git@github.com
+<pre><code class="language-bash">pip3 --version
+python3 -V
 </code></pre>
 
-<p>测试是否连接成功，如果能看到</p>
+<p>版本号可能不同，但它看起来如下所示：</p>
 
-<p>Hi username/username.github.io! You&rsquo;ve successfully authenticated, but GitHub does not provide shell access.
-即表示连接成功了。</p>
-
-<pre><code class="language-bash">git remote add origin git@github.com:username/username.github.io.git
-git commit -m &quot;自定义描述&quot;
-git push -u origin master
+<pre><code class="language-bash">pip 18.1 from /usr/lib/python3/dist-packages/pip (python 3.7)
 </code></pre>
 
-<h3>hexo开启github远程同步文件</h3>
+<h3>为Python 2安装pip</h3>
 
-<pre><code class="language-bash">git add .
-git commit -m ‘在新电脑上提交新文章’ #(引号内容可改)
-git push
+<p><strong>以具有sudo权限的非root用户身份执行</strong>以下步骤</p>
+
+<p>首先更新包索引：</p>
+
+<pre><code class="language-bash">sudo apt update
 </code></pre>
 
-<pre><code class="language-bash">hexo clean
-hexo g
-hexo d
+<p>为Python 2及其所有依赖项安装pip：</p>
+
+<pre><code class="language-bash">sudo apt install python-pip
+</code></pre>
+
+<p>通过输入以下命令来验证安装，该命令将打印pip版本：</p>
+
+<pre><code class="language-bash">pip --version
+</code></pre>
+
+<p>版本号可能会有所不同，但它看起来像这样：</p>
+
+<pre><code class="language-bash">pip 18.1 from /usr/lib/python2.7/dist-packages/pip (python 2.7)
+</code></pre>
+
+<p>安装软件</p>
+
+<pre><code class="language-bash">pip install 软件包名
+</code></pre>
+
+<p>卸载包：</p>
+
+<pre><code class="language-bash">pip uninstall package_name
+</code></pre>
+
+<p>从PyPI搜索包：</p>
+
+<pre><code class="language-bash">pip search &quot;search_query&quot;
+</code></pre>
+
+<p>列出已安装的包：</p>
+
+<pre><code class="language-bash">pip list
+</code></pre>
+
+<p>列出过时的包：</p>
+
+<pre><code class="language-bash">pip list --outdated
 </code></pre>
 </article>
                 <section class="author">
@@ -147,13 +157,13 @@ hexo d
                     
                     <section class="nav prev more">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/aira2-uploads-googledrive-onedrive.html">使用Aira2下载文件后自动上传到GoogleDrive网盘onedrive</a>
+                        <a class="link" href="/hello-world.html">hexo Hello World</a>
                     </section>
                     
                     
                     <section class="nav next more">
                         <div class="head">下篇文章</div>
-                        <a class="link" href="/linux_ssh_scp_id_rsa.html">Linux下scp使用RSA秘钥传输数据Scp命令免密码远程下载上传</a>
+                        <a class="link" href="/linux-github-id_rsa-pub.html">Linux下如何管理多个ssh密钥对github公钥私钥</a>
                     </section>
                     
                 </section>
