@@ -102,11 +102,12 @@
 
 <p><strong>Linux:</strong> 安装screen，git和最新的Rclone。如果是Debian/Ubuntu，直接输入以下命令</p>
 
-<pre><code class="language-bash">sudo apt update
-sudo apt -y upgrade
-sudo apt install -y python3-pip screen git
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install -y python3-pip screen git curl
 curl https://rclone.org/install.sh | sudo bash
 </code></pre>
+
+<p><strong>CentOS</strong>把<code>apt-get</code>替换成<code>yum</code></p>
 
 <p>然后从Github下载代码并安装相关Python依赖包</p>
 
