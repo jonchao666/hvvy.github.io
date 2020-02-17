@@ -224,16 +224,16 @@ curl https://rclone.org/install.sh | sudo bash
 <li><code>-d</code>后跟团队盘id</li>
 <li><code>-dp</code>后跟保存的目标文件夹路径</li>
 <li><code>-b</code>后跟开始账号序号</li>
+<li><code>-e</code>后跟结束账号序号,<strong>少于或等于已经添加到团队盘成员的个数数值</strong></li>
+</ol>
 
-<li><p><code>-e</code>后跟结束账号序号,<strong>少于或等于已经添加到团队盘成员的个数数值</strong></p></li>
+<p>其它</p>
 
-<li><p>如果想看参数的具体含义，直接运行<code>python3 rclone_sa_magic.py -h</code></p></li>
-
-<li><p>特别地，如果想多开，请用<code>-p</code>参数给不同的复制任务指定不同的端口</p></li>
-
-<li><p>如果发现拷贝内容明显少于源Team Drive里面的内容，那么你可能碰到<a href="https://forum.rclone.org/t/rclone-cannot-see-all-files-folder-in-public-shared-folder/12351">Bug</a>了，请给上运行参数再加上<code>--disable_list_r</code></p></li>
-
-<li><p>如果你一开始就碰到了</p></li>
+<ol>
+<li>如果想看参数的具体含义，直接运行<code>python3 rclone_sa_magic.py -h</code></li>
+<li>特别地，如果想多开，请用<code>-p</code>参数给不同的复制任务指定不同的端口</li>
+<li>如果发现拷贝内容明显少于源Team Drive里面的内容，那么你可能碰到<a href="https://forum.rclone.org/t/rclone-cannot-see-all-files-folder-in-public-shared-folder/12351">Bug</a>了，请给上运行参数再加上<code>--disable_list_r</code></li>
+<li>如果你一开始就碰到了</li>
 </ol>
 
 <pre><code class="language-bash">Failed to rc: connection failed: Post http://localhost:5572/core/stats: dial tcp :5572: connectex: No connection could be made because the target machine actively refused it.
