@@ -106,13 +106,23 @@
 <p>Debian/Ubuntu安装</p>
 
 <pre><code class="language-bash">apt update
-apt install python-pip git -y
+apt install python-pip git screen -y
 git clone https://github.com/Spazzlo/folderclone.git
 cd folderclone
 pip3 install folderclone
 </code></pre>
 
 <p><code>CentOS</code>把<code>apt-get</code>替换成<code>yum</code></p>
+
+<p>因拷贝时间长，防止中断，强烈建议使用<code>screen</code>后台运行。<code>screen</code>简单使用方法</p>
+
+<pre><code class="language-bash"># 创建screen窗口,folderclone名字可自定义
+screen -S folderclone
+# 临时退出使用screen后台运行,按组合键
+【Ctrl】【a】【d】
+# 回到screen窗口
+screen -r folderclone
+</code></pre>
 
 <p>Windows安装</p>
 
