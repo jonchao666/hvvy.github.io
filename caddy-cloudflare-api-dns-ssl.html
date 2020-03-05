@@ -244,7 +244,7 @@ tls {
 
 <p>会自动给你生成一个通配符SSL证书 Caddy自动申请SSL证书位置：</p>
 
-<pre><code class="language-bash">/etc/ssl/caddy/acme/acme-v02.api.letsencrypt.org/sites/*.xxx.com(域名)/
+<pre><code class="language-bash">~/.caddy/acme/acme-v02.api.letsencrypt.org/sites/wildcard_.xxx.com
 </code></pre>
 
 <p>此时你就可以使用<code>*.xxx.com.crt</code>和<code>*.xxx.com.key</code>文件为你的所有子域名配置SSL了。</p>
