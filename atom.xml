@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>567899.xyz</title>
   <id>https://567899.xyz</id>
-  <updated>2020-03-07T00:21:03-05:00</updated>
+  <updated>2020-03-07T00:27:05-05:00</updated>
   <subtitle>这家伙很赖，什么也没有留下。</subtitle>
   <link href="https://567899.xyz"></link>
   <author>
@@ -68,6 +68,16 @@
     </author>
   </entry>
   <entry>
+    <title>使用GitHub Actions云编译OpenWrt</title>
+    <updated>2020-01-12T17:00:00+08:00</updated>
+    <id>tag:567899.xyz,2020-01-12:/build-openwrt-with-github-actions.html</id>
+    <content type="html"></content>
+    <link href="https://567899.xyz/build-openwrt-with-github-actions.html"></link>
+    <author>
+      <name>567899.xyz</name>
+    </author>
+  </entry>
+  <entry>
     <title>检测移动电信联通通讯运营商SIM卡分配给用户的最高速率、限速速率网速值</title>
     <updated>2019-11-04T17:00:00+08:00</updated>
     <id>tag:567899.xyz,2019-11-04:/internet-sim-ambr-dl-ul-2g-3g-4g-lte.html</id>
@@ -93,16 +103,6 @@
     <id>tag:567899.xyz,2019-10-22:/bbr2.html</id>
     <content type="html">&lt;p&gt;手动编译下载安装 TCP BBR v2 Alpha/Preview 内核Ubuntu &amp;amp; Debian &amp;amp; CentOS 删除Linux旧内核linux-headers-5.2.0-rc3+_5.2.0-rc3+-1_amd64.deb,linux-image-5.2.0-rc3+_5.2.0-rc3+-1_amd64.deb&lt;/p&gt;&#xA;</content>
     <link href="https://567899.xyz/bbr2.html"></link>
-    <author>
-      <name>567899.xyz</name>
-    </author>
-  </entry>
-  <entry>
-    <title>Windows10 LTSC 2019 安装和卸载 linux 子系统</title>
-    <updated>2019-10-18T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2019-10-18:/windows10-ltsc-2019-linux.html</id>
-    <content type="html">&lt;p&gt;Windows10企业版LTSC 2019 1809安装和卸载linux子系统&lt;/p&gt;&#xA;</content>
-    <link href="https://567899.xyz/windows10-ltsc-2019-linux.html"></link>
     <author>
       <name>567899.xyz</name>
     </author>
