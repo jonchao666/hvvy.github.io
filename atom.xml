@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>567899.xyz</title>
   <id>https://567899.xyz</id>
-  <updated>2020-03-09T01:50:12-04:00</updated>
+  <updated>2020-03-09T02:00:37-04:00</updated>
   <subtitle>这家伙很赖，什么也没有留下。</subtitle>
   <link href="https://567899.xyz"></link>
   <author>
@@ -18,7 +18,7 @@
     </author>
   </entry>
   <entry>
-    <title>Goorm免费VPS</title>
+    <title>Goorm免费NAT VPS</title>
     <updated>2020-03-08T17:00:00+08:00</updated>
     <id>tag:567899.xyz,2020-03-08:/goorm.html</id>
     <content type="html"></content>
