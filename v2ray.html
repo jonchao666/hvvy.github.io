@@ -377,6 +377,24 @@ ssl_certificate_key    /www/server/panel/vhost/cert/域名/privkey.pem;
 &quot;keyFile&quot;: &quot;/etc/ssl/caddy/acme/acme-v02.api.letsencrypt.org/sites/域名/域名.key&quot;
 </code></pre>
 
+<p>如果需要配置多个域名证书，可以增加<code>certificates</code>值，例如</p>
+
+<pre><code>&quot;certificates&quot;: [
+    {
+    &quot;certificateFile&quot;: &quot;/path/to/tls1.crt&quot;, // 换成你的证书，绝对路径
+    &quot;keyFile&quot;: &quot;/path/to/tls1.key&quot; // 换成你的私钥，绝对路径
+    },
+    {
+    &quot;certificateFile&quot;: &quot;/path/to/tls2.crt&quot;, // 换成你的证书，绝对路径
+    &quot;keyFile&quot;: &quot;/path/to/tls2.key&quot; // 换成你的私钥，绝对路径
+    },
+    {
+    &quot;certificateFile&quot;: &quot;/path/to/tls3.crt&quot;, // 换成你的证书，绝对路径
+    &quot;keyFile&quot;: &quot;/path/to/tls3.key&quot; // 换成你的私钥，绝对路径
+    }
+    ]
+</code></pre>
+
 <p>二、 配置WEB服务</p>
 
 <p>我们需要2个HTTP服务 同时监听2个TCP端口80和8000，80端口用作301跳转，8000用作回落。这样的好处是更好的伪装HTTPS流量，及HTTP的80端口能自动跳转到HTTP 443端口上</p>
