@@ -415,6 +415,17 @@ ssl_certificate_key    /www/server/panel/vhost/cert/域名/privkey.pem;
 http://xxx.xxx {
       redir  https://xxx.xxx{uri}
 }
+https://xxx.xxx:1443 {
+        browse
+        basicauth /password username yourpassword
+        gzip
+        root /var/www/
+        proxy /ray localhost:22782 {
+                websocket
+                header_upstream -Origin
+        }
+        fastcgi / /run/php/php7.3-fpm.sock php
+}
 </code></pre>
 
 <p>宝塔Nginx需要修改配置文件ssl监听端口为非443，例如改名为1443端口 然后申请SSL证书并开启强制HTTPS功能，然后增加<code>server</code>的http端口8000，完整的配置文件示范如下</p>
