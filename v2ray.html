@@ -141,6 +141,38 @@ yum install wget curl -y
 
 <h3>配置VMess(websocket tls web)</h3>
 
+<p>需要防火墙放行到3个TCP端口</p>
+
+<table>
+<thead>
+<tr>
+<th>协议</th>
+<th>端口</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>TCP</td>
+<td>80</td>
+<td>常规HTTP端口</td>
+</tr>
+
+<tr>
+<td>TCP</td>
+<td>443</td>
+<td>常规HTTPS端口</td>
+</tr>
+
+<tr>
+<td>TCP</td>
+<td>22782</td>
+<td>websocket转发,可自定义端口号.</td>
+</tr>
+</tbody>
+</table>
+
 <p>一、 服务端V2ray配置文件</p>
 
 <p>编辑文件<code>/etc/v2ray/config.json</code></p>
@@ -397,11 +429,52 @@ ssl_certificate_key    /www/server/panel/vhost/cert/域名/privkey.pem;
 
 <p>二、 配置WEB服务</p>
 
-<p>我们需要2个HTTP服务 同时监听2个TCP端口80和8000，80端口用作301跳转，8000用作回落。这样的好处是更好的伪装HTTPS流量，及HTTP的80端口能自动跳转到HTTP 443端口上</p>
+<ol>
+<li>为了更好的伪装，防止流量推测用到了回落模式.</li>
+<li>为了兼顾<code>http://</code>的常规80端口能自动跳转到<code>https://</code>需要web服务器追加一个非80的HTTP服务</li>
+</ol>
+
+<p>防火墙需要放行到4个TCP端口</p>
+
+<table>
+<thead>
+<tr>
+<th>协议</th>
+<th>端口</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>TCP</td>
+<td>80</td>
+<td><code>http://</code>301跳转到<code>https://</code>,申请/自动续期Let’s Encrypt SSL证书</td>
+</tr>
+
+<tr>
+<td>TCP</td>
+<td>443</td>
+<td>V2Ray前置处理代理ssl证书</td>
+</tr>
+
+<tr>
+<td>TCP</td>
+<td>8000</td>
+<td>VLESS回落HTTP端口,可自定义端口号</td>
+</tr>
+
+<tr>
+<td>TCP</td>
+<td>1443</td>
+<td>更改https的端口为非443，可自定义端口号</td>
+</tr>
+</tbody>
+</table>
 
 <p>Caddy的配置文件示范如下</p>
 
-<pre><code>http://xxx.xxx:8000 {
+<pre><code>http://xxx.xxx:8000 https://xxx.xxx:1443 {
         browse
         basicauth /password username yourpassword
         gzip
@@ -414,17 +487,6 @@ ssl_certificate_key    /www/server/panel/vhost/cert/域名/privkey.pem;
 }
 http://xxx.xxx {
       redir  https://xxx.xxx{uri}
-}
-https://xxx.xxx:1443 {
-        browse
-        basicauth /password username yourpassword
-        gzip
-        root /var/www/
-        proxy /ray localhost:22782 {
-                websocket
-                header_upstream -Origin
-        }
-        fastcgi / /run/php/php7.3-fpm.sock php
 }
 </code></pre>
 
@@ -496,6 +558,7 @@ https://xxx.xxx:1443 {
     access_log  /www/wwwlogs/域名.log;
     error_log  /www/wwwlogs/域名.error.log;
     
+    #WebSocket端口转发(可选)
     location /ray {
     proxy_redirect off;
     proxy_pass http://127.0.0.1:22782;
