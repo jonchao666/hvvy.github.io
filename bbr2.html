@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="567899.xyz">
+<meta name="twitter:description" content="这家伙很赖，什么也没有留下。">
+<meta name="twitter:image:src" content="https://567899.xyz/images/avatar.png">
+
+<meta property="og:url" content="https://567899.xyz">
+<meta property="og:title" content="567899.xyz">
+<meta property="og:description" content="这家伙很赖，什么也没有留下。">
+<meta property="og:site_name" content="567899.xyz">
+<meta property="og:image" content="https://567899.xyz/images/avatar.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="567899.xyz">
+<meta itemprop="description" content="这家伙很赖，什么也没有留下。">
+<meta itemprop="image" content="https://567899.xyz/images/avatar.png">
+
+<link rel="canonical" href="https://567899.xyz">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="bbr2,CentOS,Ubuntu,Debian,tcp,">
+        <meta name="description" content="Ubuntu &amp; Debian &amp; CentOS手动编译安装 TCP BBR v2 Alpha/Preview 内核">
+        <meta name="author" content="567899.xyz">
+        <title>Ubuntu &amp; Debian &amp; CentOS手动编译安装 TCP BBR v2 Alpha/Preview 内核</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar.png" />
+    567899.xyz
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">Ubuntu &amp; Debian &amp; CentOS手动编译安装 TCP BBR v2 Alpha/Preview 内核</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    
+                    <span class="date" data-time="1571734800"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/bbr2/index.html">bbr2</a><a class="tag" href="/tag/CentOS/index.html">CentOS</a><a class="tag" href="/tag/Ubuntu/index.html">Ubuntu</a><a class="tag" href="/tag/Debian/index.html">Debian</a><a class="tag" href="/tag/tcp/index.html">tcp</a></span>
+                </section>
+                <article class="content"><p>TCP BBR v2 alpha： <a href="https://github.com/google/bbr/tree/v2alpha">https://github.com/google/bbr/tree/v2alpha</a></p>
+
+<h3>Ubuntu &amp; Debian 环境依赖</h3>
+
+<pre><code class="language-bash">apt-get update
+apt install -y build-essential libncurses5-dev
+apt -y build-dep linux
+apt install -y git 
+</code></pre>
+
+<p>(可选)如提示错误<code>E: You must put some ‘source’ URIs in your sources.list</code>解决方法如下</p>
+
+<pre><code class="language-bash">sed -i 's/#deb-src/deb-src/g' /etc/apt/sources.list
+sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list
+apt-get update
+</code></pre>
+
+<h3>编译内核</h3>
+
+<pre><code class="language-bash"># 下载源码
+git clone -o google-bbr -b v2alpha  https://github.com/google/bbr.git
+cd bbr
+# 禁用签名调试
+scripts/config --disable MODULE_SIG
+scripts/config --disable DEBUG_INFO
+# 配置tcp bbr2选项
+make menuconfig
+</code></pre>
+
+<p>依次进入<code>Networking support  ---&gt;</code>   <code>Networking options  ---&gt;</code>   <code>TCP: advanced congestion control ---&gt;</code>  <code>BBR2 TCP</code> 按空格键在前面标记<code>&lt;M&gt;</code> 其它选项保持默认即可.(也可以按<code>/</code> 在搜索框输入<code>bbr2</code>回车根据查询结果，按数字键 <code>1</code> 进入<code>BBR2 TCP</code>配置页面按空格键标记<code>&lt;M&gt;   BBR2 TCP</code> )</p>
+
+<p>开始编译</p>
+
+<pre><code class="language-bash">screen -S kernel  # 新建一个会话
+make -jN deb-pkg  # N 为线程数
+</code></pre>
+
+<p>编译完成后 /root 目录下生成以下文件</p>
+
+<pre><code class="language-bash">linux-5.2.0-rc3+_5.2.0-rc3+-1.diff.gz
+linux-5.2.0-rc3+_5.2.0-rc3+-1.dsc
+linux-5.2.0-rc3+_5.2.0-rc3+-1_amd64.buildinfo
+linux-5.2.0-rc3+_5.2.0-rc3+-1_amd64.changes
+linux-5.2.0-rc3+_5.2.0-rc3+.orig.tar.gz
+linux-headers-5.2.0-rc3+_5.2.0-rc3+-1_amd64.deb
+linux-image-5.2.0-rc3+_5.2.0-rc3+-1_amd64.deb
+linux-libc-dev_5.2.0-rc3+-1_amd64.deb
+</code></pre>
+
+<p>如果你不想自己编译也可以下载本站编译好的内核，编译时间：2019-10-22</p>
+
+<p><a href="/uploads/linux-headers-5.2.0-rc3+_5.2.0-rc3+-1_amd64.deb">linux-headers-5.2.0-rc3+_5.2.0-rc3+-1_amd64.deb</a></p>
+
+<p><a href="/uploads/linux-image-5.2.0-rc3+_5.2.0-rc3+-1_amd64.deb">linux-image-5.2.0-rc3+_5.2.0-rc3+-1_amd64.deb</a></p>
+
+<p><a href="/uploads/linux-libc-dev_5.2.0-rc3+-1_amd64.deb">linux-libc-dev_5.2.0-rc3+-1_amd64.deb</a></p>
+
+<h3>安装 v2alpha 内核</h3>
+
+<p>下载后缀为<code>*.deb</code>的3个文件,以 Debian 9 64-bit 为例</p>
+
+<pre><code class="language-bash">dpkg -i linux-headers-5.2.0-rc3+_5.2.0-rc3+-1_amd64.deb
+dpkg -i linux-image-5.2.0-rc3+_5.2.0-rc3+-1_amd64.deb
+dpkg -i linux-libc-dev_5.2.0-rc3+-1_amd64.deb
+update-grub
+reboot
+</code></pre>
+
+<h3>开启 bbr2</h3>
+
+<pre><code class="language-bash">echo &quot;net.core.default_qdisc=fq&quot; &gt;&gt; /etc/sysctl.conf
+echo &quot;net.ipv4.tcp_congestion_control = bbr2&quot; &gt;&gt; /etc/sysctl.conf
+echo &quot;net.ipv4.tcp_ecn = 1&quot; &gt;&gt; /etc/sysctl.conf # 开启ECN (可选)
+sysctl -p
+</code></pre>
+
+<p>查看是否开启 bbr2</p>
+
+<pre><code class="language-bash">sysctl net.ipv4.tcp_available_congestion_control
+# net.ipv4.tcp_available_congestion_control = reno cubic bbr2
+lsmod | grep bbr
+# tcp_bbr2               40960  1
+</code></pre>
+
+<h3>删除多余旧内核</h3>
+
+<p>首先查询当前我们使用的是内核是那个版本别删错了。</p>
+
+<pre><code class="language-bash">uname -a
+</code></pre>
+
+<p>查询系统中装了多少内核</p>
+
+<pre><code class="language-bash">dpkg --get-selections|grep linux
+</code></pre>
+
+<p>多余的内核可以通过命令删除 需要删除header和image</p>
+
+<pre><code class="language-bash">apt-get purge linux-image-*.*.*-**       # *号用你想删除的实际情况改写
+apt-get purge linux-headers-*.*.*-**     # *号用你想删除的实际情况改写
+</code></pre>
+
+<hr />
+
+<h3>CentOS安装启用bbr</h3>
+
+<pre><code class="language-bash">wget https://567899.xyz/uploads/kernel-5.2.0_rc3+-1.x86_64.rpm
+wget https://567899.xyz/uploads/kernel-headers-5.2.0_rc3+-1.x86_64.rpm
+yum -y localinstall *
+grub2-set-default 0
+echo &quot;net.core.default_qdisc=fq&quot; &gt;&gt; /etc/sysctl.conf
+echo &quot;net.ipv4.tcp_congestion_control = bbr2&quot; &gt;&gt; /etc/sysctl.conf
+echo &quot;net.ipv4.tcp_ecn = 1&quot; &gt;&gt; /etc/sysctl.conf   # 开启ecn (可选)
+sysctl -p
+rm kernel-5.2.0_rc3+-1.x86_64.rpm
+rm kernel-headers-5.2.0_rc3+-1.x86_64.rpm
+reboot
+</code></pre>
+
+<p>查询系统中全部的内核</p>
+
+<pre><code class="language-bash">rpm -qa | grep kernel
+</code></pre>
+
+<p>CentOS 清除旧内核</p>
+
+<pre><code class="language-bash">yum remove kernel-3.10.0-693.21.1.el7.x86_64  #替换自己的内核名
+</code></pre>
+
+<hr />
+
+<p>Linux kernel 5.4-rc6
+make on <sup>11</sup>&frasl;<sub>20</sub> 2019</p>
+
+<pre><code class="language-bash">wget https://github.com/hvvy/bbr/releases/download/0.1.1/linux-headers-5.4.0-rc6_5.4.0-rc6-1_amd64.deb
+wget https://github.com/hvvy/bbr/releases/download/0.1.1/linux-image-5.4.0-rc6_5.4.0-rc6-1_amd64.deb
+wget https://github.com/hvvy/bbr/releases/download/0.1.1/linux-libc-dev_5.4.0-rc6-1_amd64.deb
+dpkg -i linux-headers-5.4.0-rc6_5.4.0-rc6-1_amd64.deb
+dpkg -i linux-image-5.4.0-rc6_5.4.0-rc6-1_amd64.deb
+dpkg -i linux-libc-dev_5.4.0-rc6-1_amd64.deb
+update-grub
+reboot
+</code></pre>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/qq-for-linux.html">QQ·Linux版更新2019-10-24</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/windows10-ltsc-2019-linux.html">Windows10 LTSC 2019 安装和卸载 linux 子系统</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        567899.xyz ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+	
+<script src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+var a_idx = 0;
+jQuery(document).ready(function($) {
+    $("body").click(function(e) {
+        var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+        var $i = $("<span/>").text(a[a_idx]);
+        a_idx = (a_idx + 1) % a.length;
+        var x = e.pageX,
+        y = e.pageY;
+        $i.css({
+            "z-index": 100000000,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": "#FF0000"
+        });
+        $("body").append($i);
+        $i.animate({
+            "top": y - 180,
+            "opacity": 0
+        },
+        1500,
+        function() {
+            $i.remove();
+        });
+    });
+});
+</script>
+	
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>

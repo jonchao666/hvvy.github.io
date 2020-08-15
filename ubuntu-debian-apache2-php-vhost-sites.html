@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="567899.xyz">
+<meta name="twitter:description" content="这家伙很赖，什么也没有留下。">
+<meta name="twitter:image:src" content="https://567899.xyz/images/avatar.png">
+
+<meta property="og:url" content="https://567899.xyz">
+<meta property="og:title" content="567899.xyz">
+<meta property="og:description" content="这家伙很赖，什么也没有留下。">
+<meta property="og:site_name" content="567899.xyz">
+<meta property="og:image" content="https://567899.xyz/images/avatar.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="567899.xyz">
+<meta itemprop="description" content="这家伙很赖，什么也没有留下。">
+<meta itemprop="image" content="https://567899.xyz/images/avatar.png">
+
+<link rel="canonical" href="https://567899.xyz">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="Ubuntu,Apache2,Debian,PHP,">
+        <meta name="description" content="Ubuntu_Debian配置Apache2_PHP配置站点">
+        <meta name="author" content="567899.xyz">
+        <title>Ubuntu_Debian配置Apache2_PHP配置站点</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar.png" />
+    567899.xyz
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">Ubuntu_Debian配置Apache2_PHP配置站点</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    
+                    <span class="date" data-time="1547197200"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/Ubuntu/index.html">Ubuntu</a><a class="tag" href="/tag/Apache2/index.html">Apache2</a><a class="tag" href="/tag/Debian/index.html">Debian</a><a class="tag" href="/tag/PHP/index.html">PHP</a></span>
+                </section>
+                <article class="content"><p>日常更新</p>
+
+<pre><code class="language-bash">apt-get update -y
+apt-get upgrade -y
+</code></pre>
+
+<p>查找程序名</p>
+
+<pre><code class="language-bash">sudo apt-cache search apache | grep 'apache2'
+</code></pre>
+
+<h1>安装Apache2</h1>
+
+<pre><code class="language-bash">apt-get install apache2
+</code></pre>
+
+<p>安装好后开服务</p>
+
+<pre><code class="language-bash">service apache2 start
+systemctl enable apache2
+</code></pre>
+
+<p>检查Apache2运行状态</p>
+
+<pre><code class="language-bash">systemctl status apache2
+</code></pre>
+
+<p>安装Apache的php支持模块</p>
+
+<pre><code class="language-bash">sudo apt-get install libapache2-mod-php
+</code></pre>
+
+<p>重启Apache2</p>
+
+<pre><code class="language-bash">/etc/init.d/apache2 restart
+</code></pre>
+
+<p>停止</p>
+
+<pre><code class="language-bash">/etc/init.d/apache2 stop
+</code></pre>
+
+<p>状态查询</p>
+
+<pre><code class="language-bash">/etc/init.d/apache2 status
+</code></pre>
+
+<p>在浏览器中输入IP地址，看到以下页面说明apache成功安装</p>
+
+<p>Debian系统上Apache2 Web服务器安装的配置布局如下：</p>
+
+<pre><code class="language-bash">/etc/apache2/
+|-- apache2.conf
+|       `--  ports.conf
+|-- mods-enabled
+|       |-- *.load
+|       `-- *.conf
+|-- conf-enabled
+|       `-- *.conf
+|-- sites-enabled
+|       `-- *.conf
+</code></pre>
+
+<ol>
+<li>apache2.conf is the main configuration file. It puts the pieces together by including all remaining configuration files when starting up the web server.</li>
+<li>ports.conf is always included from the main configuration file. It is used to determine the listening ports for incoming connections, and this file can be customized anytime.</li>
+<li>Configuration files in the mods-enabled/, conf-enabled/ and sites-enabled/ directories contain particular configuration snippets which manage modules, global configuration fragments, or virtual host configurations, respectively.</li>
+<li>They are activated by symlinking available configuration files from their respective *-available/ counterparts. These should be managed by using our helpers a2enmod, a2dismod, a2ensite, a2dissite, and a2enconf, a2disconf . See their respective man pages for detailed information.</li>
+<li>The binary is called apache2. Due to the use of environment variables, in the default configuration, apache2 needs to be started/stopped with /etc/init.d/apache2 or apache2ctl. Calling /usr/bin/apache2 directly will not work with the default configuration.</li>
+</ol>
+
+<p>Document Roots</p>
+
+<p>By default, Debian does not allow access through the web browser to any file apart of those located in /var/www, public_html directories (when enabled) and /usr/share (for web applications). If your site is using a web document root located elsewhere (such as in /srv) you may need to whitelist your document root directory in /etc/apache2/apache2.conf.</p>
+
+<p>The default Debian document root is /var/www/html. You can make your own virtual hosts under /var/www. This is different to previous releases which provides better security out of the box.</p>
+
+<p>Reporting Problems</p>
+
+<p>Please use the reportbug tool to report bugs in the Apache2 package with Debian. However, check existing bug reports before reporting a new bug.</p>
+
+<p>Please report bugs specific to modules (such as PHP and others) to respective packages, not to the web server itself.</p>
+
+<p>查看apache2版本号</p>
+
+<pre><code class="language-bash">apache2 -v
+</code></pre>
+
+<p>显示</p>
+
+<pre><code class="language-bash">Server version: Apache/2.4.25 (Debian)
+Server built:   2019-04-02T19:05:13
+</code></pre>
+
+<p>列出 Debian 仓库中与 Apache 相关的软件列表。</p>
+
+<pre><code class="language-bash">apt-cache search apache | less
+</code></pre>
+
+<p>带有 “apache” 字眼的软件包通常都是与相应软件包有关的，如 -doc, -dev, -common, -perl …</p>
+
+<p><a href="https://wiki.debian.org/zh_CN/Apache">https://wiki.debian.org/zh_CN/Apache</a></p>
+
+<h1>安装PHP及所需的模块：</h1>
+
+<pre><code class="language-bash">apt-get install php7.0 libapache2-mod-php7.0 php7.0-cli php7.0-mcrypt php7.0-intl php7.0-mysql php7.0-curl php7.0-gd php7.0-soap php7.0-xml php7.0-zip -y
+</code></pre>
+
+<p>查看PHP版本</p>
+
+<pre><code class="language-bash">php -v
+</code></pre>
+
+<p>显示如下</p>
+
+<p>PHP 7.0.33-0+deb9u3 (cli) (built: Mar  8 2019 10:01:24) ( NTS )
+Copyright &copy; 1997-2017 The PHP Group
+Zend Engine v3.0.0, Copyright &copy; 1998-2017 Zend Technologies
+    with Zend OPcache v7.0.33-0+deb9u3, Copyright &copy; 1999-2017, by Zend Technologies</p>
+
+<p>测试是否安装成功
+创建<code>test.php</code>脚本，保存到<code>/var/www/html</code>目录下,脚本内容为：</p>
+
+<pre><code class="language-bash">&lt;?php
+echo &quot;Hellow World&quot;;
+?&gt;
+</code></pre>
+
+<p>浏览器输入localhost/test.php，浏览器返回Hello World则环境配置成功</p>
+
+<h1>设置域名虚拟主机</h1>
+
+<p>使用Apache Web服务器时，您可以使用虚拟主机 （类似于Nginx中的服务器块）来封装配置详细信息并从单个服务器托管多个域。 我们将设置一个名为example.com的域名，但您应将其替换为您自己的域名 。 要了解有关使用DigitalOcean设置域名的更多信息，请参阅我们的DigitalOcean DNS简介 。</p>
+
+<p>Debian 9上的Apache默认启用了一个服务器块，配置为从/var/www/html目录中提供文档。 虽然这适用于单个站点，但如果您托管多个站点，它可能会变得难以处理。 不要修改/var/www/html ，让我们在example.com网站的/var/www创建一个目录结构，将/var/www/html保留为默认目录，如果客户端请求没有匹配任何其他网站。</p>
+
+<p>按如下所示为example.com创建目录，使用-p标志创建任何必需的父目录：</p>
+
+<pre><code class="language-bash">sudo mkdir -p /var/www/example.com/html
+</code></pre>
+
+<p>接下来，使用$USER环境变量分配目录的所有权：</p>
+
+<pre><code class="language-bash">sudo chown -R $USER:$USER /var/www/example.com/html
+</code></pre>
+
+<p>如果您尚未修改unmask值，则Web根目录的权限应该是正确的，但您可以通过键入以下内容来确保：</p>
+
+<pre><code class="language-bash">sudo chmod -R 755 /var/www/example.com
+</code></pre>
+
+<p>接下来，使用nano或您喜欢的编辑器创建一个示例index.html页面：</p>
+
+<pre><code class="language-bash">nano /var/www/example.com/html/index.html
+</code></pre>
+
+<p>在里面，添加以下示例HTML：</p>
+
+<pre><code class="language-bash">/var/www/example.com/html/index.html
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Welcome to Example.com!&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Success!  The example.com server block is working!&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>完成后保存并关闭文件。</p>
+
+<p>为了使Apache能够提供此内容，必须使用正确的指令创建虚拟主机文件。 不要直接修改位于<code>/etc/apache2/sites-available/000-default.conf</code>的默认配置文件，而是在<code>/etc/apache2/sites-available/example.com.conf</code>创建一个新文件：</p>
+
+<pre><code class="language-bash">sudo nano /etc/apache2/sites-available/example.com.conf
+</code></pre>
+
+<p>粘贴在以下配置块中，类似于默认配置块，但为我们的新目录和域名更新：</p>
+
+<pre><code class="language-bash">nano /etc/apache2/sites-available/example.com.conf
+</code></pre>
+
+<p>键入以下内容来</p>
+
+<pre><code class="language-bash">&lt;VirtualHost *:80&gt;
+    ServerAdmin admin@example.com
+    ServerName example.com
+    ServerAlias www.example.com
+    DocumentRoot /var/www/example.com/html
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p>请注意，我们已将DocumentRoot更新为新目录，将ServerAdmin更新为example.com站点管理员可以访问的电子邮件。 我们还添加了两个指令： ServerName ，它建立了应该与此虚拟主机定义匹配的基本域; ServerAlias ，它定义了应该匹配的更多名称，就像它们是基本名称一样。</p>
+
+<p>完成后保存并关闭文件。</p>
+
+<p>让我们使用a2ensite工具启用该文件：</p>
+
+<pre><code class="language-bash">sudo a2ensite example.com.conf
+</code></pre>
+
+<p>禁用000-default.conf定义的默认站点：</p>
+
+<pre><code class="language-bash">sudo a2dissite 000-default.conf
+</code></pre>
+
+<p>接下来，让我们测试一下配置错误：</p>
+
+<pre><code class="language-bash">sudo apache2ctl configtest
+</code></pre>
+
+<p>您应该看到以下输出：</p>
+
+<p>Syntax OK</p>
+
+<p>重启Apache以实现更改：</p>
+
+<pre><code class="language-bash">sudo systemctl restart apache2
+</code></pre>
+
+<p>Apache现在应该为您的域名服务。 您可以通过导航到http:// example.com来测试这一点，您应该在其中看到如下内容：</p>
+
+<h1>其它</h1>
+
+<ul>
+<li>/var/www/html ：实际的Web内容默认只包含您之前看到的默认Apache页面，它是在/var/www/html目录下提供的。 这可以通过更改Apache配置文件来更改。</li>
+<li>/etc/apache2 ：Apache配置目录。 所有Apache配置文件都驻留在此处。</li>
+<li>/etc/apache2/apache2.conf ：主要的Apache配置文件。 可以对其进行修改以更改Apache全局配置。 该文件负责加载配置目录中的许多其他文件。</li>
+<li>/etc/apache2/ports.conf ：此文件指定Apache将监听的端口。 默认情况下，Apache在端口80上监听，并在启用提供SSL功能的模块时另外监听端口443。</li>
+<li>/etc/apache2/sites-available/ ：可以存储每站点虚拟主机的目录。 Apache不会使用此目录中的配置文件，除非它们链接到sites-enabled目录。 通常，所有服务器块配置都在此目录中完成，然后通过使用a2ensite命令链接到其他目录来启用。</li>
+<li>/etc/apache2/sites-enabled/ ：存储已启用的每站点虚拟主机的目录。 通常，这些是通过使用a2ensite链接到sites-available目录中的配置文件来创建的。 Apache在启动或重新加载以编译完整配置时读取此目录中的配置文件和链接。</li>
+<li>/etc/apache2/conf-available/ ， /etc/apache2/conf-enabled/ ：这些目录与sites-available和sites-enabled目录具有相同的关系，但用于存储不属于a的配置片段虚拟主机。 可以使用a2enconf命令启用conf-available目录中的文件，并使用a2enconf命令禁用这些a2disconf 。</li>
+<li>/etc/apache2/mods-available/ ， /etc/apache2/mods-enabled/ ：这些目录分别包含可用和已启用的模块。 以.load结尾的文件包含用于加载特定模块的片段，而以.conf结尾的文件包含这些模块的配置。 可以使用a2enmod和a2dismod命令启用和禁用模块。</li>
+<li>/var/log/apache2/access.log ：默认情况下，除非将Apache配置为执行其他操作，否则对Web服务器的每个请求都将记录在此日志文件中。</li>
+<li>/var/log/apache2/error.log ：默认情况下，所有错误都记录在此文件中。 Apache配置中的LogLevel指令指定错误日志将包含多少详细信息。</li>
+</ul>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/baidupcs-go.html">BaiduPCS-Go上传下载不限速的百度网盘客户端</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/debian-ubuntu-install-new-nginx.html">Debian9安装最新版Nginx</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        567899.xyz ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+	
+<script src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+var a_idx = 0;
+jQuery(document).ready(function($) {
+    $("body").click(function(e) {
+        var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+        var $i = $("<span/>").text(a[a_idx]);
+        a_idx = (a_idx + 1) % a.length;
+        var x = e.pageX,
+        y = e.pageY;
+        $i.css({
+            "z-index": 100000000,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": "#FF0000"
+        });
+        $("body").append($i);
+        $i.animate({
+            "top": y - 180,
+            "opacity": 0
+        },
+        1500,
+        function() {
+            $i.remove();
+        });
+    });
+});
+</script>
+	
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="567899.xyz">
+<meta name="twitter:description" content="这家伙很赖，什么也没有留下。">
+<meta name="twitter:image:src" content="https://567899.xyz/images/avatar.png">
+
+<meta property="og:url" content="https://567899.xyz">
+<meta property="og:title" content="567899.xyz">
+<meta property="og:description" content="这家伙很赖，什么也没有留下。">
+<meta property="og:site_name" content="567899.xyz">
+<meta property="og:image" content="https://567899.xyz/images/avatar.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="567899.xyz">
+<meta itemprop="description" content="这家伙很赖，什么也没有留下。">
+<meta itemprop="image" content="https://567899.xyz/images/avatar.png">
+
+<link rel="canonical" href="https://567899.xyz">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="besttrace,traceroute,">
+        <meta name="description" content="Linux VPS使用BestTrace进行路由跟踪">
+        <meta name="author" content="567899.xyz">
+        <title>Linux VPS使用BestTrace进行路由跟踪</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar.png" />
+    567899.xyz
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">Linux VPS使用BestTrace进行路由跟踪</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    
+                    <span class="date" data-time="1420621200"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/besttrace/index.html">besttrace</a><a class="tag" href="/tag/traceroute/index.html">traceroute</a></span>
+                </section>
+                <article class="content"><p>VPS回程路由指的是你的远程VPS的IP地址到你本地ISP的IP。</p>
+
+<p>使用<code>traceroute</code>命令进行路由跟踪,但不能显示IP归属地。</p>
+
+<p><a href="https://www.ipip.net/product/client.html">下载BestTrace</a></p>
+
+<ul>
+<li><a href="https://cdn.ipip.net/17mon/besttrace.exe">Windows</a></li>
+<li><a href="https://itunes.apple.com/us/app/best-trace/id1037779758?l=zh&amp;ls=1&amp;mt=12">Mac OS</a></li>
+<li><a href="https://itunes.apple.com/cn/app/best-trace/id1026747589?ls=1&amp;mt=8">iOS</a></li>
+<li><a href="https://cdn.ipip.net/17mon/besttrace.apk">Android</a></li>
+<li><a href="https://cdn.ipip.net/17mon/besttrace4linux.zip">Linux</a></li>
+</ul>
+
+<p>Linux使用方法如下</p>
+
+<pre><code class="language-bash">wget https://cdn.ipip.net/17mon/besttrace4linux.zip
+unzip besttrace4linux.zip
+chmod +x besttrace
+./besttrace -q1 -g cn IP地址
+</code></pre>
+
+<p>更多使用说明可输入<code>./besttrace --help</code>进行查看，完整的参数如下：</p>
+
+<pre><code class="language-bash">-6， - ipv6
+    使用ipv6。
+  -J， - json
+    使用JSON格式打印traceroute结果。
+  -g， - lang string
+    语言现在仅支持cn和en。
+  -m， - maxhop int
+    指定traceroute将探测的最大跳数（最大生存时间值）。默认值为30.（默认为30）
+  -a， - noas
+    显示时，请勿尝试将IP地址映射到AS。
+  -n， - nodomain
+    显示时，请勿尝试将IP地址映射到主机名。
+  -l， - location
+    显示时，请勿尝试将IP地址映射到位置。
+  -q， - query int
+    设置每跳的探测包数。默认值为3.（默认值为3）
+  -z， - sendtime int
+    探针之间的最小时间间隔（默认为0）。
+    如果该值大于10，则它指定一个以毫秒为单位的数字，否则它是一个秒数（也允许浮点值）。
+    当某些路由器对ICMP消息使用速率限制时很有用。
+  -f， - stopop int
+    指定要启动的TTL。默认为1.（默认值为1）
+   - 同步
+    通过同步发送icmp包。
+  -T， - tcp
+    使用TCP SYN进行探测。
+  -V， - 版本
+    打印版本并退出。
+  -w， - waittime int
+    设置等待探测响应的时间（以秒为单位）。 （默认3）
+</code></pre>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/nano.html">nano文本编辑器使用复制剪切粘贴查找替换</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/gmail-smtp.html">Gmail邮件客户端中SMTP的设置</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        567899.xyz ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+	
+<script src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+var a_idx = 0;
+jQuery(document).ready(function($) {
+    $("body").click(function(e) {
+        var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+        var $i = $("<span/>").text(a[a_idx]);
+        a_idx = (a_idx + 1) % a.length;
+        var x = e.pageX,
+        y = e.pageY;
+        $i.css({
+            "z-index": 100000000,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": "#FF0000"
+        });
+        $("body").append($i);
+        $i.animate({
+            "top": y - 180,
+            "opacity": 0
+        },
+        1500,
+        function() {
+            $i.remove();
+        });
+    });
+});
+</script>
+	
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>
