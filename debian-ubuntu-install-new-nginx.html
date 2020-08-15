@@ -152,6 +152,37 @@ systemctl stop nginx
 
 <p>然后在目录<code>/etc/nginx/conf.d/</code>下面新建文件<code>site1.conf</code>，<code>site2.conf</code>&hellip;文件名任意写，自己看明白就OK</p>
 
+<p>Debian10的Nginx新增站点方法</p>
+
+<p>在目录<code>/etc/nginx/sites-available/</code>下新增站点配置文件<code>your_domain</code></p>
+
+<pre><code class="language-bash">nano /etc/nginx/sites-available/your_domain
+</code></pre>
+
+<p>示范如下</p>
+
+<pre><code>server {
+ listen 80;
+ listen [::]:80;
+
+ root /var/www/your_domain/html;
+ index index.html index.htm index.nginx-debian.html;
+
+ server_name your_domain www.your_domain;
+
+ location / {
+ try_files $uri $uri/ =404;
+ }
+}
+</code></pre>
+
+<p>接下来，通过创建sites-enabled目录中的自定义配置文件的符号链接来启用这个服务器块：</p>
+
+<pre><code>sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
+</code></pre>
+
+<p>使用<code>nginx -t</code>测试Nginx文件中有没有语法错误，配置测试通过就可以<code>systemctl restart nginx</code>重新启动Nginx</p>
+
 <p>Nginx配置支持PHP</p>
 
 <pre><code class="language-bash">location ~ \.php$ {
