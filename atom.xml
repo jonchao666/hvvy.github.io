@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>567899.xyz</title>
   <id>https://567899.xyz</id>
-  <updated>2020-08-15T13:35:29-04:00</updated>
+  <updated>2020-08-16T12:31:05-04:00</updated>
   <subtitle>这家伙很赖，什么也没有留下。</subtitle>
   <link href="https://567899.xyz"></link>
   <author>
@@ -23,6 +23,16 @@
     <id>tag:567899.xyz,2020-08-03:/chinaunicom-traffic-cap-canceled.html</id>
     <content type="html">&lt;p&gt;中国联通手机用户免费办理流量封顶取消(长期有效)一次办理，终身有效。需要的小伙伴抓紧上车&lt;/p&gt;&#xA;</content>
     <link href="https://567899.xyz/chinaunicom-traffic-cap-canceled.html"></link>
+    <author>
+      <name>567899.xyz</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Caddy 2的安装、配置站点</title>
+    <updated>2020-05-24T18:00:00+08:00</updated>
+    <id>tag:567899.xyz,2020-05-24:/caddy2.html</id>
+    <content type="html">&lt;p&gt;使用Caddy 2的安装、配置gzip,websocket,redir,PHP,basicauth搭建一个简单的WEB网站。&lt;/p&gt;&#xA;</content>
+    <link href="https://567899.xyz/caddy2.html"></link>
     <author>
       <name>567899.xyz</name>
     </author>
@@ -93,16 +103,6 @@
     <id>tag:567899.xyz,2020-01-12:/build-openwrt-with-github-actions.html</id>
     <content type="html"></content>
     <link href="https://567899.xyz/build-openwrt-with-github-actions.html"></link>
-    <author>
-      <name>567899.xyz</name>
-    </author>
-  </entry>
-  <entry>
-    <title>检测移动电信联通通讯运营商SIM卡分配给用户的最高速率、限速速率网速值</title>
-    <updated>2019-11-04T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2019-11-04:/internet-sim-ambr-dl-ul-2g-3g-4g-lte.html</id>
-    <content type="html"></content>
-    <link href="https://567899.xyz/internet-sim-ambr-dl-ul-2g-3g-4g-lte.html"></link>
     <author>
       <name>567899.xyz</name>
     </author>
