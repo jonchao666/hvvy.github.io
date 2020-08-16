@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>567899.xyz</title>
   <id>https://567899.xyz</id>
-  <updated>2020-08-16T12:32:16-04:00</updated>
+  <updated>2020-08-16T12:45:29-04:00</updated>
   <subtitle>这家伙很赖，什么也没有留下。</subtitle>
   <link href="https://567899.xyz"></link>
   <author>
@@ -28,7 +28,7 @@
     </author>
   </entry>
   <entry>
-    <title>Caddy 2的安装、配置站点</title>
+    <title>Caddy2的安装、配置站点</title>
     <updated>2020-05-24T18:00:00+08:00</updated>
     <id>tag:567899.xyz,2020-05-24:/caddy2.html</id>
     <content type="html">&lt;p&gt;使用Caddy 2的安装、配置gzip,websocket,redir,PHP,basicauth搭建一个简单的WEB网站。&lt;/p&gt;&#xA;</content>
