@@ -139,7 +139,7 @@ systemctl status caddy-api.service
 	#Protect all resources in /secret so only Bob can access them with the password &quot;hiccup&quot;
 	basicauth /secret/* {
 	Bob JDJhJDEwJEVCNmdaNEg2Ti5iejRMYkF3MFZhZ3VtV3E1SzBWZEZ5Q3VWc0tzOEJwZE9TaFlZdEVkZDhX	
-	#通过base64密码工具生成密文
+	#使用caddy hash-password生成base64密码
 	}
 	#redir https://mydomain.com{uri}
 	@v2ray_websocket {
