@@ -88,8 +88,8 @@
 <p>Debian, Ubuntu, Raspbian</p>
 
 <pre><code class="language-bash">echo &quot;deb [trusted=yes] https://apt.fury.io/caddy/ /&quot; \
-tee -a /etc/apt/sources.list.d/caddy-fury.list
-apt update
+    | tee -a /etc/apt/sources.list.d/caddy-fury.list
+apt updat
 apt install caddy
 </code></pre>
 
