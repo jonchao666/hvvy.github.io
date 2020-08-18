@@ -45,10 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="Linux,scp,RSA,">
-        <meta name="description" content="Linux下scp使用RSA秘钥传输数据Scp命令免密码远程下载上传">
+        <meta name="keywords" content="Android,">
+        <meta name="description" content="安卓手机跳过Google开机向导设置">
         <meta name="author" content="567899.xyz">
-        <title>Linux下scp使用RSA秘钥传输数据Scp命令免密码远程下载上传</title>
+        <title>安卓手机跳过Google开机向导设置</title>
     </head>
     <body>
         <article class="container">
@@ -65,54 +65,52 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">Linux下scp使用RSA秘钥传输数据Scp命令免密码远程下载上传</h1>
+                <h1 class="title">安卓手机跳过Google开机向导设置</h1>
                 <section class="info">
                     <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
                     <a class="name" href="/about.me.html">567899.xyz</a>
                     
-                    <span class="date" data-time="1523437200"><span class="from"></span></span>
+                    <span class="date" data-time="1478944800"><span class="from"></span></span>
                     
-                    <span class="tags"><a class="tag" href="/tag/Linux/index.html">Linux</a><a class="tag" href="/tag/scp/index.html">scp</a><a class="tag" href="/tag/RSA/index.html">RSA</a></span>
+                    <span class="tags"><a class="tag" href="/tag/Android/index.html">Android</a></span>
                 </section>
-                <article class="content"><h3>生成密钥对</h3>
+                <article class="content"><h1>build.prop关闭开机引导（推荐）</h1>
 
-<pre><code class="language-bash">ssh-keygen
+<p>打开TWRP终端</p>
+
+<pre><code class="language-bash">mount -o remount,rw /system
+#挂载 system 分区为读写
+vi /system/build.prop
+#浏览build.prop
+#输入&quot;i&quot;进入Insert编辑模式
+ro.setupwizard.mode=OPTIONAL
+#找到该行将&quot;OPTIONAL&quot;修改为&quot;DISABLED&quot;
+#按 ESC 回到 Normal 模式
+:wq
+#输入:wq存盘并退出
+reboot
+#重启手机 enjoy it !
 </code></pre>
 
-<ul>
-<li><code>id_rsa</code>为私钥文件(保存在client)</li>
-<li><code>id_rsa.pub</code>为公钥(用于追加到server的用户目录<code>/.ssh/authorized_keys</code>文件中)</li>
-</ul>
+<h1>首屏四角跳过</h1>
 
-<h3>下载数据</h3>
+<p>从左上角开始，顺时针依次点击四个角（状态栏以下）</p>
 
-<pre><code class="language-bash">scp -i ~/.ssh/id_rsa -r root@server_ip:/var/www/ /var/www/
-</code></pre>
+<h1>路由器代理</h1>
 
-<h3>上传数据</h3>
+<p>在路由器系统中设置网络代理以连接 Google 服务器通过验证</p>
 
-<pre><code class="language-bash">scp -i ~/.ssh/id_rsa -r /var/www/ root@server_ip:/var/www/
-</code></pre>
+<h1>延后安装</h1>
 
-<h3>ssh登录</h3>
+<p>刷写系统完毕并开机后再刷入 Gapps，存在 GooglePlay 服务 停止运行的问题</p>
 
-<pre><code class="language-bash">ssh user@host
-</code></pre>
+<h1>删除验证程序</h1>
 
-<h3>其它</h3>
+<p>进入 TWRP，挂载 system，打开 文件管理，删除或重命名 setupwizard.apk</p>
 
-<p>ssh使用RSA密钥对登录也是同理，service名称为sshd,配置文件为<code>/etc/ssh/sshd_config</code></p>
+<p><code>system/priv-app/setupwizard/setupwizard.apk</code></p>
 
-<pre><code class="language-bash">chmod -R 700 ~/.ssh/ 
-chmod 600 ~/.ssh/authorized_keys
-</code></pre>
-
-<h3>指定端口</h3>
-
-<p><code>-P</code>: 大写的P, 指定端口号</p>
-
-<pre><code class="language-bash">scp -P 788 -i ~/.ssh/id_rsa -r /var/www/ root@server_ip:/var/www/
-</code></pre>
+<p>开机后，挂梯子登录谷歌账户，再把 setupwizard.apk 改回来（前提是不删除源文件，只重命名一下），完成通过向导即可。若未改回会存在任务键、返回键失灵、状态栏无法下拉等问题。</p>
 </article>
                 <section class="author">
                     <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
@@ -123,13 +121,13 @@ chmod 600 ~/.ssh/authorized_keys
                     
                     <section class="nav prev more">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/hexo-backup-synchronize-edit.html">hexo备份更换设备后同步编辑</a>
+                        <a class="link" href="/hello-world.html">hexo Hello World</a>
                     </section>
                     
                     
                     <section class="nav next more">
                         <div class="head">下篇文章</div>
-                        <a class="link" href="/aira2-uploads-googledrive-onedrive.html">使用Aira2下载文件后自动上传到GoogleDrive网盘onedrive</a>
+                        <a class="link" href="/ubuntu-debian-install-python3-pin3-pip.html">在Debian、Ubuntu系统上为Python 2/3安装和使用Pip的方法</a>
                     </section>
                     
                 </section>
