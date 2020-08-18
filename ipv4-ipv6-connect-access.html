@@ -45,9 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="这家伙很赖，什么也没有留下。">
-        <meta name="description" content="这家伙很赖，什么也没有留下。">
-        <title>567899.xyz</title>
+        <meta name="keywords" content="IPv4,IPv6,">
+        <meta name="description" content="IPv6的VPS连接IPv4和IPv4的VPS免费获取IPv6">
+        <meta name="author" content="567899.xyz">
+        <title>IPv6的VPS连接IPv4和IPv4的VPS免费获取IPv6</title>
     </head>
     <body>
         <article class="container">
@@ -63,39 +64,75 @@
   </ul>
 </header>
 
-            <article class="main page">
-                <header class="header site">
+            <article class="main article">
+                <h1 class="title">IPv6的VPS连接IPv4和IPv4的VPS免费获取IPv6</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
                     
-                        <img class="logo" src="/images/avatar.png" />
-                        <h1 class="tag">VMess</h1>
-                        <h2 class="tag-sub">1 篇文章</h2>
+                    <span class="date" data-time="1510221600"><span class="from"></span></span>
                     
-                </header>
-                <ul class="article-list">
+                    <span class="tags"><a class="tag" href="/tag/IPv4/index.html">IPv4</a><a class="tag" href="/tag/IPv6/index.html">IPv6</a></span>
+                </section>
+                <article class="content"><h1>只有IPv6的VPS连通IPV4</h1>
+
+<p>无ipv4纯ipv6先编辑<code>/etc/resolv.conf</code>改成DNS64地址</p>
+
+<pre><code class="language-bash">nameserver 2001:67c:2b0::4
+nameserver 2001:67c:27e4::64
+</code></pre>
+
+<p>然后执行</p>
+
+<pre><code class="language-bash">chattr +i /etc/resolv.conf
+service systemd-resolved restart
+</code></pre>
+
+<h1>IPV4免费获得IPV6</h1>
+
+<p>只有IPV4的VPS通过<a href="https://he.net/">Hurricane Electric Internet Services</a>免费获得IPV6。</p>
+
+<p>Hurricane Electric Free IPv6 Tunnel Broker</p>
+
+<ol>
+<li><a href="https://tunnelbroker.net/register.php">注册</a></li>
+<li><a href="https://tunnelbroker.net">登陆</a></li>
+</ol>
+
+<p>按提示输入公网IPV4,选择地区区域，获得IPV6。</p>
+
+<p>选择自己VPS的系统对应版本按提示附加上去  enjoy</p>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
                     
-                    <li class="article">
-                        <a class="title" href="/v2ray.html">V2ray安装配置VMess、VLESS教程</a>
-                        
-                        <section class="preview content"><p>V2Ray从原有<code>go.sh</code>升级到<code>install-realese.sh</code>全新安装脚本。配置VMess、VLESS、websocket、端口回落、CDN等教程</p>
-</section>
-                        <section class="info">
-                            <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
-                            <a class="name" href="/about.me.html">567899.xyz</a>
-                            
-                            <span class="date" data-time="1547542800"><span class="from"></span></span>
-                            
-                            <span class="tags">
-                            <a class="tag" href="/tag/V2ray/index.html">V2ray</a><a class="tag" href="/tag/VLESS/index.html">VLESS</a><a class="tag" href="/tag/WebSocket/index.html">WebSocket</a><a class="tag" href="/tag/VMess/index.html">VMess</a><a class="tag" href="/tag/Caddy/index.html">Caddy</a>
-                            </span>
-                        </section>
-                    </li>
-                    
-                </ul>
-                <section class="page-nav">
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/debian-ubuntu-kernel-update-bbr.html">Debian/Ubuntu系统手动更新内核并启用TCP BBR拥塞控制算法</a>
+                    </section>
                     
                     
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/oneindex-installation-failed.html">Oneindex程序安装失败解决办法</a>
+                    </section>
                     
                 </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
             </article>
         </article>
         <footer class="footer">
@@ -140,6 +177,6 @@ jQuery(document).ready(function($) {
 	
 </footer>
 
+        <script src="/bundle/index.js"></script>
     </body>
-    <script src="/bundle/index.js"></script>
 </html>

@@ -79,6 +79,7 @@
 <ol>
 <li>V2Ray v4.27.0+新增支持VLESS新协议</li>
 <li>VMess AEAD will be used when alterId is 0 in V2Ray v4.28.0+</li>
+<li>安装脚本放弃go.sh改用install-realese.sh</li>
 </ol>
 
 <p>推荐以下2种组合模式运行v2ray</p>
@@ -88,19 +89,34 @@
 <li>VLESS(VLESS TCP TLS 回落) 推荐指数★★★★★</li>
 </ul>
 
-<h1>鸣谢</h1>
+<h1>V2Ray从原有<code>go.sh</code>升级到<code>install-realese.sh</code></h1>
 
-<p>感谢各位开发者大佬们的无私奉献，详情请参考</p>
-
-<ol>
-<li><a href="https://v2ray.com/">https://v2ray.com/</a></li>
-<li><a href="https://github.com/v2ray/v2ray-core">https://github.com/v2ray/v2ray-core</a></li>
-<li><a href="https://toutyrater.github.io/">https://toutyrater.github.io/</a></li>
-<li><a href="https://guide.v2fly.org/">https://guide.v2fly.org/</a></li>
-<li><a href="https://github.com/veekxt/v2ray-template">https://github.com/veekxt/v2ray-template</a></li>
-<li><a href="https://github.com/v2fly/v2ray-examples">https://github.com/v2fly/v2ray-examples</a></li>
-<li><a href="https://www.v2fly.org/">https://www.v2fly.org/</a></li>
-</ol>
+<pre><code class="language-bash">#转移配置文件目录至新目录/usr/local/etc/v2ray
+mkdir -p /usr/local/etc/v2ray
+mv /etc/v2ray/config.json /usr/local/etc/v2ray/config.json
+#移除旧脚本安装的 v2ray-core（由于旧脚本停用，只能手动移除）
+systemctl stop v2ray
+systemctl disable v2ray
+rm -f /etc/systemd/system/v2ray.service
+rm -f /etc/systemd/system/v2ray.service
+rm -f /etc/systemd/system/v2ray@.service
+rm -f /etc/systemd/system/v2ray@.service
+rm -rf /etc/v2ray
+rm -rf /usr/bin/v2ray
+#之前手动修改过 v2ray.service 使用 domain socket 的人还需要以下三行
+rm -rf /tmp/v2ray-ds
+deluser v2ray
+delgroup --only-if-empty v2ray
+#使用新脚本进行安装
+bash &lt;(curl -sL https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
+#启动 v2ray 服务（以下两种方法择一）
+##多配置文件（兼容单配置）
+systemctl enable v2ray
+systemctl start v2ray
+##单配置文件+指定档名，例如想指定/usr/local/etc/v2ray/config.json就是
+systemctl enable v2ray@config
+systemctl start v2ray@config
+</code></pre>
 
 <h2>V2Ray安装</h2>
 
@@ -118,12 +134,27 @@ apt-get install wget curl -y
 yum install wget curl -y
 </code></pre>
 
-<p>安装V2Ray</p>
+<p>V2Ray安装</p>
+
+<p><a href="https://github.com/v2fly/fhs-install-v2ray">https://github.com/v2fly/fhs-install-v2ray</a></p>
+
+<pre><code>#下載
+curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
+curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh
+#安裝和更新 V2Ray
+bash install-release.sh
+#安裝最新發行的 geoip.dat 和 geosite.dat
+bash install-dat-release.sh
+#移除 V2Ray
+bash install-release.sh --remove
+</code></pre>
+
+<p><del>原有go.sh安装V2Ray</del></p>
 
 <pre><code class="language-bash">bash &lt;(curl -L -s https://install.direct/go.sh)
 </code></pre>
 
-<p>如果上面的官方链接失效了可以使用下面的</p>
+<p><del>如果上面的官方链接失效了可以使用下面的</del></p>
 
 <pre><code class="language-bash">bash &lt;(curl -L -s https://raw.githubusercontent.com/hvvy/v2ray-core/master/v2ray_install.sh)
 </code></pre>
@@ -417,6 +448,12 @@ ssl_certificate_key    /www/server/panel/vhost/cert/域名/privkey.pem;
 
 <pre><code>&quot;certificateFile&quot;: &quot;/etc/ssl/caddy/acme/acme-v02.api.letsencrypt.org/sites/域名/域名.crt&quot;,
 &quot;keyFile&quot;: &quot;/etc/ssl/caddy/acme/acme-v02.api.letsencrypt.org/sites/域名/域名.key&quot;
+</code></pre>
+
+<p>Caddy2的SSL证书路径</p>
+
+<pre><code class="language-bash">/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/域名/域名.crt
+/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/域名/域名.key
 </code></pre>
 
 <p>如果需要配置多个域名证书，可以增加<code>certificates</code>值，例如</p>
@@ -771,6 +808,20 @@ service v2ray start
 
 <pre><code class="language-bash">/usr/bin/v2ray/v2ray --version
 </code></pre>
+
+<h1>鸣谢</h1>
+
+<p>感谢各位开发者大佬们的无私奉献，详情请参考</p>
+
+<ol>
+<li><a href="https://v2ray.com/">https://v2ray.com/</a></li>
+<li><a href="https://github.com/v2ray/v2ray-core">https://github.com/v2ray/v2ray-core</a></li>
+<li><a href="https://toutyrater.github.io/">https://toutyrater.github.io/</a></li>
+<li><a href="https://guide.v2fly.org/">https://guide.v2fly.org/</a></li>
+<li><a href="https://github.com/veekxt/v2ray-template">https://github.com/veekxt/v2ray-template</a></li>
+<li><a href="https://github.com/v2fly/v2ray-examples">https://github.com/v2fly/v2ray-examples</a></li>
+<li><a href="https://www.v2fly.org/">https://www.v2fly.org/</a></li>
+</ol>
 </article>
                 <section class="author">
                     <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
