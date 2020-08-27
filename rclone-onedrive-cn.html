@@ -74,7 +74,20 @@
                     
                     <span class="tags"><a class="tag" href="/tag/rclone/index.html">rclone</a><a class="tag" href="/tag/onedrive/index.html">onedrive</a></span>
                 </section>
-                <article class="content"><h4>世纪互联 OneDrive 获取 CLIENT_ID 及 CLIENT_SECRET</h4>
+                <article class="content"><h4>世纪互联空全局订阅获取Azure+自建独享API</h4>
+
+<p>适用于可以使用API,但本身子账号不能创建API的。可以撸个空全局，利用空全局账号创建API来供不能创建API的子号使用。</p>
+
+<p>打开<a href="https://www.microsoft.com/zh-cn/microsoft-365/compare-china-global-versions-microsoft-365">比较面向中小企业的中国版本计划和价格</a> 随便选个套餐<code>立即购买</code>然后按提示注册新账号，左上角点进去,进入管理,把付款取消掉。</p>
+
+<p>API权限<strong>我们需要空全局管理员点击</strong>  <code>代表XXXX授予管理员同意</code></p>
+
+<p>WINDOWS平台<code>rclone</code>获取<code>token</code>时需要在后面加上<code>--onedrive-is-21vianet-version=true</code>示范如下</p>
+
+<pre><code class="language-bash">rclone authorize &quot;onedrive&quot; &quot;client_ID&quot; &quot;client_secret&quot; --onedrive-is-21vianet-version=true
+</code></pre>
+
+<h4>世纪互联 OneDrive 获取 CLIENT_ID 及 CLIENT_SECRET</h4>
 
 <p>打开 <a href="https://portal.azure.cn/">https://portal.azure.cn/</a> 登陆并按以下步骤：</p>
 
