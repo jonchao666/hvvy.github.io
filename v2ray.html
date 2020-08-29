@@ -149,6 +149,17 @@ bash install-dat-release.sh
 bash install-release.sh --remove
 </code></pre>
 
+<p><strong>V2ray在使用VLESS时证书权限的解决办法</strong></p>
+
+<p><a href="https://github.com/v2fly/fhs-install-v2ray/wiki/Insufficient-permissions-when-using-certificates">使用證書時權限不足</a> 会导致套用<a href="https://github.com/v2fly/v2ray-examples/tree/master/VLESS-TCP-TLS%20(minimal%20by%20rprx)">模板</a>后V2ray无法启动且无错误日志</p>
+
+<p>简单粗暴的解决方法是编辑修改<code>/etc/systemd/system/v2ray.service</code>找到<code>User=nobody</code>修改为<code>User=root</code></p>
+
+<pre><code class="language-bash">sed -i 's/User=nobody/User=root/' /etc/systemd/system/v2ray.service
+</code></pre>
+
+<p>详情参考<a href="https://github.com/v2fly/fhs-install-v2ray/wiki/Insufficient-permissions-when-using-certificates">使用證書時權限不足</a></p>
+
 <p><del>原有go.sh安装V2Ray</del></p>
 
 <pre><code class="language-bash">bash &lt;(curl -L -s https://install.direct/go.sh)
@@ -168,7 +179,7 @@ bash install-release.sh --remove
 
 <p>按需要改动下面<code>/etc/v2ray/config.json</code>里面的<code>port</code> 和 <code>id</code>和 <code>password</code>等值，建议改成<code>/etc/v2ray/config_Backup.json</code>默认随机生成的值，当然也可以照抄不改直接复制使用。</p>
 
-<p><a href="https://uuid.buyaocha.com/">UUID在线生成</a></p>
+<p><code>uuid</code>可以通过<code>cat /proc/sys/kernel/random/uuid</code>来随机生成</p>
 
 <h3>配置VMess(websocket tls web)</h3>
 
@@ -454,6 +465,12 @@ ssl_certificate_key    /www/server/panel/vhost/cert/域名/privkey.pem;
 
 <pre><code class="language-bash">/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/域名/域名.crt
 /var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/域名/域名.key
+</code></pre>
+
+<p>Certbot的SSL证书路径</p>
+
+<pre><code class="language-bash">/etc/letsencrypt/live/example.com/fullchain.pem
+/etc/letsencrypt/live/example.com/privkey.pem
 </code></pre>
 
 <p>如果需要配置多个域名证书，可以增加<code>certificates</code>值，例如</p>
