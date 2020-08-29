@@ -45,10 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="Debian,Nginx,">
-        <meta name="description" content="Nginx使用官方工具 Certbot 配置申请 Let’s Encrypt SSL 安全证书详细教程">
+        <meta name="keywords" content="Debian,Nginx,Certbot,">
+        <meta name="description" content="Nginx使用官方工具Certbot配置申请Let’s Encrypt安全SSL证书详细教程">
         <meta name="author" content="567899.xyz">
-        <title>Nginx使用官方工具 Certbot 配置申请 Let’s Encrypt SSL 安全证书详细教程</title>
+        <title>Nginx使用官方工具Certbot配置申请Let’s Encrypt安全SSL证书详细教程</title>
     </head>
     <body>
         <article class="container">
@@ -65,16 +65,48 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">Nginx使用官方工具 Certbot 配置申请 Let’s Encrypt SSL 安全证书详细教程</h1>
+                <h1 class="title">Nginx使用官方工具Certbot配置申请Let’s Encrypt安全SSL证书详细教程</h1>
                 <section class="info">
                     <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
                     <a class="name" href="/about.me.html">567899.xyz</a>
                     
                     <span class="date" data-time="1542790800"><span class="from"></span></span>
                     
-                    <span class="tags"><a class="tag" href="/tag/Debian/index.html">Debian</a><a class="tag" href="/tag/Nginx/index.html">Nginx</a></span>
+                    <span class="tags"><a class="tag" href="/tag/Debian/index.html">Debian</a><a class="tag" href="/tag/Nginx/index.html">Nginx</a><a class="tag" href="/tag/Certbot/index.html">Certbot</a></span>
                 </section>
-                <article class="content"><h3>获取 Certbot 客户端</h3>
+                <article class="content"><h3>获取Certbot客户端</h3>
+
+<pre><code class="language-bash">apt update
+apt install openssl nginx certbot -y
+systemctl enable nginx
+systemctl start nginx
+</code></pre>
+
+<h3>获取SSL证书</h3>
+
+<pre><code class="language-bash">certbot certonly --webroot -w /var/www/example -d example.com -d www.example.com
+</code></pre>
+
+<p>这个命令会为<code>example.com</code>和<code>www.example.com</code>这两个域名生成一个证书，使用<code>--webroot</code>模式会在<code>/var/www/example</code>站点根目录中创建<code>.well-known</code>文件夹，这个文件夹里面包含了一些验证文件，certbot会通过访问<code>example.com/.well-known/acme-challenge</code>来验证你的域名是否绑定的这个服务器。</p>
+
+<p>SSL证书保存路径</p>
+
+<pre><code class="language-bash">/etc/letsencrypt/live/example.com/fullchain.pem
+/etc/letsencrypt/live/example.com/privkey.pem
+</code></pre>
+
+<h3>自动更新SSL证书</h3>
+
+<p>Let’s Encrypt提供的证书只有90天的有效期，certbot运行</p>
+
+<pre><code class="language-bash">certbot renew
+</code></pre>
+
+<p>自动检查系统内的证书，并且自动更新这些证书。 我们也可以运行<code>certbot renew --dry-run</code>测试一下</p>
+
+<p>或添加一个<code>cron</code>计划<code>19 4 * * 3 root certbot renew</code>意为每周三的00:19执行定时更新SSL证书计划</p>
+
+<h3>获取 Certbot 客户端</h3>
 
 <pre><code class="language-bash">wget https://dl.eff.org/certbot-auto
 chmod a+x ./certbot-auto
