@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>567899.xyz</title>
   <id>https://567899.xyz</id>
-  <updated>2020-08-29T16:57:16Z</updated>
+  <updated>2020-08-31T06:22:37Z</updated>
   <subtitle>这家伙很赖，什么也没有留下。</subtitle>
   <link href="https://567899.xyz"></link>
   <author>
@@ -13,6 +13,16 @@
     <id>tag:567899.xyz,2020-02-11:/google_drive_folderclone.html</id>
     <content type="html">&lt;p&gt;超级详细Folderclone使用的图文教程，更新新版Folderclone的使用方法&lt;/p&gt;&#xA;</content>
     <link href="https://567899.xyz/google_drive_folderclone.html"></link>
+    <author>
+      <name>567899.xyz</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Microsoft OneDrive空全局账号自建API(Rclone、OneManager-php)</title>
+    <updated>2020-08-30T18:00:00+08:00</updated>
+    <id>tag:567899.xyz,2020-08-30:/onedrive-api.html</id>
+    <content type="html">&lt;p&gt;OneDrive申请空全局账号，然后登陆Azure自建API(Rclone、OneManager-php)使用，可避免使用公共API因使用频率过高导致的Rclone、网盘列目录程序OneManager-php、OneList、PyOne、Oneindex等等不稳定情况&lt;/p&gt;&#xA;</content>
+    <link href="https://567899.xyz/onedrive-api.html"></link>
     <author>
       <name>567899.xyz</name>
     </author>
@@ -93,16 +103,6 @@
     <id>tag:567899.xyz,2020-01-31:/cn-onedrive-oneindex.html</id>
     <content type="html"></content>
     <link href="https://567899.xyz/cn-onedrive-oneindex.html"></link>
-    <author>
-      <name>567899.xyz</name>
-    </author>
-  </entry>
-  <entry>
-    <title>使用GitHub Actions云编译OpenWrt</title>
-    <updated>2020-01-12T17:00:00+08:00</updated>
-    <id>tag:567899.xyz,2020-01-12:/build-openwrt-with-github-actions.html</id>
-    <content type="html"></content>
-    <link href="https://567899.xyz/build-openwrt-with-github-actions.html"></link>
     <author>
       <name>567899.xyz</name>
     </author>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="567899.xyz">
+<meta name="twitter:description" content="这家伙很赖，什么也没有留下。">
+<meta name="twitter:image:src" content="https://567899.xyz/images/avatar.png">
+
+<meta property="og:url" content="https://567899.xyz">
+<meta property="og:title" content="567899.xyz">
+<meta property="og:description" content="这家伙很赖，什么也没有留下。">
+<meta property="og:site_name" content="567899.xyz">
+<meta property="og:image" content="https://567899.xyz/images/avatar.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="567899.xyz">
+<meta itemprop="description" content="这家伙很赖，什么也没有留下。">
+<meta itemprop="image" content="https://567899.xyz/images/avatar.png">
+
+<link rel="canonical" href="https://567899.xyz">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="OneDrive,API,Rclone,">
+        <meta name="description" content="Microsoft OneDrive空全局账号自建API(Rclone、OneManager-php)">
+        <meta name="author" content="567899.xyz">
+        <title>Microsoft OneDrive空全局账号自建API(Rclone、OneManager-php)</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar.png" />
+    567899.xyz
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">Microsoft OneDrive空全局账号自建API(Rclone、OneManager-php)</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar.png);"></span>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    
+                    <span class="date" data-time="1598781600"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/OneDrive/index.html">OneDrive</a><a class="tag" href="/tag/API/index.html">API</a><a class="tag" href="/tag/Rclone/index.html">Rclone</a></span>
+                </section>
+                <article class="content"><p><strong>注意：</strong> 区分国际版和中国版(由世纪互联运营)</p>
+
+<p>Microsoft OneDrive网页登陆管理入口<a href="https://onedrive.live.com">国际版</a>、<a href="https://portal.partner.microsoftonline.cn">中国版(由世纪互联运营)</a></p>
+
+<h2>申请空全局账号</h2>
+
+<p><a href="https://www.microsoft.com/zh-cn/microsoft-365/business/compare-all-microsoft-365-business-products?&amp;activetab=tab:primaryr2">国际版购买注册(A1、A3、A1P、EDU、个人版)</a>、<a href="https://www.microsoft.com/zh-cn/microsoft-365/compare-china-global-versions-microsoft-365">中国版(由世纪互联运营)购买注册</a>随便选个套餐，点<code>立即购买</code>，按提示注册新账号，然后进入<code>管理</code>把付款取消掉,到此空全局账号已经撸到手了。</p>
+
+<h2>登陆Azure创建API</h2>
+
+<p><a href="https://portal.azure.cn">Microsoft Azure由世纪互联运营</a>、<a href="https://portal.azure.com">国际版</a></p>
+
+<p>创建方法一样的，但是要注意区分国际版和中国特供版的登陆管理入口地区。</p>
+
+<h3>创建Rclone的API</h3>
+
+<p>获取 CLIENT_ID 及 CLIENT_SECRET</p>
+
+<p><a href="https://portal.azure.cn">Microsoft Azure由世纪互联运营</a>、<a href="https://portal.azure.com">国际版</a>登陆并按以下步骤：</p>
+
+<ol>
+<li>左侧找到 <code>Azure Active Directory</code> 点击</li>
+<li>左侧找到 <code>应用注册</code></li>
+<li>上方找到 <code>新注册</code> 点击</li>
+<li>名称：<code>Rclone</code></li>
+<li>受支持的账户类型：    <code>任何组织目录(任何 Azure AD 目录 - 多租户)中的帐户</code>（第二个）</li>
+<li>Web重定向 URL：<code>http://localhost:53682</code></li>
+<li>点击注册 找到 <code>应用程序(客户端) ID</code>  <strong>复制client_ID保存</strong></li>
+<li>左侧找到 <code>证书和密码</code> 点击</li>
+<li>下方 <code>客户端密码</code> - <code>新客户端密码</code></li>
+<li>说明：<code>Rclone</code></li>
+<li>截止期限：默认 <code>1年内</code>改为<code>从不</code></li>
+<li>点击 添加，<code>值</code> 客户端密码  <strong>复制client_secret保存</strong></li>
+<li>左侧找到 <code>API 权限</code> 点击</li>
+<li><code>添加权限</code>  - <code>Microsoft Graph</code> - <code>委托的权限</code> - <code>Files (7)</code>全部勾选</li>
+<li>选择<code>应用程序权限</code> 在下方<code>Files</code>里选择 <code>Files.Read.All</code>和<code>Files.ReadWrite.All</code></li>
+</ol>
+
+<p>回到界面会发现该权限处于未授权状态，<strong>我们需要全局管理员点击</strong>  <code>代表XXXX授予管理员同意</code></p>
+
+<pre><code class="language-bash">Files.Read
+Files.Read.All
+Files.Read.Selected
+Files.ReadWrite
+Files.ReadWrite.All
+Files.ReadWrite.AppFolder
+Files.ReadWrite.Selected
+</code></pre>
+
+<h3>创建网盘列目录程序API</h3>
+
+<p>OneDrive列表程序重定向URI</p>
+
+<table>
+<thead>
+<tr>
+<th>程序</th>
+<th>重定向URI</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>OneManager-php</td>
+<td><a href="https://scfonedrive.github.io">https://scfonedrive.github.io</a></td>
+</tr>
+
+<tr>
+<td>OneList</td>
+<td><a href="http://localhost/onedrive-login">http://localhost/onedrive-login</a></td>
+</tr>
+
+<tr>
+<td>PyOne</td>
+<td><a href="https://pyoneauth.github.io">https://pyoneauth.github.io</a></td>
+</tr>
+
+<tr>
+<td>Oneindex</td>
+<td><a href="https://oneindex.github.io">https://oneindex.github.io</a></td>
+</tr>
+</tbody>
+</table>
+
+<p>不同OneDrive列目录程序创建方法一样，唯独不一样的就是重定向URL网址不同,下面以<code>OneManager-php</code>为例获取 CLIENT_ID 及 CLIENT_SECRET</p>
+
+<p><a href="https://portal.azure.cn">Microsoft Azure由世纪互联运营</a>、<a href="https://portal.azure.com">国际版</a>登陆并按以下步骤：</p>
+
+<ol>
+<li>左侧找到 <code>Azure Active Directory</code> 点击</li>
+<li>左侧找到 <code>应用注册</code></li>
+<li>上方找到 <code>新注册</code> 点击</li>
+<li>名称：<code>OneManager-php</code></li>
+<li>受支持的账户类型：    <code>任何组织目录(任何 Azure AD 目录 - 多租户)中的帐户</code>（第二个）</li>
+<li>Web重定向 URL：<code>https://scfonedrive.github.io</code></li>
+<li>点击注册 找到 <code>应用程序(客户端) ID</code>  <strong>复制client_ID保存</strong></li>
+<li>左侧找到 <code>证书和密码</code> 点击</li>
+<li>下方 <code>客户端密码</code> - <code>新客户端密码</code></li>
+<li>说明：<code>OneManager-php</code></li>
+<li>截止期限：默认 <code>1年内</code>改为<code>从不</code></li>
+<li>点击 添加，<code>值</code> 客户端密码  <strong>复制client_secret保存</strong></li>
+<li>左侧找到 <code>API 权限</code> 点击</li>
+<li><code>添加权限</code>  - <code>Microsoft Graph</code> - <code>委托的权限</code> - <code>Files</code> - <code>Files.ReadWrite.All</code></li>
+</ol>
+
+<p>回到界面会发现该权限处于未授权状态，<strong>我们需要全局管理员点击</strong>  <code>代表XXXX授予管理员同意</code></p>
+
+<p>如果需要创建其它OneDrive列目录程序，修改对应的<code>应用注册名称</code>和<code>重定向URL网址</code>即可。</p>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
+                    <a class="name" href="/about.me.html">567899.xyz</a>
+                    <div class="intro">记录折腾中的点点滴滴</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/google_drive_folderclone.html">[更新]Folderclone谷歌Google Drive共享云端硬盘转存相互转移拷贝复制文件的正确姿势</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/chinaunicom-traffic-cap-canceled.html">联通用户免费办理流量封顶取消(长期有效)</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//vvy.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        567899.xyz ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+	
+<script src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+var a_idx = 0;
+jQuery(document).ready(function($) {
+    $("body").click(function(e) {
+        var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+        var $i = $("<span/>").text(a[a_idx]);
+        a_idx = (a_idx + 1) % a.length;
+        var x = e.pageX,
+        y = e.pageY;
+        $i.css({
+            "z-index": 100000000,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": "#FF0000"
+        });
+        $("body").append($i);
+        $i.animate({
+            "top": y - 180,
+            "opacity": 0
+        },
+        1500,
+        function() {
+            $i.remove();
+        });
+    });
+});
+</script>
+	
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>
