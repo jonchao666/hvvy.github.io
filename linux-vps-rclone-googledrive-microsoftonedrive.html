@@ -659,6 +659,21 @@ rclone dedupe - 交互式查找重复文件，进行删除/重命名操作。
 
 <pre><code class="language-bash">fusermount -qzu LocalFolder
 </code></pre>
+
+<p>多线程下载</p>
+
+<pre><code class="language-bash">--transfers 64
+</code></pre>
+
+<p>直接通过文件的下载链接保存到网盘</p>
+
+<pre><code class="language-bash">rclone rclone copyurl https://xxx.com/xxx.zip rcloneconfigname:directory/ -a -vP
+</code></pre>
+
+<p>自定义名字</p>
+
+<pre><code class="language-bash">rclone rclone copyurl https://xxx.com/xxx.zip rcloneconfigname:directory/yyy.zip -a -vP
+</code></pre>
 </article>
                 <section class="author">
                     <div class="avatar" style="background-image: url(/images/avatar.png);"></div>
