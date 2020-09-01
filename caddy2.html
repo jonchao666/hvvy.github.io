@@ -130,6 +130,7 @@ systemctl status caddy-api.service
 <p>编辑文件<code>/etc/caddy/Caddyfile</code> 示范如下</p>
 
 <pre><code class="language-Caddyfile">mydomain.com {
+	#experimental_http3
 	#respond &quot;Hello, world!&quot;
 	root * /usr/share/caddy/mydomain.com
 	file_server /* browse
@@ -151,6 +152,16 @@ systemctl status caddy-api.service
 }
 </code></pre>
 
+<p>验证Caddyfile有效性</p>
+
+<pre><code class="language-bash">caddy adapt --config caddy adapt --config /etc/caddy/Caddyfile --pretty --validate
+</code></pre>
+
+<p>从<code>Caddyfile</code>生成<code>JSON</code>配置</p>
+
+<pre><code class="language-bash">caddy adapt --config /etc/caddy/Caddyfile --pretty
+</code></pre>
+
 <h1>通过systemd管理caddy</h1>
 
 <pre><code class="language-bash">systemctl start caddy.service
@@ -164,8 +175,8 @@ systemctl status caddy.service
 
 <p>存放在<code>/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/域名/</code>目录下</p>
 
-<pre><code class="language-bash">/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/域名/域名.crt
-/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/域名/域名.key
+<pre><code class="language-bash">/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/域名/域名.crt 
+/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/域名/域名.key 
 </code></pre>
 
 <h1>其它</h1>
