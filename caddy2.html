@@ -129,10 +129,10 @@ systemctl status caddy-api.service
 
 <p>编辑文件<code>/etc/caddy/Caddyfile</code> 示范如下</p>
 
-<pre><code class="language-Caddyfile">mydomain.com {
+<pre><code class="language-Caddyfile">example.com {
 	#experimental_http3
 	#respond &quot;Hello, world!&quot;
-	root * /usr/share/caddy/mydomain.com
+	root * /usr/share/caddy/example.com
 	file_server /* browse
 	#file_server
 	encode gzip zstd
@@ -142,7 +142,7 @@ systemctl status caddy-api.service
 	Bob JDJhJDEwJEVCNmdaNEg2Ti5iejRMYkF3MFZhZ3VtV3E1SzBWZEZ5Q3VWc0tzOEJwZE9TaFlZdEVkZDhX	
 	#使用caddy hash-password生成base64密码
 	}
-	#redir https://mydomain.com{uri}
+	#redir https://example.com{uri}
 	@v2ray_websocket {
 	path /ray
 	header Connection *Upgrade*
@@ -175,10 +175,8 @@ systemctl status caddy.service
 
 <h1>Caddy 2生成的SSL证书默认路径</h1>
 
-<p>存放在<code>/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/域名/</code>目录下</p>
-
-<pre><code class="language-bash">/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/域名/域名.crt 
-/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/域名/域名.key 
+<pre><code class="language-bash">/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/example.com/example.com.crt
+/var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/example.com/example.com.key 
 </code></pre>
 
 <h1>其它</h1>
